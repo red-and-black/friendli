@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block pagename %}Error{% endblock pagename %}
+
+{% block content %}
+<div class='container text-center my-4'>
+  <h3 class='text-rockmelon'>Uh oh, our bad.</h3>
+  <p>There has been an error somewhere, but it wasn't you.</p>
+  <p>We'll try to fix it as soon as we can.</p>
+  <button class='btn btn-info' onclick='window.history.back();'>
+    <i class='material-icons align-middle'>arrow_back</i>
+    Go back
+  </button>
+</div>
+{% endblock content %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block pagename %}Landing{% endblock pagename %}
+{% block heading %}GoodChat{% endblock heading %}
+
+{% block content %}
+<div class='my-5 text-center text-less-light mx-2'>
+  <h3 class='text-info'>GoodChat @ {{ conference.name }}</h3>
+  {% if conference.start_date and conference.end_date %}
+    <p>
+    {% if conference.start_date|date:'M' == conference.end_date|date:'M' %}
+      {{ conference.start_date|date:'j' }}
+    {% else %}
+      {{ conference.start_date|date:'j M' }}
+    {% endif %}
+      -
+      {{ conference.end_date|date:'j M' }}
+    {% if conference.location %}
+      &nbsp;&bull;&nbsp; {{ conference.location }}
+    {% endif %}
+    </p>
+  {% endif %}
+  {% if conference.message %}
+    <p class='mx-4'>{{ conference.message }}</p>
+  {% endif %}
+  {% if not user.is_authenticated %}
+  <div class='d-flex justify-content-center m-4 pt-3'>
+    <a class='btn btn-info' href="{% url 'login' %}">Log In</a>
+    &nbsp;&nbsp;&nbsp;
+    <a class='btn btn-info' href="{% url 'signup' %}">Sign Up</a>
+  </div>
+  {% endif %}
+  <div class="card bg-darkest-grey mt-5 mx-4">
+    <div class="card-body">
+      {% if not user.is_authenticated %}
+      <h5 class="card-title mb-3 text-center">Welcome!</h5>
+      {% else %}
+      <h5 class="card-title mb-3 text-center">Welcome back {{ user.username }}!</h5>
+      {% endif %}
+      <p class="card-text text-left">
+        Goodchat makes it easy to find, contact and meet like-minded people
+        at conferences.
+      </p>
+      <p class="card-text text-left">
+        It's privacy-focused, ephemeral and free. No email required.
+      </p>
+      <p class="card-text text-left">
+        For more info, see our
+        <a href="{% url 'faqs' %}" class="text-info">FAQs</a>.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}

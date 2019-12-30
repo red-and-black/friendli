@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}Looking For{% endblock pagename %}
+{% block heading %}Looking for{% endblock heading %}
+
+
+{% block content %}
+<div class='container my-3'>
+  <ul>
+  {% for looking_for in looking_for %}
+    <li>
+      {{ looking_for.looking_for }}&nbsp;
+      <a href="{% url 'edit-looking-for' looking_for.pk %}" class='text-info'>Edit</a>
+    </li>
+  {% endfor %}
+  </ul>
+</div>
+<form method=post>
+  {% csrf_token %}
+  <p>
+    Add looking_for: {{ form.looking_for|setclass:'form-control' }}
+  </p>
+  <button type='submit' class='btn btn-info'>
+    Save
+  </button>
+</form>
+{% endblock content %}

@@ -1,0 +1,4 @@
+# File types
+
+*.pyc
+*.sqlite3

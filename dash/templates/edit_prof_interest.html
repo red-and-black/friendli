@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}Edit professional interests{% endblock pagename %}
+{% block heading %}Edit professional interests{% endblock heading %}
+
+
+{% block content %}
+<div>
+  <p>
+    {{ prof_interest.prof_interest }}
+  </p>
+</div>
+<form method=post>
+  {% csrf_token %}
+  <p>
+    Edit professional interest: {{ form.prof_interest|setclass:'form-control' }}
+  </p>
+  <button type='submit' class='btn btn-info'>
+    Save
+  </button>
+</form>
+{% endblock content %}

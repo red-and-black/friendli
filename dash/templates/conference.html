@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block pagename %}Conference{% endblock pagename %}
+{% block heading %}Conference{% endblock heading %}
+
+{% block content %}
+{% if conference %}
+<div class='container my-5 text-less-light'>
+  <h2>{{ conference.name }}</h2>
+  <p>
+    <span class='text-info'>Hashtag</span>
+    #{{ conference.hashtag }}
+  </p>
+  <p>
+    <span class='text-info'>Dates</span>
+    {% if conference.start_date %}
+      {{ conference.start_date }} - {{ conference.end_date }}
+    {% else %}
+      No dates
+    {% endif %}
+  </p>
+  <p>
+    <span class='text-info'>Location</span>
+    {{ conference.location }}
+  </p>
+  <p>
+    <span class='text-info'>Collective noun</span>
+    {{ conference.collective_noun }}
+  </p>
+  <p>
+    <span class='text-info'>Link</span>
+    <a href='{{ conference.link }}' class='text-less-light'>{{ conference.link }}</a>
+  </p>
+  <p>
+    <span class='text-info'>Code of conduct</span>
+    <a href='{{ conference.coc_link }}' class='text-less-light'>{{ conference.coc_link }}</a>
+  </p>
+  <p>
+    <span class='text-info'>Message</span>
+    {{ conference.message }}
+  </p>
+  <p>
+    <span class='text-info'>Polling interval</span>
+    {{ conference.polling_interval }}
+  </p>
+  <a href="{% url 'edit-conference' %}" class='btn btn-info my-3'>Edit</a>
+</div>
+{% else %}
+{% endif %}
+{% endblock content %}

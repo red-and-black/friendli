@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}Search{% endblock pagename %}
+{% block heading %}Search{% endblock heading %}
+
+{% block content %}
+<div class='container mt-2'>
+  <div class="d-flex justify-content-center">
+    <div class='btn-group mt-2 mb-4 w-100'>
+      <button class='btn btn-info search-form-toggle'>
+        <i class='material-icons align-middle'>search</i>
+        Profile
+      </button>
+      <a href="{% url 'username-search' %}" class='btn btn-secondary'>
+        <i class='material-icons align-middle'>search</i>
+        Username
+      </a>
+      <button class='btn btn-dark-grey px-0 search-form-toggle'>
+        <i class='material-icons align-middle' id='caret'>
+          {% if page_obj %}
+            keyboard_arrow_down
+          {% else %}
+            keyboard_arrow_up
+          {% endif %}
+        </i>
+      </button>
+    </div>
+  </div>
+  <form id='search_form' method='POST'>
+    {% csrf_token %}
+    <div class='form-group'>
+      <label>Languages</label>
+      {{ profile_form.languages|setclass:'form-control bg-dark-grey text-less-light multiselect' }}
+    </div>
+    <div class='form-group'>
+      <label>They are looking for</label>
+      {{ profile_form.looking_for|setclass:'form-control bg-dark-grey text-less-light multiselect' }}
+    </div>
+    <div class='form-group'>
+      <label>Professional interests</label>
+      {{ profile_form.prof_interests|setclass:'form-control bg-dark-grey text-less-light multiselect' }}
+    </div>
+    <div class='form-group'>
+      <label>Personal interests</label>
+      {{ profile_form.personal_interests|setclass:'form-control bg-dark-grey text-less-light multiselect' }}
+    </div>
+    <div class='form-group'>
+      <label>Keywords in Tech stack</label>
+      {{ profile_form.stack|setclass:'form-control bg-dark-grey text-less-light' }}
+    </div>
+    <div class='form-group'>
+      <label>Keywords in Everything else</label>
+      {{ profile_form.detail|setclass:'form-control bg-dark-grey text-less-light' }}
+    </div>
+    <div class='d-flex justify-content-between mb-5 mt-1'>
+      <button class='btn btn-secondary' id='clear_all'>Clear all</button>
+      <input class='btn btn-info' type='submit' value='Search' />
+    </div>
+  </form>
+  {% if count is not None %}
+  <div id='search_results'>
+    <div class="card bg-info mb-4">
+      <div class="card-body">
+        <h5 class="text-center m-0">
+          You found {{ count}} pe{{ count|pluralize:"rson,ople" }}.
+        </h5>
+      </div>
+    </div>
+    {% for profile in page_obj %}
+    <div class='card bg-dark-grey mb-2'>
+      <div class='card-header bg-transparent'>
+        {{ profile.user.username }}
+        <div class='float-right'>
+          <a href="{% url 'start-conversation' profile.user.pk %}" class='text-less-light'>
+            <i class='material-icons align-middle'>send</i>
+          </a>
+          &nbsp;&nbsp;&nbsp;
+          <span onclick="toggleStar('{{ profile.user.pk }}', '{{ profile.user.username }}');"
+            class='pointer hover-gold text-less-light'>
+            <i class='material-icons align-middle'
+              id='user-{{ profile.user.pk }}-star-icon'
+            >{% if profile.user in starred_users %}star{% else %}star_outline{% endif %}</i>
+          </span>
+          &nbsp;&nbsp;&nbsp;
+          <a href="{% url 'profile-block' profile.user.pk %}" class='text-less-light block'>
+            <i class='material-icons align-middle'>block</i>
+          </a>
+        </div>
+      </div>
+      <div class='card-body py-2'>
+        {% if profile.languages.all %}
+        <p class='my-2'>
+          <span class='text-rockmelon font-weight-bold'>Languages</span>&nbsp;
+          <span class="languages">{{ profile.languages.all|join:" &nbsp;&bull;&nbsp; " }}</span>
+        </p>
+        {% endif %}
+        {% if profile.looking_for.all %}
+        <p class='my-2'>
+          <span class='text-rockmelon font-weight-bold'>Looking for</span>&nbsp;
+            <span class="looking_for">{{ profile.looking_for.all|join:" &nbsp;&bull;&nbsp; " }}</span>
+        </p>
+        {% endif %}
+        {% if profile.prof_interests.all %}
+        <p class='my-2'><span class='text-rockmelon font-weight-bold'>Professional interests</span>&nbsp;
+          <span class="prof_interests">{{ profile.prof_interests.all|join:" &nbsp;&bull;&nbsp; " }}</span>
+        </p>
+        {% endif %}
+        {% if profile.personal_interests.all %}
+        <p class='my-2'><span class='text-rockmelon font-weight-bold'>Personal interests</span>&nbsp;
+          <span class="personal_interests">{{ profile.personal_interests.all|join:" &nbsp;&bull;&nbsp; " }}</span>
+        </p>
+        {% endif %}
+        {% if profile.stack %}
+        <p class='my-2'><span class='text-rockmelon font-weight-bold'>Tech stack</span>&nbsp;
+          <span class="stack">{{ profile.stack }}</span>
+        </p>
+        {% endif %}
+        {% if profile.detail %}
+        <p class='my-2'><span class='text-rockmelon font-weight-bold'>Everything else</span>&nbsp;
+          <span class="detail">{{ profile.detail }}</span>
+        </p>
+        {% endif %}
+        {% if profile.github or profile.twitter %}
+        <dt class='text-rockmelon mt-2'>Social media</dt>
+          {% if profile.github %}
+          <dd>
+          <a href="https://github.com/{{ profile.github }}" class='text-info' target='blank'>
+            <i class='fa fa-github text-less-light'></i>&nbsp;
+            {{ profile.github|truncatechars:16 }}
+          </a>&nbsp;
+          {% endif %}
+          {% if profile.twitter %}
+            <a href="https://twitter.com/{{ profile.twitter }}" class='text-info' target='blank'>
+              <i class='fa fa-twitter text-less-light'></i>&nbsp;
+              {{ profile.twitter|truncatechars:16  }}
+            </a>
+          </dd>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+    <div class="pagination justify-content-center">
+      <span class="step-links">
+        {% if page_obj.has_previous %}
+          <a href="?page=1" class='text-info'>&laquo; First</a>
+          &nbsp;
+          <a href="?page={{ page_obj.previous_page_number }}" class='text-info'>Previous</a>
+        {% endif %}
+        {% if page_obj.has_previous or page_obj.has_next %}
+          &nbsp;
+          <span class="current">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+          </span>
+          &nbsp;
+        {% endif %}
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}" class='text-info'>Next</a>
+          &nbsp;
+          <a href="?page={{ page_obj.paginator.num_pages }}" class='text-info'>Last &raquo;</a>
+        {% endif %}
+      </span>
+    </div>
+  {% endif %}
+  </div>
+</div>
+{% endblock content %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}
+
+{% block js %}
+  <script>
+    function toggleStar(userId, userName) {
+      var errorMsg = "Starring/Unstarring for " + userName + " failed.";
+      var baseUrl = "{% url 'profile-star' 0 %}";
+      var url = baseUrl.replace("0", userId);
+      $.ajax({
+        url: url
+      }).done(function(json) {
+        var action = json.action;
+        var id = "user-" + userId + "-star-icon";
+        if (action == "starred") {
+          $("#" + id).html("star");
+        } else if (action == "unstarred") {
+          $("#" + id).html("star_outline");
+        } else {
+          alert(errorMsg);
+        };
+      }).fail(function() {
+        alert(errorMsg);
+      });
+    };
+    $("#clear_all").click(function(e) {
+      $("#search_form").find("input:text, textarea").val("");
+      $("#search_form").find(".multiselect").val(null).trigger('change');
+      $("#search_results").html("");
+      window.scrollTo(0, 0);
+      $.ajax(
+        {url: "{% url 'clear-search' %}"}
+      );
+      e.preventDefault();
+    });
+    $(".search-form-toggle").click(function(e) {
+      $("#search_form").toggle();
+      var caretText = $("#caret").html().trim();
+      var newCaretText = (caretText == "keyboard_arrow_up")
+        ? "keyboard_arrow_down"
+        : "keyboard_arrow_up";
+      $("#caret").html(newCaretText);
+      this.blur();
+    });
+    {% if count is not None %}
+    $(function () {
+      $('#search_form').hide();
+      {% for language in search_data.languages %}
+      $(".languages").highlight("{{ language }}");
+      {% endfor %}
+      {% for looking_for in search_data.looking_for %}
+      $(".looking_for").highlight("{{ looking_for }}");
+      {% endfor %}
+      {% for personal_interest in search_data.personal_interests %}
+      $(".personal_interests").highlight("{{ personal_interest }}");
+      {% endfor %}
+      {% for prof_interest in search_data.prof_interests %}
+      $(".prof_interests").highlight("{{ prof_interest }}");
+      {% endfor %}
+      {% for stack_item in search_data.stack %}
+      $(".stack").highlight("{{ stack_item }}");
+      {% endfor %}
+      {% for detail_item in search_data.detail %}
+      $(".detail").highlight("{{ detail_item }}");
+      {% endfor %}
+    });
+    {% endif %}
+  </script>
+{% endblock js %}

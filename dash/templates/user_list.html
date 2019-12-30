@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block pagename %}People{% endblock pagename %}
+{% block heading %}All Users{% endblock heading %}
+
+
+{% block content %}
+<div>
+  {% for profile in page_obj %}
+  <div class='card bg-dark-grey mb-2'>
+    <div class='card-header bg-transparent'>
+      <a href="{% url 'profile-detail' profile.user.username %}" class='text-info'>
+      {{ profile.user.username }}
+      </a>
+      <div class='float-right'>
+        <a href="{% url 'start-conversation' profile.user.pk %}" class='text-less-light'>
+          <i class='material-icons align-middle'>send</i>
+        </a>
+      </div>
+    </div>
+    <div class='card-body py-2'>
+      {% if profile.languages.all %}
+      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Languages</span>&nbsp;
+        {% for language in profile.languages.all %}
+          {{ language }},
+        {% endfor %}
+      </p>
+      {% endif %}
+      {% if profile.looking_for.all %}
+      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Looking for</span>&nbsp;
+        {% for looking_for in profile.looking_for.all %}
+          {{ looking_for }}
+        {% endfor %}
+      </p>
+      {% endif %}
+      {% if profile.prof_interests.all %}
+      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Professional interests</span>&nbsp;
+        {% for interest in profile.prof_interests.all %}
+          {{ interest }}
+        {% endfor %}
+      </p>
+      {% endif %}
+      {% if profile.personal_interests.all %}
+      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Personal interests</span>&nbsp;
+        {% for interest in profile.personal_interests.all %}
+          {{ interest }}
+        {% endfor %}
+      </p>
+      {% endif %}
+      {% if profile.stack %}
+      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Stack</span>&nbsp;
+        {{ profile.stack }}
+      </p>
+      {% endif %}
+      {% if profile.detail %}
+      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Detail</span>&nbsp;
+        {{ profile.detail }}
+      </p>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+  <div class="pagination justify-content-center">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+          <a href="?page=1" class='text-info'>&laquo; First</a>
+          &nbsp;
+          <a href="?page={{ page_obj.previous_page_number }}" class='text-info'>Previous</a>
+      {% endif %}
+      &nbsp;
+      <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      </span>
+      &nbsp;
+      {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}" class='text-info'>Next</a>
+          &nbsp;
+          <a href="?page={{ page_obj.paginator.num_pages }}" class='text-info'>Last &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+</div>
+{% endblock content %}

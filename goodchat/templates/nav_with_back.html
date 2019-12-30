@@ -1,0 +1,84 @@
+<!-- NAVBAR
+===================================== -->
+<nav class='navbar fixed-top navbar-dark bg-dark-grey'>
+  <div class='container medium-width'>
+    <a class='nav-link text-less-light' href="{% url 'conversations' %}">
+    <i class='material-icons align-middle'>arrow_back_ios</i>
+    </a>
+    <h5 class='mb-1 mt-2 mr-5 ml-1'>
+      <a href="{% url 'profile-detail' other_party %}" class='text-less-light'>
+        {{ other_party }}
+      </a>
+    </h5>
+    <a class='navbar-toggler  bg-dark-grey border-0 text-less-light py-2'
+      type='button' data-toggle='collapse' data-target='#navbarToggle'
+      aria-controls='navbarToggle' aria-expanded='false'
+      aria-label='Toggle navigation'
+    >
+      <i class='material-icons text-less-light align-middle'>more_vert</i>
+    </a>
+    <div class='collapse navbar-collapse' id='navbarToggle'>
+      <ul class='navbar-nav mr-auto mt-2 mt-lg-0'>
+        <li class='nav-item'>
+          <a class='nav-link' href="{% url 'landing' %}">
+            <i class='material-icons align-middle ml-3 mr-2'>home</i>
+            Home
+          </a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href="https://goodchat.io/terms" target='blank'>
+            <i class='material-icons align-middle ml-3 mr-2'>description</i>
+            Terms
+          </a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href="https://goodchat.io/privacy" target='blank'>
+            <i class='material-icons align-middle ml-3 mr-2'>lock</i>
+            Privacy
+          </a>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li class='nav-item'>
+          <a class='nav-link' href="{% url 'change-password' %}">
+            <i class='material-icons align-middle ml-3 mr-2'>vpn_key</i>
+            Change password
+          </a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href="#">
+            <i class='material-icons align-middle ml-3 mr-2'>report_problem</i>
+            Reports (coming soon)
+          </a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href="{% url 'blocked-list' %}">
+            <i class='material-icons align-middle ml-3 mr-2'>block</i>
+            Blocked list
+          </a>
+        </li>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+        <li class='nav-item'>
+          <a class='nav-link' href="{% url 'logout' %}">
+            <i class='material-icons align-middle ml-3 mr-2'>account_circle</i>
+            Log Out
+          </a>
+        </li>
+        {% else %}
+        <li class='nav-item'>
+          <a class='nav-link' href="{% url 'signup' %}">
+            <i class='material-icons align-middle ml-3 mr-2'>account_circle</i>
+            Sign Up
+          </a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href="{% url 'login' %}">
+            <i class='material-icons align-middle ml-3 mr-2'>account_circle</i>
+            Log In
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>  
+</nav>

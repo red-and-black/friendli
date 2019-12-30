@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block pagename %}FAQs{% endblock pagename %}
+{% block heading %}FAQs{% endblock heading %}
+
+{% block content %}
+<div class='container my-5 text-less-light justify-content-center'>
+  <div class='col'>
+    <h4 class='text-info mb-1'>What is this thing?</h4>
+    <p>
+      GoodChat is a webapp that you can use to search for people who are
+      attending the same conference as you, based on shared interests,
+      languages, and technologies. Then you can chat and maybe meet up in
+      person!
+    </p>
+    <p>
+      It makes it easier to meet people you have things in common with, and
+      ease the anxiety that networking in a large group of people can cause.
+    </p>
+    <p>
+      We made it because we know the struggle of trying to meet new people at
+      conferences, and we thought we could help.
+    </p>
+    <h4 class='text-info mb-1'>Who made it?</h4>
+    <p>
+      Keira and Sky, two ordinary developers who go to a lot of conferences.
+      We also run
+      <a href='https://meetniq.org' target=blank class='text-info'>meetniq.org</a>.
+    </p>
+    <h4 class='text-info mb-1'>Is it part of {{ conference.name }}?</h4>
+    <p>
+      No. This is our beta, and we are testing it by running an instance for
+      attendees at {{ conference.name }}. We are in no way affiliated with
+      {{ conference.name }}, and any mistakes we make are not their fault!
+    </p>
+    <p>
+      That being said, we do expect you to follow {{ conference.name }}'s code
+      of conduct while you use GoodChat though.
+      {% if conference.coc_link %}
+        It's at
+        <a href="{{ conference.coc_link }}" target=blank class='text-info'>
+          {{ conference.coc_link }}</a>.
+      {% endif %}
+    </p>
+    <h4 class='text-info mb-1'>What happens with my data?</h4>
+    <p>
+      The whole database for each conference is deleted within a week of the
+      conference ending.
+    </p>
+    <p>
+      We only use your data to run the GoodChat service. We won't use it for
+      anything else. The
+      <a href="https://goodchat.io/privacy" target=blank class='text-info'>
+        privacy policy
+      </a> has the details.
+    </p>
+    <h4 class='text-info mb-1'>How does it make money?</h4>
+    <p>
+      Right now, it doesn't.
+    </p>
+    <p>
+      If the beta is goes well, we'll start approaching conferences to support
+      us.
+    </p>
+    <h4 class='text-info mb-1'>Can we have GoodChat for our conference?</h4>
+    <p>
+      Yes you can!
+    </p>
+    <p>
+      Email us at
+      <a href="mailto:humans@redandblack.io" class='text-info'>
+        humans@redandblack.io
+      </a> and we can work something out.
+    </p>
+  </div>
+</div>
+{% endblock content %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}

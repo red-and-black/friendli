@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}
+  Start a conversation with {{ other_party }}
+{% endblock pagename %}
+
+{% block nav %}
+  {% include 'nav_with_back.html' %}
+{% endblock nav %}
+
+{% block content %}
+
+  <div class="card muted-card mt-5 mx-4">
+    <div class="card-body">
+      <h5 class="card-title mb-0">
+        Start a conversation with <strong>{{ other_party }}</strong>.
+      </h5>
+      {% if other_party.profile.languages.exists %}
+        <p class="card-text mt-3">
+          They speak
+          {% for language in other_party.profile.languages.all %}
+          {{ language }}{% if not forloop.last%}{% if forloop.revcounter == 2 %} and{% else %},{% endif %}{% endif %}{% endfor %}.
+        </p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="fixed-bottom">
+    <div class="container bg-dark pt-2">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.content|setclass:"form-control bg-dark text-white" }}
+        <div class="container">
+          <div class="row justify-content-end">
+            <button class="btn btn-info my-2" type="submit">Send</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="py-5"></div>
+  <div class="py-2"></div>
+  <div class="py-1"></div>
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block pagename %}Add conference{% endblock pagename %}
+{% block heading %}Add conference{% endblock heading %}
+
+{% block content %}
+  {% if conference %}
+    <p>
+      There's alread a conference. You could
+      <a href="{% url 'edit-conference' %}" class='text-info'>edit it</a>.
+    </p>
+  {% else %}
+    <form method=post>
+      {% csrf_token %}
+      <p>
+        {{ form.as_p }}
+      </p>
+      <button type='submit' class='btn btn-info'>
+        Save
+      </button>
+    </form>
+  {% endif %}
+{% endblock content %}

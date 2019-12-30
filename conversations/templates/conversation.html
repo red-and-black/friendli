@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}  Conversation with  {{ other_party }}{% endblock pagename %}
+
+{% block nav %}
+  {% include 'nav_with_back.html' %}
+{% endblock nav %}
+
+{% block content %}
+
+  {% for message in read_messages %}
+    {% include 'partials/message.html' with message=message %}
+  {% endfor %}
+
+  {% if blocked_by_user %}
+    <div class="my-3 pb-1 border-top text-muted border-bottom border-muted text-center">
+      You blocked this conversation
+    </div>
+  {% else %}
+    {% if unread_messages %}
+      {% with unread_count=unread_messages.count %}
+        <div class="border-bottom border-info border-top mb-2 mt-3 pb-1 text-center text-info"
+          id="scroll-marker"
+        >
+          <small>
+            {{ unread_count }} unread message{{ unread_count|pluralize }}
+          </small>
+        </div>
+      {% endwith %}
+    {% endif %}
+
+    {% for message in unread_messages %}
+      {% include 'partials/message.html' with message=message %}
+    {% endfor %}
+
+    {% if not unread_messages %}
+      <div id="scroll-marker"></div>
+    {% endif %}
+    <div class='py-2'></div>
+    <div class="fixed-bottom">
+      <div class="container medium-width bg-dark pt-2">
+        <form method="post">
+          {% csrf_token %}
+          {{ form.content|setclass:"form-control bg-dark text-white" }}
+          <div class="container">
+            <div class="row justify-content-end">
+              <button class="btn btn-info my-2" type="submit">Send</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="py-4"></div>
+  <div class="py-3"></div>
+{% endblock content %}
+
+{% block js %}
+  <script>
+    $(function() {
+      var scrollMarker = document.getElementById("scroll-marker");
+      var scrollOffset = scrollMarker.offsetTop - 15;
+      window.scrollTo(0, scrollOffset);
+    });
+  </script>
+{% endblock js %}

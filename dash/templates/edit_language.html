@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}Edit language{% endblock pagename %}
+{% block heading %}Edit language{% endblock heading %}
+
+
+{% block content %}
+<div>
+  <p>
+    {{ language.language }}
+  </p>
+</div>
+<form method=post>
+  {% csrf_token %}
+  <p>
+    Edit language: {{ form.language|setclass:'form-control' }}
+  </p>
+  <button type='submit' class='btn btn-info'>
+    Save
+  </button>
+</form>
+{% endblock content %}
