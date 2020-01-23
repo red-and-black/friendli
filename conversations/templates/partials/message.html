@@ -1,0 +1,27 @@
+{% if message.sender == user %}
+<div class="row justify-content-end">
+{% else %}
+<div class="row justify-content-start">
+{% endif %}
+  <div class="col-11">
+    {% if message.sender == user %}
+    <div class="card bg-darkest-grey mt-2">
+    {% else %}
+    <div class="card bg-even-darker-grey mt-2">
+    {% endif %}
+      <div class="card-body mb-n1 pb-0 pt-1 px-2">
+        <p class="card-text urlize">
+          {{ message.content|linebreaksbr|urlize }}
+        </p>
+      </div>
+      <div class="card-footer bg-transparent border-0px-2 py-0 text-right">
+        <small>
+        {% if message.sender != user %}
+        {{ message.sender }} &middot;
+        {% endif %}
+        {{ message.time }}
+        </small>
+      </div>
+    </div>
+  </div>
+</div>

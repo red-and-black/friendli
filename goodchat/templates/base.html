@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>
+      GoodChat &bull; {{ conference_name }} |
+      {% block pagename %}{% endblock pagename %}
+    </title>
+  </head>
+
+  <body class='bg-dark text-less-light'>
+
+{% block nav %}
+<!-- NAVBAR
+===================================== -->
+<nav class='navbar fixed-top navbar-dark bg-dark-grey'>
+  <div class='container medium-width'>
+    <h5 class='mb-1 mt-2 mr-5 ml-3'>
+      {% block heading %}{% endblock heading %}
+    </h5>
+    <a class='navbar-toggler bg-dark-grey border-0 text-less-light py-2'
+      type='button' data-toggle='collapse' data-target='#navbarToggle'
+      aria-controls='navbarToggle' aria-expanded='false'
+      aria-label='Toggle navigation'
+    >
+      <i class='material-icons text-less-light align-middle'>more_vert</i>
+    </a>
+    <div class='collapse navbar-collapse' id='navbarToggle'>
+      <ul class='navbar-nav mr-auto mt-2 mt-lg-0'>
+        <li class='nav-item'>
+          <a class='nav-link' href="{% url 'landing' %}">
+            <i class='material-icons align-middle ml-3 mr-2'>home</i>
+            Home
+          </a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href="{% url 'faqs' %}">
+            <i class='material-icons align-middle ml-3 mr-2'>info</i>
+            FAQs
+          </a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href="https://goodchat.io/terms" target='blank'>
+            <i class='material-icons align-middle ml-3 mr-2'>description</i>
+            Terms
+          </a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href="https://goodchat.io/privacy" target='blank'>
+            <i class='material-icons align-middle ml-3 mr-2'>lock</i>
+            Privacy
+          </a>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li class='nav-item'>
+          <a class='nav-link' href="{% url 'change-password' %}">
+            <i class='material-icons align-middle ml-3 mr-2'>vpn_key</i>
+            Change password
+          </a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href="#">
+            <i class='material-icons align-middle ml-3 mr-2'>report_problem</i>
+            Reports (coming soon)
+          </a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href="{% url 'blocked-list' %}">
+            <i class='material-icons align-middle ml-3 mr-2'>block</i>
+            Blocked list
+          </a>
+        </li>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+        <li class='nav-item'>
+          <a class='nav-link' href="{% url 'logout' %}">
+            <i class='material-icons align-middle ml-3 mr-2'>account_circle</i>
+            Log Out
+          </a>
+        </li>
+        {% else %}
+        <li class='nav-item'>
+          <a class='nav-link' href="{% url 'signup' %}">
+            <i class='material-icons align-middle ml-3 mr-2'>account_circle</i>
+            Sign Up
+          </a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href="{% url 'login' %}">
+            <i class='material-icons align-middle ml-3 mr-2'>account_circle</i>
+            Log In
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock nav %}
+
+  <!-- CONTENT
+  ===================================== -->
+  <div class='py-4'>
+  </div>
+  <div class='py-1'>
+  </div>
+
+  <div class='container medium-width mb-5 mt-3'>
+    {% block content %}
+    {% endblock content %}
+  </div>
+
+  <!-- FOOTER
+  ===================================== -->
+  {% if user.is_authenticated %}
+  {% block footer %}{% endblock footer %}
+  {% endif %}
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+
+  </body>
+
+  {% if user.is_authenticated %}
+    <script>
+      $(function (){
+        resizeTextarea();
+        restyleMultiselects();
+        poll({{ polling_interval }});
+      });
+      /*
+       * Polls for new messages.
+       */
+      function poll(waitTime) {
+        setTimeout(function () {
+          $.ajax({
+            url: "{% url 'unread-messages' %}",
+          }).done(function(json) {
+            var messageCounts = json['messages'];
+            var wait = json['wait'];
+            for (var i = 0; i < messageCounts.length; ++i) {
+              var id = messageCounts[i].id.toString();
+              var count = messageCounts[i].count.toString();
+              var counterId = "#" + id + "_unread_count";
+              var html = (
+                "<span class=\"align-top badge badge-pill badge-info\">"
+                + count
+                + "</span>"
+              );
+              $(counterId).html(html);
+            };
+            var conversationCount = messageCounts.length;
+            if (conversationCount > 0) {
+              var html = (
+                "<span class=\"align-top badge badge-pill badge-info\" "
+                + "style=\"position: absolute;\">"
+                + conversationCount.toString()
+                + "</span>"
+              );
+              $("#conversation_count").html(html);
+            };
+            poll(wait);
+          }).fail(function() {
+            // If the connection is lost, fall back to polling once per minute.
+            poll(60);
+          });
+        }, waitTime * 1000);
+      };
+      /*
+       * Automatically resizes textareas to fit content.
+       * TODO: Cap the number of lines it can expand to, and make this settable
+       * on each individual text area.
+       * From https://stackoverflow.com/a/25621277
+       */
+      function resizeTextarea () {
+        $('textarea').each(function () {
+          this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+        }).on('input', function () {
+          this.style.height = 'auto';
+          this.style.height = (this.scrollHeight) + 'px';
+        });
+      };
+      function restyleMultiselects () {
+        $('.multiselect').select2({
+          allowClear: true,
+          closeOnSelect: false,
+          placeholder: "",
+        });
+      };
+      jQuery.fn.highlight = function(pat) {
+       function innerHighlight(node, pat) {
+        var skip = 0;
+        if (node.nodeType == 3) {
+         var pos = node.data.toUpperCase().indexOf(pat);
+         pos -= (node.data.substr(0, pos).toUpperCase().length - node.data.substr(0, pos).length);
+         if (pos >= 0) {
+          var spannode = document.createElement('span');
+          spannode.className = 'highlight';
+          var middlebit = node.splitText(pos);
+          var endbit = middlebit.splitText(pat.length);
+          var middleclone = middlebit.cloneNode(true);
+          spannode.appendChild(middleclone);
+          middlebit.parentNode.replaceChild(spannode, middlebit);
+          skip = 1;
+         }
+        }
+        else if (node.nodeType == 1 && node.childNodes && !/(script|style)/i.test(node.tagName)) {
+         for (var i = 0; i < node.childNodes.length; ++i) {
+          i += innerHighlight(node.childNodes[i], pat);
+         }
+        }
+        return skip;
+       }
+       return this.length && pat && pat.length ? this.each(function() {
+        innerHighlight(this, pat.toUpperCase());
+       }) : this;
+      };
+    </script>
+  {% endif %}
+
+  {% block js %}
+  {% endblock js %}
+</html>

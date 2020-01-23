@@ -1,0 +1,210 @@
+/* BOOTSTRAP PRESETS WE USE */
+/* info is the blue we are using, #138597 */
+/* bg-dark is #343a40 */
+/* text-light is #f8f9fa */
+$blue: #138597;
+$less_light: #d7dbe0;
+$light_grey: #c0c3c6;
+$dark_grey: #292e33;
+$darkest_grey: #24292d;
+$watermelon: #ef5d60;
+$rockmelon: #ff8552;
+
+
+/* Custom colours */
+.text-muted {
+  color: #abafb3 !important;
+}
+
+.bg-rockmelon {
+  background-color: #ff8552;
+}
+
+.bg-watermelon {
+  background-color: #ef5d60;
+}
+
+.bg-dark-grey {
+  background-color: #292e33;
+}
+
+.bg-darkest-grey {
+  background-color: #24292d;
+}
+
+.bg-even-darker-grey {
+  background-color: #1d2024;
+}
+
+.text-rockmelon {
+  color: #ff8552;
+}
+
+.text-watermelon {
+  color: #ef5d60;
+}
+
+.text-less-light {
+  color: #d7dbe0;
+}
+
+.text-light-grey {
+  color: $light_grey;
+}
+
+.highlight {
+  background-color: $blue;
+}
+
+.btn-dark-grey {
+  background-color: $dark_grey;
+  color: #f8f9fa;
+}
+
+.btn-rockmelon {
+  background-color: #ff8552;
+  border-right: #ff8552;
+  color: #f8f9fa;
+}
+
+.btn-watermelon {
+  background-color: #ef5d60;
+  border-right: #ef5d60;
+  color: #f8f9fa;
+}
+
+a.link-rockmelon {
+  color: #ff8552;
+}
+
+a.link-watermelon {
+  color: #ef5d60;
+}
+
+
+/* Cursor */
+.pointer {
+  cursor: pointer;
+}
+
+
+/* Max-width */
+.medium-width {
+  max-width: 720px;
+}
+
+/* Cards */
+.muted-card {
+  background-color: transparent;
+  color: $light_grey;
+  border-color: $light_grey;
+  border-style: dashed;
+}
+
+/* Forms */
+.form-control {
+  color: $less_light;
+  border-color: $light_grey;
+  background-color: $dark_grey;
+}
+.form-control:focus {
+  color: $less_light;
+  border-color: $less_light;
+  background-color: $dark_grey;
+  box-shadow: inset 0 1px 1px rgba(19, 133, 151, 1), 0 0 3px rgba(19, 133, 151, 0.9);
+}
+
+option.form-control:active {
+  background-color: $blue;
+}
+
+
+/* urlize */
+.urlize a {
+  color: $blue;
+}
+
+/* Chrome overrides */
+input:-webkit-autofill {
+    -webkit-box-shadow:0 0 0 50px $dark_grey inset; /* Change the color to your own background color */
+    -webkit-text-fill-color: $less_light;
+}
+
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 50px $dark_grey  inset;/*your box-shadow*/
+    -webkit-text-fill-color: $less_light;
+}
+
+/* anchor decoration */
+
+a:hover {
+  text-decoration: none;
+}
+
+a.text-less-light:hover {
+  color: $blue;
+}
+
+a.block:hover {
+  color: $watermelon !important;
+}
+
+span.hover-gold:hover {
+  color: #fcdf02;
+}
+
+/* Badges */
+.badge-rockmelon {
+  background-color: $rockmelon;
+  color: $less_light;
+}
+
+/* Select2 customisation */
+.select2-container--default {
+  &.select2-container--focus {
+    .select2-selection--multiple {
+      border-color: $less_light;
+    }
+  }
+
+  .select2-results__option--highlighted[aria-selected] {
+    background-color: $blue !important;
+  }
+
+  .select2-selection--multiple {
+    background-color: $dark-grey;
+
+    .select2-selection__choice {
+      background-color: $blue;
+      border-color: $blue;
+      color: white;
+    }
+
+    .select2-selection__choice__remove {
+      color: white;
+      margin-right: 0.375rem;
+    }
+
+    .select2-selection__clear {
+      padding-left: 0.5rem;
+      padding-right: 0.25rem;
+    }
+  }
+}
+
+.select2-dropdown {
+  background-color: $dark_grey;
+  color: $less_light;
+
+  .select2-results__option[aria-selected="true"] {
+    background-color: $secondary;
+    color: white;
+  }
+
+}
+
+.close-paragraphs {
+  p {
+    margin-bottom: 0.375rem;
+  }
+}

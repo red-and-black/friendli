@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block pagename %}Edit conference{% endblock pagename %}
+{% block heading %}Edit conference{% endblock heading %}
+
+{% block content %}
+<form method=post>
+  {% csrf_token %}
+  <p>
+    {{ form.as_p }}
+  </p>
+  <button type='submit' class='btn btn-info'>
+    Save
+  </button>
+</form>
+{% endblock content %}

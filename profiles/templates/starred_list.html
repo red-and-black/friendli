@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block pagename %}Your crew{% endblock pagename %}
+{% block heading %}Your saved list{% endblock heading %}
+
+{% block content %}
+<div class='container'>
+  {% for profile in page_obj %}
+  <div class='card bg-dark-grey my-2' id='user_{{ profile.user.id }}'>
+    <div class='card-header bg-transparent'>
+      <a href="{% url 'profile-detail' profile.user.username %}" class='text-info'>
+      {{ profile.user.username }}
+      </a>
+      <div class='float-right'>
+        <a href="{% url 'start-conversation' profile.user.pk %}" class='text-less-light'>
+          <i class='material-icons align-middle'>send</i>
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <span onclick="unstar('{{ profile.user.id }}', '{{ profile.user.username }}');"
+          class='pointer text-less-light hover-gold'>
+          <i class='material-icons align-middle'>star</i>
+        </span>
+        &nbsp;&nbsp;&nbsp;
+        <a href="{% url 'profile-block' profile.user.pk %}" class='text-less-light block'>
+          <i class='material-icons align-middle'>block</i>
+        </a>
+      </div>
+    </div>
+    <div class='card-body py-2'>
+    {% if profile.languages.all or profile.looking_for.all or profile.interests.all or profile.detail %}
+    {% if profile.languages.all %}
+    <p class='my-2'><span class='text-rockmelon font-weight-bold'>Languages</span>&nbsp;
+      {{ profile.languages.all|join:", " }}
+    </p>
+    {% endif %}
+    {% if profile.looking_for.all %}
+    <p class='my-2'><span class='text-rockmelon font-weight-bold'>Looking for</span>&nbsp;
+      {{ profile.looking_for.all|join:", " }}
+    </p>
+    {% endif %}
+    {% if profile.prof_interests.all %}
+    <p class='my-2'><span class='text-rockmelon font-weight-bold'>Professional interests</span>&nbsp;
+      {{ profile.prof_interests.all|join:", " }}
+    </p>
+    {% endif %}
+    {% if profile.personal_interests.all %}
+    <p class='my-2'><span class='text-rockmelon font-weight-bold'>Personal interests</span>&nbsp;
+      {{ profile.personal_interests.all|join:", " }}
+    </p>
+    {% endif %}
+    {% if profile.stack %}
+    <p class='my-2'><span class='text-rockmelon font-weight-bold'>Tech stack</span>&nbsp;
+      {{ profile.stack }}
+    </p>
+    {% endif %}
+    {% if profile.detail %}
+    <p class='my-2'><span class='text-rockmelon font-weight-bold'>Everything else</span>&nbsp;
+      {{ profile.detail }}
+    </p>
+    {% endif %}
+      {% if profile.github or profile.twitter %}
+      <dt class='text-rockmelon mt-2'>Social media</dt>
+        {% if profile.github %}
+        <dd>
+        <a href="https://github.com/{{ profile.github }}" class='text-info' target='blank'>
+          <i class='fa fa-github text-less-light'></i>&nbsp;
+          {{ profile.github|truncatechars:16 }}
+        </a>&nbsp;
+        {% endif %}
+        {% if profile.twitter %}
+          <a href="https://twitter.com/{{ profile.twitter }}" class='text-info' target='blank'>
+            <i class='fa fa-twitter text-less-light'></i>&nbsp;
+            {{ profile.twitter|truncatechars:16  }}
+          </a>
+        </dd>
+        {% endif %}
+      {% endif %}
+    {% else %}
+      <class='my-2'>{{ profile.user.username }}'s profile is empty.</p>
+    {% endif %}
+    </div>
+  </div>
+  {% empty %}
+    <div class="card muted-card mt-5 mx-4">
+      <div class="card-body">
+        <h5 class="card-title mb-0">
+          No saved profiles yet.
+        </h5>
+          <p class="card-text mt-3">
+            When you search for people
+            (<i class='material-icons align-middle'> search</i> below), you can save
+            them to contact later. Just click the
+            <i class='material-icons align-middle'>star_outline</i> on each
+            profile you want to save.
+          </p>
+      </div>
+    </div>
+  {% endfor %}
+  <div class="pagination justify-content-center">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+        <a href="?page=1" class='text-info'>&laquo; First</a>
+        &nbsp;
+        <a href="?page={{ page_obj.previous_page_number }}" class='text-info'>Previous</a>
+      {% endif %}
+      {% if page_obj.has_previous or page_obj.has_next %}
+        &nbsp;
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+        &nbsp;
+      {% endif %}
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class='text-info'>Next</a>
+        &nbsp;
+        <a href="?page={{ page_obj.paginator.num_pages }}" class='text-info'>Last &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+</div>
+{% endblock content %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}
+
+{% block js %}
+  <script>
+    function unstar(userId, userName) {
+      var errorMsg = "Unstarring " + userName + " failed.";
+      var baseUrl = "{% url 'profile-star' 0 %}";
+      var url = baseUrl.replace("0", userId);
+      $.ajax({
+        url: url
+      }).done(function(json) {
+        var action = json.action;
+        if (action == "unstarred") {
+          var id = "user_" + userId;
+          var message = userName + " has been unstarred.";
+          var marker = "<div class='card-body py-2'>" + message + "</div>";
+          $("#" + id).html(marker);
+        } else {
+          alert(errorMsg);
+        };
+      }).fail(function() {
+        alert(errorMsg);
+      });
+    };
+  </script>
+{% endblock js %}

@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block pagename %}Conversations{% endblock pagename %}
+
+{% block heading %}Conversations{% endblock heading %}
+
+{% block content %}
+{% if conversations or blocked_conversations %}
+  {% for conversation in conversations %}
+    {% url 'conversation' conversation.pk as the_url %}
+    <div class="card bg-dark-grey my-2 pointer"
+      onclick="document.location='{{ the_url }}';"
+    >
+      <div class="card-body px-2 py-1">
+        <div class="clearfix">
+          <p class="card-text float-left mb-1">
+            {% if conversation.initiator == user %}
+              <strong>{{ conversation.approachee.username }}</strong>
+              <span id="{{ conversation.pk }}_unread_count">
+                {% if conversation.initiator_unread_count > 0 %}
+                  <span class="badge badge-info badge-pill align-top">
+                    {{ conversation.initiator_unread_count }}
+                  </span>
+                {% endif %}
+              </span>
+            {% else %}
+              <strong>{{ conversation.initiator.username }}</strong>
+              <span id="{{ conversation.pk }}_unread_count">
+                {% if conversation.approachee_unread_count > 0 %}
+                  <span class="badge badge-pill badge-info align-top">
+                    {{ conversation.approachee_unread_count }}
+                  </span>
+                {% endif %}
+              </span>
+            {% endif %}
+          </p>
+          <p class="float-right mb-1">
+            <small>{{ conversation.time }}</small>
+          </p>
+        </div>
+        <p class="card-text">
+          {{ conversation.latest_message.content|truncatechars:60 }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+    {% if blocked_conversations %}
+    <div class="my-3 pb-1 border-top text-muted border-bottom border-muted text-center">
+      Blocked conversations
+    </div>
+    {% endif %}
+  {% for conversation in blocked_conversations %}
+    {% url 'conversation' conversation.pk as the_url %}
+    <div class="card bg-dark-grey pointer my-2 text-light-grey" onclick="document.location='{{ the_url }}';">
+      <div class="card-body px-2 py-1">
+        <div class="clearfix">
+          <p class="card-text float-left mb-1">
+            {% if conversation.initiator == user %}
+              <strong>{{ conversation.approachee.username }}</strong>
+            {% else %}
+              <strong>{{ conversation.initiator.username }}</strong>
+            {% endif %}
+          </p>
+        </div>
+        <p class="card-text">
+          You blocked this user
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+  {% else %}
+    <div class="card muted-card mt-5 mx-4 py-3">
+      <div class="card-body text-center">
+        <h5 class="card-title mb-4 text-center">Let's get started!</h5>
+        <p class="card-text">
+          Set up your profile
+          <i class='material-icons align-middle'>person_outline</i>
+          so others can find you.
+        </p>
+        <p class="card-text text-center">
+          <i class='material-icons align-middle'>arrow_downward</i>
+        </p>
+        <p class="card-text">
+          Find people
+          <i class='material-icons align-middle'>search</i>
+          to contact.
+        </p>
+        <p class="card-text text-center">
+          <i class='material-icons align-middle'>arrow_downward</i>
+        </p>
+        <p class="card-text">
+          Star
+          <i class='material-icons align-middle'>star_outline</i>
+          people for later, or message them
+          <i class='material-icons align-middle'>chat_bubble_outline</i>
+          right away.
+        </p>
+        <a href="{% url 'profile-edit' %}" class='btn btn-info mt-3'>
+          Set up your profile
+        </a>
+      </div>
+    </div>
+  {% endif %}
+{% endblock content %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}

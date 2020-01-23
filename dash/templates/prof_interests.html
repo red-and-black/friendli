@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}Professional Interests{% endblock pagename %}
+{% block heading %}Professional Interests{% endblock heading %}
+
+
+{% block content %}
+<div class='container my-3'>
+  <ul>
+  {% for prof_interest in prof_interests %}
+    <li>
+      {{ prof_interest.prof_interest }}&nbsp;
+      <a href="{% url 'edit-prof-interest' prof_interest.pk %}" class='text-info'>Edit</a>
+    </li>
+  {% endfor %}
+  </ul>
+</div>
+<form method=post>
+  {% csrf_token %}
+  <p>
+    Add professional interest: {{ form.prof_interest|setclass:'form-control' }}
+  </p>
+  <button type='submit' class='btn btn-info'>
+    Save
+  </button>
+</form>
+{% endblock content %}

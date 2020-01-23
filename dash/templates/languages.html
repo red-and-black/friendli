@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}Languages{% endblock pagename %}
+{% block heading %}Languages{% endblock heading %}
+
+
+{% block content %}
+<div class='container my-3'>
+  <ul>
+  {% for language in languages %}
+    <li>
+      {{ language.language }}&nbsp;
+      <a href="{% url 'edit-language' language.pk %}" class='text-info'>Edit</a>
+    </li>
+  {% endfor %}
+  </ul>
+</div>
+<form method=post>
+  {% csrf_token %}
+  <p>
+    Add language: {{ form.language|setclass:'form-control' }}
+  </p>
+  <button type='submit' class='btn btn-info'>
+    Save
+  </button>
+</form>
+{% endblock content %}

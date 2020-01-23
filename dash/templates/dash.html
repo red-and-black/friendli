@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}Superuser Dash{% endblock pagename %}
+{% block heading %}Superuser Dash{% endblock heading %}
+
+
+{% block content %}
+<div class='container my-3'>
+  {% if conference_name != 'Unnamed' %}
+   <p>This is the admin dash for</p>
+   <h2>{{ conference_name }}</h2>
+   <div class="card bg-darkest-grey my-3">
+     <div class='card-body'>
+       <h4>Profile count: {{ profile_count }}</h4>
+       <h4>Conversation count: {{ convo_count }}</h4>
+     </div>
+   </div>
+   <div class='justify-content-between'>
+     <p class='py-1'>
+       <a href="{% url 'conference' %}" class='btn btn-info my-1'>
+         See conference details
+       </a>
+     </p>
+     <p class='py-1'>
+       <a href="{% url 'languages' %}" class='btn btn-info my-1'>
+         Set languages
+       </a>
+     </p>
+     <p class='py-1'>
+       <a href="{% url 'looking-for' %}" class='btn btn-info my-1'>
+         Set looking-for
+       </a>
+     </p>
+     <p class='py-1'>
+       <a href="{% url 'prof-interests' %}" class='btn btn-info my-1'>
+         Set professional interests
+       </a>
+     </p>
+     <p class='py-1'>
+       <a href="{% url 'personal-interests' %}" class='btn btn-info my-1'>
+         Set personal interests
+       </a>
+     </p>
+     <p class='py-1'>
+       <a href="{% url 'user-list' %}" class='btn btn-info my-1'>
+         See user list
+       </a>
+     </p>
+   </div>
+  {% else %}
+    <p>This is the admin dash. First, add a conference</p>
+    <a href="{% url 'add-conference' %}" class='btn btn-info my-1'>Add conference</a>
+  {% endif %}
+</div>
+
+{% endblock content %}

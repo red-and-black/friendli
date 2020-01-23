@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}Sign Up{% endblock pagename %}
+{% block heading %}Sign Up{% endblock heading %}
+
+{% block content %}
+<div class='container mt-5 mb-2'>
+  <form method=post novalidate>
+    {% csrf_token %}
+    <div class="form-group">
+      {{ form.non_field_errors }}
+      <label>Username</label>
+        {{ form.username|setclass:"form-control" }}
+        {% for error in form.username.errors %}
+          <small class='text-watermelon'>
+          {{ error }}
+          </small>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+      <label>Email <span class='text-muted'>(Optional)</span></label>
+      {{ form.email|setclass:"form-control" }}
+      {% if form.email.errors %}
+        {% for error in form.email.errors %}
+          <small class='text-watermelon'>
+          {{ error }}
+          </small>
+        {% endfor %}
+      {% else %}
+        <span class="text-muted">For password resets only. Never shared.</span>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+        {{ form.password|setclass:"form-control" }}
+        {% for error in form.password.errors %}
+          <small class='text-watermelon'>
+          {{ error }}
+          </small>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+      <label>Confirm password</label>
+        {{ form.password2|setclass:"form-control" }}
+        {% for error in form.password2.errors %}
+          <small class='text-watermelon'>{{ error }}</small>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        {{ form.terms|setclass:"form-check-input" }}
+        <label class="form-check-label" for="id_terms">
+          I accept the terms of service&nbsp;
+          <a href="https://goodchat.io/terms" target='_blank'
+            class='text-less-light'>
+            <i class='material-icons align-middle mr-2 text-info'>
+              open_in_new
+            </i>
+          </a>
+        </label>
+        {% if form.terms.errors %}
+          <div class="ml-n3 mt-n1">
+            {% for error in form.terms.errors %}
+              <small class='text-watermelon'>{{ error }}</small>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        {{ form.privacy|setclass:"form-check-input" }}
+        <label class="form-check-label" for="id_privacy">
+          I accept the privacy policy&nbsp;
+          <a href="https://goodchat.io/privacy" target='_blank'
+            class='text-less-light'>
+            <i class='material-icons align-middle mr-2 text-info'>
+              open_in_new
+            </i>
+          </a>
+        </label>
+        {% if form.privacy.errors %}
+          <div class="ml-n3 mt-n1">
+            {% for error in form.privacy.errors %}
+              <small class='text-watermelon'>{{ error }}</small>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <button type='submit' class='btn btn-info'>
+      Sign up
+    </button>
+  </form>
+</div>
+{% endblock content %}
