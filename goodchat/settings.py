@@ -140,7 +140,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'goodchat', 'static'),)
+
 if IS_PRODUCTION_INSTANCE:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
     STATIC_ROOT = '/home/goodchat/static/'
 
 
