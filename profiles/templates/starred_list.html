@@ -21,9 +21,19 @@
           <i class='material-icons align-middle'>star</i>
         </span>
         &nbsp;&nbsp;&nbsp;
-        <a href="{% url 'profile-block' profile.user.pk %}" class='text-less-light block'>
-          <i class='material-icons align-middle'>block</i>
+        <a class="text-less-light block" href="#"
+          role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <i class='material-icons align-middle'>more_horiz</i>
         </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a href="{% url 'profile-block' profile.user.pk %}" class='dropdown-item py-2'>
+            <i class='material-icons align-middle'>block</i>&nbsp;Block
+          </a>
+          <a href="{% url 'new-report' profile.user.pk %}" class='dropdown-item py-2'>
+            <i class='material-icons align-middle'>report</i>&nbsp;Report
+          </a>
+        </div>
       </div>
     </div>
     <div class='card-body py-2'>

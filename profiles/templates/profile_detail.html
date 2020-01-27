@@ -1,145 +1,172 @@
 {% extends 'base.html' %}
 
-{% block pagename %}{{ user_to_view.username }}{% endblock pagename %}
-
-{% block heading %}{{ user_to_view.username }}{% endblock heading %}
+{% block pagename %}
+  {% if user_to_view == request.user %}
+    Your profile
+  {% else %}
+    {{ user_to_view.username }}
+  {% endif %}
+{% endblock pagename %}
+{% block heading %}
+  {% if user_to_view == request.user %}
+    Your profile
+  {% else %}
+    {{ user_to_view.username }}
+  {% endif %}
+{% endblock heading %}
 
 {% block content %}
 <div class="container">
-{% if user_to_view == request.user %}
-  {% if profile_is_empty %}
-    <div class="card muted-card mt-5 mx-4 py-3">
-      <div class="card-body text-center">
-        <h5 class="card-title mb-4 text-center">Your profile is empty.</h5>
-        <p class="card-text">
-          Add some info to it so that people can find you in their search
-          results.
-        </p>
-        <a href="{% url 'profile-edit' %}" class='btn btn-info mt-2'>
-          Set up your profile
+  {% if user_to_view == request.user %}
+    {% if profile_is_empty %}
+      <div class="card muted-card mt-5 mx-4 py-3">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-4 text-center">Your profile is empty.</h5>
+          <p class="card-text">
+            Add some info to it so that people can find you in their search
+            results.
+          </p>
+          <a href="{% url 'profile-edit' %}" class='btn btn-info mt-2'>
+            Set up your profile
+          </a>
+        </div>
+      </div>
+    {% else %}
+      <div class="card muted-card my-3" id="notifications_card">
+        <div class="card-body text-center">
+          <p class="card-text">
+            Want a notification when someone contacts you? We recommend it.</p>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-info" id="allow_notifications">
+              Enable notifications
+            </button>
+          </div>
+        </div>
+      </div>
+      {% if not user_to_view.profile.personal_interests.all and not user_to_view.profile.prof_interests.all or not user_to_view.profile.languages.all %}
+        <div class="card muted-card my-3">
+          <div class="card-body">
+            {% if not user_to_view.profile.languages.all %}
+              <p class="card-text">How about adding the language/s you speak?</p>
+            {% endif %}
+            {% if not user_to_view.profile.personal_interests.all and not user_to_view.profile.prof_interests.all %}
+              <p class="card-text">How about adding some of your interests?</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+    {% if not profile_is_empty %}
+    <div class='card bg-dark-grey my-2'>
+      <div class='card-header bg-transparent'>
+      <div class='d-flex justify-content-between'>
+        <a href="{% url 'profile-edit' %}" class='btn btn-info mt-2 mr-2'>
+          Edit profile
+        </a>
+        <a href="{% url 'change-password' %}" class='btn btn-info mt-2'>
+          Change password
         </a>
       </div>
-    </div>
-  {% else %}
-    <div class="card muted-card my-3" id="notifications_card">
-      <div class="card-body text-center">
-        <p class="card-text">
-          Want a notification when someone contacts you? We recommend it.</p>
-        <div class="d-flex justify-content-center">
-          <button class="btn btn-info" id="allow_notifications">
-            Enable notifications
-          </button>
-        </div>
-      </div>
-    </div>
-    {% if not user_to_view.profile.personal_interests.all and not user_to_view.profile.prof_interests.all or not user_to_view.profile.languages.all %}
-      <div class="card muted-card my-3">
-        <div class="card-body">
-          {% if not user_to_view.profile.languages.all %}
-            <p class="card-text">How about adding the language/s you speak?</p>
-          {% endif %}
-          {% if not user_to_view.profile.personal_interests.all and not user_to_view.profile.prof_interests.all %}
-            <p class="card-text">How about adding some of your interests?</p>
-          {% endif %}
-        </div>
-      </div>
     {% endif %}
-  {% endif %}
-  {% if not profile_is_empty %}
-  <div class='d-flex justify-content-between'>
-    <a href="{% url 'profile-edit' %}" class='btn btn-info mt-2 mr-2'>
-      Edit profile
-    </a>
-    <a href="{% url 'change-password' %}" class='btn btn-info mt-2'>
-      Change password
-    </a>
-  </div>
-  {% endif %}
-
-{% else %}
-    {% if user_to_view not in request_user_blocked %}
-      <a href="{% url 'start-conversation' user_to_view.pk %}"
-        class='btn btn-info mt-2'>
-        <i class='material-icons align-middle'>send</i>
-        &nbsp;&nbsp;Message
-      </a>
-      <span onclick="toggleStar('{{ user_to_view.pk }}');" class="btn btn-info mt-2">
-        {% if user_to_view in request_user_stars %}
-        <i class='material-icons align-middle' id="star-icon">
-          star
-        </i>&nbsp;&nbsp;Saved
-        {% else %}
-        <i class='material-icons align-middle' id="star-icon">
-          star_outline
-        </i>&nbsp;&nbsp;Save
-        {% endif %}
-      </span>
-    {% endif %}
-    <a href="{% url 'profile-block' user_to_view.pk %}" class='btn btn-info mt-2'>
-      {% if user_to_view in request_user_blocked %}
-      <i class='material-icons align-middle'>block</i>&nbsp;&nbsp;Unblock
-      {% else %}
-      <i class='material-icons align-middle'>block</i>&nbsp;&nbsp;Block
-      {% endif %}
-    </a>
-  {% endif %}
-  <dl class='mt-4'>
-    {% if profile_to_view.languages.all %}
-      <dt class='text-rockmelon'>Languages</dt>
-      <dd class='mb-1'>
-        {{ profile_to_view.languages.all|join:" &nbsp;&bull;&nbsp; " }}
-      </dd>
-    {% endif %}
-    {% if profile_to_view.looking_for.all %}
-      <dt class='text-rockmelon mt-2'>Looking for</dt>
-      <dd class='mb-1'>
-        {{ profile_to_view.looking_for.all|join:" &nbsp;&bull;&nbsp; " }}
-      </dd>
-    {% endif %}
-    {% if profile_to_view.personal_interests.all %}
-      <dt class='text-rockmelon mt-2'>Personal interests</dt>
-      <dd class='mb-1'>
-        {{ profile_to_view.personal_interests.all|join:" &nbsp;&bull;&nbsp; " }}
-      </dd>
-    {% endif %}
-    {% if profile_to_view.prof_interests.all %}
-      <dt class='text-rockmelon mt-2'>Professional interests</dt>
-      <dd class='mb-1'>
-        {{ profile_to_view.prof_interests.all|join:" &nbsp;&bull;&nbsp; " }}
-      </dd>
-    {% endif %}
-    {% if profile_to_view.stack %}
-      <dt class='text-rockmelon mt-2'>Tech stack</dt>
-      <dd class='urlize text-break'>
-        {{ profile_to_view.stack|urlize }}
-      </dd>
-    {% endif %}
-    {% if profile_to_view.detail %}
-      <dt class='text-rockmelon mt-2'>Everything else</dt>
-      <dd class='close-paragraphs urlize text-break'>
-        {{ profile_to_view.detail|urlize|linebreaks }}
-      </dd>
-    {% endif %}
-    {% if profile_to_view.github or profile_to_view.twitter %}
-      <dt class='text-rockmelon mt-2'>Social media</dt>
-        {% if profile_to_view.github %}
-        <dd>
-        <a href="https://github.com/{{ profile_to_view.github }}"
-          class='text-info' target='blank'>
-          <i class='fa fa-github text-less-light'></i>&nbsp;
-          {{ profile_to_view.github|truncatechars:16 }}
-        </a>&nbsp;
-      {% endif %}
-      {% if profile_to_view.twitter %}
-          <a href="https://twitter.com/{{ profile_to_view.twitter }}"
-            class='text-info' target='blank'>
-            <i class='fa fa-twitter text-less-light'></i>&nbsp;
-            {{ profile_to_view.twitter|truncatechars:16  }}
+  {% else %}   <!-- user isn't request.user -->
+  <div class='card bg-dark-grey my-2'>
+    <div class='card-header bg-transparent'>
+    <div class='float-right'>
+      {% if user_to_view not in request_user_blocked %}
+          <a href="{% url 'start-conversation' user_to_view.pk %}" class='text-less-light'>
+            <i class='material-icons align-middle'>send</i>
           </a>
-        </dd>
+          &nbsp;&nbsp;&nbsp;
+          <span onclick="toggleStar('{{ user_to_view.pk }}');"
+            class='pointer text-less-light hover-gold'>
+            {% if user_to_view in request_user_stars %}
+              <i class='material-icons align-middle' id="star-icon">star</i>
+            {% else %}
+              <i class='material-icons align-middle' id="star-icon">star_outline</i>
+            {% endif %}
+          </span>
       {% endif %}
+        &nbsp;&nbsp;&nbsp;
+        <a class="text-less-light block" href="#"
+          role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <i class='material-icons align-middle'>more_horiz</i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          {% if user_to_view in request_user_blocked %}
+          <a href="{% url 'profile-block' user_to_view.pk %}" class='dropdown-item py-2'>
+            <i class='material-icons align-middle'>block</i>&nbsp;Unblock
+          </a>
+          {% else %}
+          <a href="{% url 'profile-block' user_to_view.pk %}" class='dropdown-item py-2'>
+            <i class='material-icons align-middle'>block</i>&nbsp;Block
+          </a>
+          {% endif %}
+          <a href="{% url 'new-report' user_to_view.pk %}" class='dropdown-item py-2'>
+            <i class='material-icons align-middle'>report</i>&nbsp;Report
+          </a>
+        </div>
+      </div>
+  {% endif %}
+      <dl class='mt-4'>
+        {% if profile_to_view.languages.all %}
+          <dt class='text-rockmelon'>Languages</dt>
+          <dd class='mb-1'>
+            {{ profile_to_view.languages.all|join:" &nbsp;&bull;&nbsp; " }}
+          </dd>
+        {% endif %}
+        {% if profile_to_view.looking_for.all %}
+          <dt class='text-rockmelon mt-2'>Looking for</dt>
+          <dd class='mb-1'>
+            {{ profile_to_view.looking_for.all|join:" &nbsp;&bull;&nbsp; " }}
+          </dd>
+        {% endif %}
+        {% if profile_to_view.personal_interests.all %}
+          <dt class='text-rockmelon mt-2'>Personal interests</dt>
+          <dd class='mb-1'>
+            {{ profile_to_view.personal_interests.all|join:" &nbsp;&bull;&nbsp; " }}
+          </dd>
+        {% endif %}
+        {% if profile_to_view.prof_interests.all %}
+          <dt class='text-rockmelon mt-2'>Professional interests</dt>
+          <dd class='mb-1'>
+            {{ profile_to_view.prof_interests.all|join:" &nbsp;&bull;&nbsp; " }}
+          </dd>
+        {% endif %}
+        {% if profile_to_view.stack %}
+          <dt class='text-rockmelon mt-2'>Tech stack</dt>
+          <dd class='urlize text-break'>
+            {{ profile_to_view.stack|urlize }}
+          </dd>
+        {% endif %}
+        {% if profile_to_view.detail %}
+          <dt class='text-rockmelon mt-2'>Everything else</dt>
+          <dd class='close-paragraphs urlize text-break'>
+            {{ profile_to_view.detail|urlize|linebreaks }}
+          </dd>
+        {% endif %}
+        {% if profile_to_view.github or profile_to_view.twitter %}
+          <dt class='text-rockmelon mt-2'>Social media</dt>
+            {% if profile_to_view.github %}
+            <dd>
+            <a href="https://github.com/{{ profile_to_view.github }}"
+              class='text-info' target='blank'>
+              <i class='fa fa-github text-less-light'></i>&nbsp;
+              {{ profile_to_view.github|truncatechars:16 }}
+            </a>&nbsp;
+          {% endif %}
+          {% if profile_to_view.twitter %}
+              <a href="https://twitter.com/{{ profile_to_view.twitter }}"
+                class='text-info' target='blank'>
+                <i class='fa fa-twitter text-less-light'></i>&nbsp;
+                {{ profile_to_view.twitter|truncatechars:16  }}
+              </a>
+            </dd>
+          {% endif %}
+        </dl>
+      </div>
+    </div>
     {% endif %}
-  </dl>
 </div>
 {% endblock content %}
 

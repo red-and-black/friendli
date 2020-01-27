@@ -18,6 +18,11 @@
    </div>
    <div class='justify-content-between'>
      <p class='py-1'>
+       <a href="{% url 'reports' %}" class='btn btn-info my-1'>
+         See {{ reports_count }} reports
+       </a>
+     </p>
+     <p class='py-1'>
        <a href="{% url 'conference' %}" class='btn btn-info my-1'>
          See conference details
        </a>

@@ -136,7 +136,6 @@ input:-webkit-autofill:focus {
 }
 
 /* anchor decoration */
-
 a:hover {
   text-decoration: none;
 }
@@ -157,6 +156,21 @@ span.hover-gold:hover {
 .badge-rockmelon {
   background-color: $rockmelon;
   color: $less_light;
+}
+
+
+/* dropdown overrides */
+.dropdown-menu {
+  background-color: $secondary;
+}
+
+.dropdown-item {
+  color: white;
+}
+
+.dropdown-item:hover {
+  color: white;
+  background-color: $blue;
 }
 
 /* Select2 customisation */

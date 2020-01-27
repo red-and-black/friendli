@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}All reports{% endblock pagename %}
+{% block heading %}All reports{% endblock heading %}
+
+
+{% block content %}
+<div class='container my-5'>
+  {% for report in reports %}
+  <div class='card bg-dark-grey my-2'>
+    <div class='card-body'>
+      <p>
+        <span class='text-rockmelon'>Reporter</span>&nbsp;{{ report.reporter }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Reportee</span>&nbsp;{{ report.reportee }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Created</span>&nbsp;{{ report.created }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Report</span>&nbsp;
+        {{ report.report }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Public outcome</span>&nbsp;
+        {{ report.public_outcome }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Private outcome</span>&nbsp;
+        {{ report.private_outcome }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Status</span>&nbsp;
+        {{ report.get_status_display }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Updated</span>&nbsp;{{ report.modified }}
+      </p>
+      <a href="{% url 'start-conversation' report.reporter.pk %}"
+        class='text-less-light'>
+        <i class='material-icons align-middle'>send</i>
+        &nbsp;Contact {{ reporter }}
+      </a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="{% url 'update-report' report.pk %}"
+        class='text-less-light'>
+        <i class='material-icons align-middle'>edit</i>
+        &nbsp;Update report
+      </a>
+    </div>
+  </div>
+  {% empty %}
+    <p>No reports yet.</p>
+  {% endfor %}
+</div>
+{% endblock content %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}

@@ -44,7 +44,20 @@
           {% csrf_token %}
           {{ form.content|setclass:"form-control bg-dark text-white" }}
           <div class="container">
-            <div class="row justify-content-end">
+            <div class="row justify-content-between">
+              <button class="text-less-light btn my-2" href="#"
+                role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class='material-icons align-middle'>more_horiz</i>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a href="{% url 'profile-block' other_party.pk  %}" class='dropdown-item py-2'>
+                  <i class='material-icons align-middle'>block</i>&nbsp;Block
+                </a>
+                <a href="{% url 'new-report' other_party.pk  %}" class='dropdown-item py-2'>
+                  <i class='material-icons align-middle'>report</i>&nbsp;Report
+                </a>
+              </div>
               <button class="btn btn-info my-2" type="submit">Send</button>
             </div>
           </div>

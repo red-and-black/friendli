@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}Report received{% endblock pagename %}
+{% block heading %}Report received{% endblock heading %}
+
+
+{% block content %}
+<div class='container my-5'>
+  <div class='card bg-dark-grey my-2'>
+    <div class='card-body'>
+      <p>Thanks, we have received your report about {{ reportee }}.</p>
+      <p>
+        We will send you a message inside GoodChat if we need any more
+        information.
+      </p>
+      {% if report.reportee not in blocked_users  %}
+        <p>
+          Don't forget, you can block {{ reportee }}, so that they won't be
+          able to see your profile or message you any more.
+        </p>
+        <a href="{% url 'profile-block' reportee.pk %}"
+          class='btn btn-watermelon my-2 d-flex justify-content-center'>
+          <i class='material-icons align-middle'>block</i>
+          &nbsp;Block {{ reportee }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+  <a href="{% url 'my-reports' %}" class='btn btn-info my-3 d-flex justify-content-center'>
+    See your report
+  </a>
+</div>
+{% endblock content %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}

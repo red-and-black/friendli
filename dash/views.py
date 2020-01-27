@@ -5,6 +5,9 @@ from django.shortcuts import (
     render
 )
 
+from behaviour.forms import UpdateBehaviourReportForm
+from behaviour.models import BehaviourReport
+
 from conferences.forms import ConferenceForm
 from conferences.models import Conference
 
@@ -33,10 +36,12 @@ from profiles.models import (
 def dash(request):
     profile_count = Profile.objects.all().count()
     convo_count = Conversation.objects.all().count()
+    reports_count = BehaviourReport.objects.all().count()
 
     return render(request, 'dash.html', {
         'convo_count': convo_count,
         'profile_count': profile_count,
+        'reports_count': reports_count,
     })
 
 
@@ -207,6 +212,30 @@ def prof_interests(request):
     return render(request, 'prof_interests.html', {
         'form': form,
         'prof_interests': prof_interests,
+    })
+
+
+@superuser_required
+def reports(request):
+    reports = BehaviourReport.objects.all()
+    return render(request, 'reports.html', {
+        'reports': reports,
+    })
+
+
+@superuser_required
+def update_report(request, pk):
+    report = BehaviourReport.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = UpdateBehaviourReportForm(request.POST, instance=report)
+        if form.is_valid():
+            report = form.save()
+            return redirect('reports')
+    else:
+        form = UpdateBehaviourReportForm(instance=report)
+    return render(request, 'update_report.html', {
+        'form': form,
+        'report': report,
     })
 
 

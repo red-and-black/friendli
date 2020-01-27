@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}Update report{% endblock pagename %}
+{% block heading %}Update report{% endblock heading %}
+
+
+{% block content %}
+<div class='container my-5'>
+  <div class='card bg-dark-grey my-2'>
+    <div class='card-body'>
+      <p>
+        <span class='text-rockmelon'>Reporter</span>&nbsp;{{ report.reporter }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Reportee</span>&nbsp;{{ report.reportee }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Created</span>&nbsp;{{ report.created }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Report</span>&nbsp;
+        {{ report.report }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Public outcome</span>&nbsp;
+        {{ report.public_outcome }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Private outcome</span>&nbsp;
+        {{ report.private_outcome }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Status</span>&nbsp;
+        {{ report.status }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Updated</span>&nbsp;{{ report.modified }}
+      </p>
+    </div>
+  </div>
+  <div class='my-3'>
+    <form method=post>
+      {% csrf_token %}
+      <p>
+        Status: {{ form.status|setclass:'form-control' }}
+      </p>
+      <p>
+        Public outcome
+        <span class='text-watermelon'>(Will be shown to reporter)</span>:
+        {{ form.public_outcome|setclass:'form-control' }}
+      </p>
+      <p>
+        Private outcome: {{ form.private_outcome|setclass:'form-control' }}
+      </p>
+      <button type='submit' class='btn btn-info'>
+        Save
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock content %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}

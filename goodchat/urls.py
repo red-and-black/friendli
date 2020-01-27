@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.urls import path
+from django.urls import (
+    include,
+    path
+)
 
 from conversations import views as conversations_views
 from dash import views as dash_views
@@ -25,6 +28,9 @@ from profiles import views as profiles_views
 urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
+
+    # Behaviour
+    path('reports/', include('behaviour.urls')),
 
     # Conversations
     path('conversation/<int:pk>/', conversations_views.conversation,
@@ -60,6 +66,9 @@ urlpatterns = [
          name='prof-interests'),
     path('dash/personal-interests/', dash_views.personal_interests,
          name='personal-interests'),
+    path('dash/reports/', dash_views.reports, name='reports'),
+    path('dash/update-report/<pk>', dash_views.update_report,
+         name='update-report'),
     path('user-list/', dash_views.user_list, name='user-list'),
 
     # Pages

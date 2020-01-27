@@ -22,16 +22,12 @@
       {{ profile.user.username }}
       </a>
       <div class='float-right'>
-        <span class='text-muted'>
-          <i class='material-icons align-middle'>send</i>
-        </span>
-        &nbsp;&nbsp;&nbsp;
-        <span class='text-muted'>
-          <i class='material-icons align-middle'>star</i>
-        </span>
-        &nbsp;&nbsp;&nbsp;
         <a href="{% url 'profile-block' profile.user.pk %}" class='text-less-light'>
-          <i class='material-icons align-middle'>block</i>
+          <i class='material-icons align-middle'>block</i>&nbsp;Unblock
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <a href="{% url 'new-report' profile.user.pk %}" class='text-less-light block'>
+          <i class='material-icons align-middle'>report</i>
         </a>
       </div>
     </div>
