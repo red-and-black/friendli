@@ -343,28 +343,28 @@ def profile_edit(request):
 
 @login_required
 def profile_detail(request, username):
-    user = get_object_or_404(User, username__iexact=username)
-    user_profile = Profile.objects.get(user=user)
+    user_to_view = get_object_or_404(User, username__iexact=username)
+    profile_to_view = Profile.objects.get(user=user_to_view)
     request_user_stars = Profile.objects.get(user=request.user).starred.all()
     request_user_blocked = Profile.objects.get(user=request.user).blocked.all()
-    if request.user in Profile.objects.get(user=user).blocked.all():
+    if request.user in Profile.objects.get(user=user_to_view).blocked.all():
         raise Http404()
 
     profile_is_empty = not any([
-        user_profile.languages.all().exists(),
-        user_profile.looking_for.all().exists(),
-        user_profile.personal_interests.all().exists(),
-        user_profile.prof_interests.all().exists(),
-        user_profile.detail,
-        user_profile.stack,
-        user_profile.twitter,
-        user_profile.github,
+        profile_to_view.languages.all().exists(),
+        profile_to_view.looking_for.all().exists(),
+        profile_to_view.personal_interests.all().exists(),
+        profile_to_view.prof_interests.all().exists(),
+        profile_to_view.detail,
+        profile_to_view.stack,
+        profile_to_view.twitter,
+        profile_to_view.github,
     ])
 
     return render(request, 'profile_detail.html', {
         'profile_is_empty': profile_is_empty,
         'request_user_blocked': request_user_blocked,
         'request_user_stars': request_user_stars,
-        'user': user,
-        'user_profile': user_profile,
+        'user_to_view': user_to_view,
+        'profile_to_view': profile_to_view,
     })
