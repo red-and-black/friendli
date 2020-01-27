@@ -116,7 +116,8 @@ def username_search(request):
                 filter(user__username__icontains=username).\
                 exclude(user__in=blocked_profiles).\
                 exclude(user__in=blocking_users).\
-                exclude(user=request.user)
+                exclude(user=request.user).\
+                exclude(user__pk=1)
 
             # Save the search expression to the session for reuse.
             request.session['user_search_username'] = username
@@ -128,7 +129,8 @@ def username_search(request):
                 filter(user__username__icontains=username).\
                 exclude(user__in=blocked_profiles).\
                 exclude(user__in=blocking_users).\
-                exclude(user=request.user)
+                exclude(user=request.user).\
+                exclude(user__pk=1)
             initial = {"username": username}
         else:
             search_results = None

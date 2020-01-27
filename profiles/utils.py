@@ -71,6 +71,7 @@ def get_search_results(user, search_data):
         exclude(user__in=blocked_profiles).\
         exclude(user__in=blocking_users).\
         exclude(user=user).\
+        exclude(user__pk=1).\
         distinct('pk')
 
     return search_results
