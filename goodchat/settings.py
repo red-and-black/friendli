@@ -97,7 +97,9 @@ DATABASES = {
         'USER': os.environ['GOODCHAT_DATABASE_USER'],
     }
 }
-if not IS_PRODUCTION_INSTANCE:
+if IS_PRODUCTION_INSTANCE:
+    DATABASES['default']['HOST'] = os.environ['GOODCHAT_DATABASE_HOST']
+else:
     DATABASES['default']['HOST'] = 'localhost'
 
 
