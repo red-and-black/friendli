@@ -123,7 +123,7 @@ def username_search(request):
             request.session['user_search_username'] = username
     else:
         username = request.session.get('user_search_username')
-        if username:
+        if username is not None:
             # TODO: De-duplicate this query and one one above.
             search_results = Profile.objects.\
                 filter(user__username__icontains=username).\
