@@ -141,12 +141,23 @@
       /*
        * Polls for new messages.
        */
+      var lastMessageCounts = null;
       function poll(waitTime) {
         setTimeout(function () {
           $.ajax({
             url: "{% url 'unread-messages' %}",
           }).done(function(json) {
             var messageCounts = json['messages'];
+            if (lastMessageCounts == null) {
+              lastMessageCounts = messageCounts;
+            };
+            if(
+              !(JSON.stringify(lastMessageCounts)
+              == JSON.stringify(messageCounts))
+            ){
+              createNotificationIfAllowed();
+              lastMessageCounts = messageCounts;
+            };
             var wait = json['wait'];
             for (var i = 0; i < messageCounts.length; ++i) {
               var id = messageCounts[i].id.toString();
@@ -224,6 +235,16 @@
        return this.length && pat && pat.length ? this.each(function() {
         innerHighlight(this, pat.toUpperCase());
        }) : this;
+      };
+
+      /*
+       * Creates a notification if notifications are allowed.
+       */
+      function createNotificationIfAllowed() {
+        if(Notification.permission === 'granted') {
+          var message = 'New message received.';
+          var notification = new Notification('GoodChat', {body: message});
+        };
       };
     </script>
   {% endif %}

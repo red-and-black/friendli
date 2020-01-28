@@ -21,6 +21,17 @@
       </div>
     </div>
   {% else %}
+    <div class="card muted-card my-3" id="notifications_card">
+      <div class="card-body text-center">
+        <p class="card-text">
+          Want a notification when someone contacts you? We recommend it.</p>
+        <div class="d-flex justify-content-center">
+          <button class="btn btn-info" id="allow_notifications">
+            Enable notifications
+          </button>
+        </div>
+      </div>
+    </div>
     {% if not user_to_view.profile.personal_interests.all and not user_to_view.profile.prof_interests.all or not user_to_view.profile.languages.all %}
       <div class="card muted-card my-3">
         <div class="card-body">
@@ -157,5 +168,71 @@
         alert(errorMsg);
       });
     };
+
+    var notificationsBtn = $('#allow_notifications');
+    var notificationsCard = $('#notifications_card');
+
+    /*
+     * Asks for permission to use notifications, then handles the response.
+     */
+    function askForNotificationPermission() {
+      // Do nothing if the browser doesn't support notifications.
+      if ("Notification" in window) {
+        if(checkNotificationPromise()) {
+          Notification.requestPermission().then((permission) => {
+            handlePermissionResponse(permission);
+          })
+        } else {
+          Notification.requestPermission(function(permission) {
+            handlePermissionResponse(permission);
+          });
+        };
+      };
+    };
+
+    /*
+     * Cleans up after permission for notifications has been requested.
+     */
+    function handlePermissionResponse(permission) {
+      hideNotificationsCardIfAppropriate();
+      // Make sure Chrome stores the information.
+      if(!('permission' in Notification)) {
+        Notification.permission = permission;
+      };
+    };
+
+    /*
+     * Checks whether browser supports the promise version of
+     * requestPermission().
+     * Safari only supports the old callback-based version.
+     */
+    function checkNotificationPromise() {
+      try {
+        Notification.requestPermission().then();
+      } catch(e) {
+        return false;
+      };
+
+      return true;
+    };
+
+    /*
+     * Hides the notifications card if notifications are disallowed/allowed, or
+     * if the browser doesn't support notifications.
+     */
+    function hideNotificationsCardIfAppropriate() {
+      if(
+        !(Notification.permission === 'default')
+        || !("Notification" in window)
+      ) {
+        notificationsCard.hide();
+      };
+    };
+
+    hideNotificationsCardIfAppropriate();
+
+    $(function() {
+      notificationsBtn.click(askForNotificationPermission);
+    });
   </script>
 {% endblock js %}
