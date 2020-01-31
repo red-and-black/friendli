@@ -45,6 +45,9 @@ urlpatterns = [
     # Dash
     path('dash/', include('dash.urls')),
 
+    # Meetups
+    path('meetups/', include('meetups.urls')),
+
     # Pages
     path('faqs/', pages_views.faqs, name='faqs'),
     path('', pages_views.landing, name='landing'),

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'conversations',
     'dash',
     'goodchat',  # TODO: Remove this. It's a hack so that base.html is found.
+    'meetups',
     'pages',
     'profiles',
 ]

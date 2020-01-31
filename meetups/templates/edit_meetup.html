@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}Edit meetup{% endblock pagename %}
+{% block heading %}Edit meetup{% endblock heading %}
+
+
+{% block content %}
+<div class='container my-4'>
+  <form method="post" novalidate class='mt-4'>
+    {% csrf_token %}
+    <div class='form-group'>
+      <label>Name your meetup</label>
+      {{ form.name|setclass:'form-control' }}
+      {% if form.name.errors %}
+        {% for error in form.name.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class='form-group'>
+      <label>Date</label>
+      {{ form.date|setclass:'form-control' }}
+      <p class='text-muted py-0 my-1'>
+        Date must be in one of these formats: dd/mm/yy, dd/mm/yyyy
+      </p>
+      {% if form.date.errors %}
+        {% for error in form.date.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class='form-group'>
+      <label>Time</label>
+      {{ form.time|setclass:'form-control' }}
+      <p class='text-muted py-0 my-1'>
+        Time must be one of in these formats: '23:00', '11 pm', or '10:30 am'.
+      </p>
+      {% if form.time.errors %}
+        {% for error in form.time.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class='form-group'>
+      <label>Location</label>
+      {{ form.location|setclass:'form-control' }}
+      {% if form.location.errors %}
+        {% for error in form.location.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class='form-group'>
+      <label>Details</label>
+      {{ form.details|setclass:'form-control' }}
+      {% if form.details.errors %}
+        {% for error in form.details.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+      <p class='text-muted py-0 my-1'>
+        Include things like:
+        <ul class='text-muted'>
+          <li>What you'll do at the meetup</li>
+          <li>How people will can find or recognise you</li>
+          <li>If you need people to message you to RSVP</li>
+        </ul>
+      </p>
+    </div>
+    <div class='form-group'>
+      <label>Relevant professional interests (optional)</label>
+      {{ form.prof_interests|setclass:'form-control multiselect' }}
+      {% if form.prof_interests.errors %}
+        {% for error in form.prof_interests.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class='form-group'>
+      <label>Relevant personal interests (optional)</label>
+      {{ form.personal_interests|setclass:'form-control multiselect' }}
+      {% if form.personal_interests.errors %}
+        {% for error in form.personal_interests.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class='container'>
+      <div class="row justify-content-end">
+        <button type='submit' class='btn btn-info my-2 align-right'>Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock content %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}

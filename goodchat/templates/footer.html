@@ -1,12 +1,17 @@
 <br/>
 <nav class='navbar navbar-expand fixed-bottom navbar-dark bg-darkest-grey'>
-  <div class='container justify-content-center medium-width'>
-    <div class='col text-center'>
+  <div class='container justify-content-around medium-width'>
+    <div class='text-center'>
       <a class='text-muted nav-link' href="{% url 'search' %}">
         <i class='material-icons align-middle'>search</i>
       </a>
     </div>
-    <div class='col text-center'>
+    <div class='text-center'>
+      <a class='text-muted nav-link' href="{% url 'meetups' %}">
+        <i class='material-icons align-middle'>people_outline</i>
+      </a>
+    </div>
+    <div class='text-center'>
       <a class='text-muted nav-link' href="{% url 'conversations' %}">
         <i class='material-icons align-middle'>chat_bubble_outline</i>
         <span id="conversation_count">
@@ -18,12 +23,12 @@
         </span>
       </a>
     </div>
-    <div class='col text-center'>
+    <div class='text-center'>
       <a class='text-muted nav-link mx-auto' href="{% url 'starred-list' %}">
         <i class='material-icons align-middle'>star_outline</i>
       </a>
     </div>
-    <div class='col text-center'>
+    <div class='text-center'>
       <a class='text-muted nav-link' href="{% url 'profile-detail' user.username %}">
         <i class='material-icons align-middle'>person_outline</i>
         {% if not user.profile.languages.all and not user.profile.detail and not user.profile.prof_interests.all %}

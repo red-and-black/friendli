@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}Meetups{% endblock pagename %}
+{% block heading %}Meetups{% endblock heading %}
+
+
+{% block content %}
+<div class='container'>
+  <div class="card muted-card my-3">
+    <div class="card-body">
+      {% if meetups %}
+      <p class="card-text text-center">
+        Anyone can create a meetup!
+      </p>
+      {% else %}
+      <p class="card-text text-center">
+        There are no meetups yet.
+      </p>
+      <p class="card-text text-center">
+        But you can make one!
+      </p>
+      {% endif %}
+      <div class='d-flex justify-content-center'>
+        <a href="{% url 'new-meetup' %}" class='btn btn-info'>Set one up</a>
+      </div>
+    </div>
+  </div>
+  {% for meetup in meetups %}
+  <div class='card bg-dark-grey my-2'>
+    <div class='card-header d-flex justify-content-between'>
+      <p class='card-title mb-0'>
+        {{ meetup.name }}
+      </p>
+      {% if request.user == meetup.organiser %}
+      <a href="{% url 'edit-meetup' meetup.pk %}"
+        class='text-less-light'>
+        <i class='material-icons align-middle'>edit</i>
+      </a>
+      {% endif %}
+    </div>
+    <div class='card-body'>
+      <p>
+        <span class='text-rockmelon'>When</span>&nbsp;
+        {{ meetup.time }}&nbsp;{{ meetup.date|date:"D j M" }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Where</span>&nbsp;
+        {{ meetup.location }}
+      </p>
+      <p class='urlize'>
+        <span class='text-rockmelon'>Details</span>&nbsp;
+        {{ meetup.details|urlize }}
+      </p>
+      {% if meetup.prof_interests.all or meetup.personal_interests.all %}
+      <p>
+        <span class='text-rockmelon'>Interests</span>&nbsp;
+        {% if meetup.prof_interests.all %}
+          {{ meetup.prof_interests.all|join:", " }},
+        {% endif %}
+        {% if meetup.personal_interests.all %}
+          {{ meetup.personal_interests.all|join:", " }}
+        {% endif %}
+      </p>
+      {% endif %}
+      <p class='mb-0'>
+        <span class='text-rockmelon'>Organiser</span>&nbsp;
+        <a href="{% url 'profile-detail' meetup.organiser %}"
+          class="text-info">
+          {{ meetup.organiser }}
+        </a>
+      </p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}
