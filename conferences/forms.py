@@ -9,12 +9,12 @@ class ConferenceForm(forms.ModelForm):
     """
     start_date = forms.DateField(
         widget=forms.DateInput(),
-        input_formats=['%d/%m/%y'],
+        input_formats=['%d/%m/%y', '%d/%m/%Y'],
     )
 
     end_date = forms.DateField(
         widget=forms.DateInput(),
-        input_formats=['%d/%m/%y'],
+        input_formats=['%d/%m/%y', '%d/%m/%Y'],
     )
 
     class Meta:
