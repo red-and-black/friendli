@@ -1,0 +1,10 @@
+<div class="card bg-darkest-grey mt-2">
+  <div class="card-body mb-n1 pb-0 pt-1 px-2">
+    <p class="card-text urlize">
+      {{ message.content|linebreaksbr|urlize }}
+    </p>
+  </div>
+  <div class="card-footer bg-transparent border-0px-2 py-0 text-right">
+    <small>{{ message.author }} &middot; {{ message.time }}</small>
+  </div>
+</div>

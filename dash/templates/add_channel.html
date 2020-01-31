@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}Channels{% endblock pagename %}
+{% block heading %}Channels{% endblock heading %}
+
+
+{% block content %}
+<div class='container my-3'>
+  <ul>
+  {% for channel in channels %}
+    <li>
+      {{ channel.name }}&nbsp;&bull;&nbsp;{{ channel.description }}
+      <a href="{% url 'edit-channel' channel.pk %}" class='text-info'>Edit</a>
+    </li>
+  {% endfor %}
+  </ul>
+</div>
+<form method=post>
+  {% csrf_token %}
+  <p>Add channel:</p>
+  {{ form.name|setclass:'form-control' }}
+  {{ form.description|setclass:'form-control' }}
+  <button type='submit' class='btn btn-info'>Save</button>
+</form>
+{% endblock content %}

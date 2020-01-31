@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
+from channels import views as channels_views
 from conversations import views as conversations_views
 from dash import views as dash_views
 from pages import views as pages_views
@@ -25,6 +26,10 @@ from profiles import views as profiles_views
 urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
+
+    # Channels
+    path('channels/<str:name>/', channels_views.channel, name='channel'),
+    path('channels/', channels_views.channels, name='channels'),
 
     # Conversations
     path('conversation/<int:pk>/', conversations_views.conversation,
@@ -39,10 +44,12 @@ urlpatterns = [
 
     # Dash
     path('dash/', dash_views.dash, name='dash'),
+    path('dash/add-channel', dash_views.add_channel, name='add-channel'),
     path('dash/add-conference', dash_views.add_conference,
          name='add-conference'),
     path('dash/conference', dash_views.conference,
          name='conference'),
+    path('dash/edit-channel', dash_views.edit_channel, name='edit-channel'),
     path('dash/edit-conference', dash_views.edit_conference,
          name='edit-conference'),
     path('dash/edit-language/<pk>', dash_views.edit_language,

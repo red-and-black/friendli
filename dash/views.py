@@ -5,6 +5,9 @@ from django.shortcuts import (
     render
 )
 
+from channels.forms import ChannelForm
+from channels.models import Channel
+
 from conferences.forms import ConferenceForm
 from conferences.models import Conference
 
@@ -37,6 +40,35 @@ def dash(request):
     return render(request, 'dash.html', {
         'convo_count': convo_count,
         'profile_count': profile_count,
+    })
+
+
+@superuser_required
+def add_channel(request):
+    if request.method == 'POST':
+        form = ChannelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add-channel')
+    else:
+        form = ChannelForm()
+    return render(request, 'add_channel.html', {
+        'form': form,
+    })
+
+
+@superuser_required
+def edit_channel(request, pk):
+    channel = Channel.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = ChannelForm(request.POST, instance=channel)
+        if form.is_valid():
+            form.save()
+            return redirect('edit-channel')
+    else:
+        form = ChannelForm(instance=channel)
+    return render(request, 'edit_channel.html', {
+        'form': form,
     })
 
 

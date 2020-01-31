@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block pagename %}Channels{% endblock pagename %}
+
+{% block heading %}Channels{% endblock heading %}
+
+{% block content %}
+  {% for channel in channels %}
+    {% url 'channel' channel.name as the_url %}
+    <div class="card bg-dark-grey my-2 pointer"
+      onclick="document.location='{{ the_url }}';"
+    >
+      <div class="card-body px-2 py-1">
+        <div class="clearfix">
+          <p class="card-text float-left mb-1">{{ channel.name }}</p>
+          <p class="float-right mb-1">
+            <small>{{ channel.time }}</small>
+          </p>
+        </div>
+        <p class="card-text">{{ channel.description }}</p>
+      </div>
+    </div>
+  {% empty %}
+    <div class="card muted-card mt-5 mx-4 py-3">
+      <div class="card-body text-center">
+        <p class="card-text">No channels have been set up yet.</p>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock content %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}

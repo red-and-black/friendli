@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}{{ channel.name }}{% endblock pagename %}
+
+{% block nav %}
+  {% include 'nav_with_back.html' %}
+{% endblock nav %}
+
+{% block content %}
+  {% for post in channel.posts %}
+    {% include 'partials/post.html' with post=post %}
+  {% empty %}
+    <div class="card muted-card mt-5 mx-4 py-3">
+      <div class="card-body text-center">
+        <h5 class="card-title mb-4 text-center">Make a post!</h5>
+        <p class="card-text">
+          This channel is waiting for its first post.
+        </p>
+        <p class="card-text">
+          How about you make it?
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+  <div id="scroll-marker"></div>
+  <div class='py-2'></div>
+  <div class="fixed-bottom">
+    <div class="container medium-width bg-dark pt-2">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.content|setclass:"form-control bg-dark text-white" }}
+        <div class="container">
+          <div class="row justify-content-end">
+            <button class="btn btn-info my-2" type="submit">Post</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+  <div class="py-4"></div>
+  <div class="py-3"></div>
+{% endblock content %}
+
+{% block js %}
+  <script>
+    $(function() {
+      var scrollMarker = document.getElementById("scroll-marker");
+      var scrollOffset = scrollMarker.offsetTop - 15;
+      window.scrollTo(0, scrollOffset);
+    });
+  </script>
+{% endblock js %}
