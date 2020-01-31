@@ -5,6 +5,7 @@ from django.shortcuts import (
     render
 )
 
+from django.contrib.auth.models import User
 from behaviour.forms import UpdateBehaviourReportForm
 from behaviour.models import BehaviourReport
 
@@ -37,11 +38,26 @@ def dash(request):
     profile_count = Profile.objects.all().count()
     convo_count = Conversation.objects.all().count()
     reports_count = BehaviourReport.objects.all().count()
+    blocks_count = Blocked.objects.all().count()
 
     return render(request, 'dash.html', {
+        'blocks_count': blocks_count,
         'convo_count': convo_count,
         'profile_count': profile_count,
         'reports_count': reports_count,
+    })
+
+
+@superuser_required
+def blocking(request):
+    blocks = Blocked.objects.all()
+    blocked_users = User.objects.\
+        filter(blocking_profile__isnull=False).\
+        distinct()
+
+    return render(request, 'blocking.html', {
+        'blocked_users': blocked_users,
+        'blocks': blocks,
     })
 
 

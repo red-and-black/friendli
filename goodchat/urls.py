@@ -21,7 +21,6 @@ from django.urls import (
 )
 
 from conversations import views as conversations_views
-from dash import views as dash_views
 from pages import views as pages_views
 from profiles import views as profiles_views
 
@@ -44,32 +43,7 @@ urlpatterns = [
          name='unread-messages'),
 
     # Dash
-    path('dash/', dash_views.dash, name='dash'),
-    path('dash/add-conference', dash_views.add_conference,
-         name='add-conference'),
-    path('dash/conference', dash_views.conference,
-         name='conference'),
-    path('dash/edit-conference', dash_views.edit_conference,
-         name='edit-conference'),
-    path('dash/edit-language/<pk>', dash_views.edit_language,
-         name='edit-language'),
-    path('dash/edit-looking-for/<pk>', dash_views.edit_looking_for,
-         name='edit-looking-for'),
-    path('dash/edit-personal_interest/<pk>',
-         dash_views.edit_personal_interest,
-         name='edit-personal-interest'),
-    path('dash/edit-prof-interest/<pk>', dash_views.edit_prof_interest,
-         name='edit-prof-interest'),
-    path('dash/languages/', dash_views.languages, name='languages'),
-    path('dash/looking-for/', dash_views.looking_for, name='looking-for'),
-    path('dash/prof-interests/', dash_views.prof_interests,
-         name='prof-interests'),
-    path('dash/personal-interests/', dash_views.personal_interests,
-         name='personal-interests'),
-    path('dash/reports/', dash_views.reports, name='reports'),
-    path('dash/update-report/<pk>', dash_views.update_report,
-         name='update-report'),
-    path('user-list/', dash_views.user_list, name='user-list'),
+    path('dash/', include('dash.urls')),
 
     # Pages
     path('faqs/', pages_views.faqs, name='faqs'),

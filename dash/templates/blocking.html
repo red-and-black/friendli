@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}All blocks{% endblock pagename %}
+{% block heading %}All blocks{% endblock heading %}
+
+
+{% block content %}
+<div class='container my-5'>
+  <div class='card bg-darkest-grey my-3'>
+    <h3>
+      <span class='text-rockmelon'>Total blocked users</span>
+      {{ blocks.count }}
+    </h3>
+    <table class='table table-dark'>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Blocked by</th>
+          <th>Blocking</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in blocked_users %}
+        <tr>
+          <td>{{ user.username }}</td>
+          <td>{{ user.blocking_profile.all.count }}</td>
+          <td>{{ user.profile.blocked.all.count }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% for block in blocks %}
+  <div class='card bg-dark-grey my-2'>
+    <div class='card-body'>
+      <p>
+        <span class='text-rockmelon'>Blocker</span>&nbsp;{{ block.blocking_profile }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Blockee</span>&nbsp;{{ block.blocked_user }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Time</span>&nbsp;{{ block.timestamp }}
+      </p>
+    </div>
+  </div>
+  {% empty %}
+    <p>No one has been blocked yet.</p>
+  {% endfor %}
+</div>
+{% endblock content %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}

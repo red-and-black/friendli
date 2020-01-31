@@ -14,12 +14,18 @@
      <div class='card-body'>
        <h4>Profile count: {{ profile_count }}</h4>
        <h4>Conversation count: {{ convo_count }}</h4>
+       <h4>Blocks count: {{ blocks_count }}</h4>
      </div>
    </div>
    <div class='justify-content-between'>
      <p class='py-1'>
        <a href="{% url 'reports' %}" class='btn btn-info my-1'>
          See {{ reports_count }} reports
+       </a>
+     </p>
+     <p class='py-1'>
+       <a href="{% url 'blocking' %}" class='btn btn-info my-1'>
+         See {{ blocks_count }} block events
        </a>
      </p>
      <p class='py-1'>
