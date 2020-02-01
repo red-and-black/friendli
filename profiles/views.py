@@ -116,19 +116,21 @@ def username_search(request):
                 filter(user__username__icontains=username).\
                 exclude(user__in=blocked_profiles).\
                 exclude(user__in=blocking_users).\
-                exclude(user=request.user)
+                exclude(user=request.user).\
+                exclude(user__pk=1)
 
             # Save the search expression to the session for reuse.
             request.session['user_search_username'] = username
     else:
         username = request.session.get('user_search_username')
-        if username:
+        if username is not None:
             # TODO: De-duplicate this query and one one above.
             search_results = Profile.objects.\
                 filter(user__username__icontains=username).\
                 exclude(user__in=blocked_profiles).\
                 exclude(user__in=blocking_users).\
-                exclude(user=request.user)
+                exclude(user=request.user).\
+                exclude(user__pk=1)
             initial = {"username": username}
         else:
             search_results = None
@@ -343,28 +345,28 @@ def profile_edit(request):
 
 @login_required
 def profile_detail(request, username):
-    user = get_object_or_404(User, username__iexact=username)
-    user_profile = Profile.objects.get(user=user)
+    user_to_view = get_object_or_404(User, username__iexact=username)
+    profile_to_view = Profile.objects.get(user=user_to_view)
     request_user_stars = Profile.objects.get(user=request.user).starred.all()
     request_user_blocked = Profile.objects.get(user=request.user).blocked.all()
-    if request.user in Profile.objects.get(user=user).blocked.all():
+    if request.user in Profile.objects.get(user=user_to_view).blocked.all():
         raise Http404()
 
     profile_is_empty = not any([
-        user_profile.languages.all().exists(),
-        user_profile.looking_for.all().exists(),
-        user_profile.personal_interests.all().exists(),
-        user_profile.prof_interests.all().exists(),
-        user_profile.detail,
-        user_profile.stack,
-        user_profile.twitter,
-        user_profile.github,
+        profile_to_view.languages.all().exists(),
+        profile_to_view.looking_for.all().exists(),
+        profile_to_view.personal_interests.all().exists(),
+        profile_to_view.prof_interests.all().exists(),
+        profile_to_view.detail,
+        profile_to_view.stack,
+        profile_to_view.twitter,
+        profile_to_view.github,
     ])
 
     return render(request, 'profile_detail.html', {
         'profile_is_empty': profile_is_empty,
         'request_user_blocked': request_user_blocked,
         'request_user_stars': request_user_stars,
-        'user': user,
-        'user_profile': user_profile,
+        'user_to_view': user_to_view,
+        'profile_to_view': profile_to_view,
     })

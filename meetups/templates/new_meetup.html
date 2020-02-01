@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}New meetup{% endblock pagename %}
+{% block heading %}New meetup{% endblock heading %}
+
+
+{% block content %}
+<div class='container'>
+  <div class="card muted-card my-3">
+    <div class="card-body">
+      <p class="card-text">
+        Meetups are available for anyone to see. You can make a meetup as
+        formal or informal as you like, and they can be about anything.
+      </p>
+      <p>
+        If you're not sure what type of meetup you want to make, here are
+        some suggestions:
+        <ul>
+          <li>Organising a meal out after the conference</li>
+          <li>Meeting up before a workshop so you can go together</li>
+          <li>Informal coffee catch up for people who share an interest</li>
+        </ul>
+      </p>
+    </div>
+  </div>
+  <form method="post" novalidate class='mt-4'>
+    {% csrf_token %}
+    <div class='form-group'>
+      <label>Name your meetup</label>
+      {{ form.name|setclass:'form-control' }}
+      {% if form.name.errors %}
+        {% for error in form.name.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class='form-group'>
+      <label>Date</label>
+      {{ form.date|setclass:'form-control' }}
+      <p class='text-muted py-0 my-1'>
+        Date must be in one of these formats: dd/mm/yy, dd/mm/yyyy
+      </p>
+      {% if form.date.errors %}
+        {% for error in form.date.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class='form-group'>
+      <label>Time</label>
+      {{ form.time|setclass:'form-control' }}
+      <p class='text-muted py-0 my-1'>
+        Time must be one of in these formats: '23:00', '11 pm', or '10:30 am'.
+      </p>
+      {% if form.time.errors %}
+        {% for error in form.time.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class='form-group'>
+      <label>Location</label>
+      {{ form.location|setclass:'form-control' }}
+      {% if form.location.errors %}
+        {% for error in form.location.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class='form-group'>
+      <label>Details</label>
+      {{ form.details|setclass:'form-control' }}
+      {% if form.details.errors %}
+        {% for error in form.details.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+      <p class='text-muted py-0 my-1'>
+        Include things like:
+        <ul class='text-muted'>
+          <li>What you'll do at the meetup</li>
+          <li>How people will can find or recognise you</li>
+          <li>If you need people to message you to RSVP</li>
+        </ul>
+      </p>
+    </div>
+    <div class='form-group'>
+      <label>Relevant professional interests (optional)</label>
+      {{ form.prof_interests|setclass:'form-control multiselect' }}
+      {% if form.prof_interests.errors %}
+        {% for error in form.prof_interests.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class='form-group'>
+      <label>Relevant personal interests (optional)</label>
+      {{ form.personal_interests|setclass:'form-control multiselect' }}
+      {% if form.personal_interests.errors %}
+        {% for error in form.personal_interests.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class='container'>
+      <div class="row justify-content-end">
+        <button type='submit' class='btn btn-info my-2 align-right'>Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock content %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}

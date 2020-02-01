@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load setclass %}
 
 {% block pagename %}Edit conference{% endblock pagename %}
 {% block heading %}Edit conference{% endblock heading %}
@@ -6,9 +7,55 @@
 {% block content %}
 <form method=post>
   {% csrf_token %}
-  <p>
-    {{ form.as_p }}
-  </p>
+  <div class="form-group">
+    <label>Name</label>{{ form.name|setclass:'form-control' }}
+    <p class='text-watermelon'>{{ form.name.errors }}</p>
+  </div>
+  <div class="form-group">
+    <label>Hashtag</label>
+    {{ form.hashtag|setclass:'form-control' }}
+    <p class='text-watermelon'>{{ form.hashtag.errors }}</p>
+  </div>
+  <div class="form-group">
+    <label>Collective noun</label>
+    {{ form.collective_noun|setclass:'form-control' }}
+    <p class='text-watermelon'>{{ form.collective_noun.errors }}</p>
+  </div>
+  <div class="form-group">
+    <label>Location</label>
+    {{ form.location|setclass:'form-control' }}
+    <p class='text-watermelon'>{{ form.location.errors }}</p>
+  </div>
+  <div class="form-group">
+    <label>Start date</label>
+    {{ form.start_date|setclass:'form-control' }}
+    <p class='text-watermelon'>{{ form.start_date.errors }}</p>
+  </div>
+  <div class="form-group">
+    <label>End date</label>
+    {{ form.end_date|setclass:'form-control' }}
+    <p class='text-watermelon'>{{ form.end_date.errors }}</p>
+  </div>
+  <div class="form-group">
+    <label>URL</label>
+    {{ form.link|setclass:'form-control' }}
+    <p class='text-watermelon'>{{ form.link.errors }}</p>
+  </div>
+  <div class="form-group">
+    <label>COC link</label>
+    {{ form.coc_link|setclass:'form-control' }}
+    <p class='text-watermelon'>{{ form.coc_link.errors }}</p>
+  </div>
+  <div class="form-group">
+    <label>Message</label>
+    {{ form.message|setclass:'form-control' }}
+    <p class='text-watermelon'>{{ form.message.errors }}</p>
+  </div>
+  <div class="form-group">
+    <label>Polling interval</label>
+    {{ form.polling_interval|setclass:'form-control' }}
+    <p class='text-watermelon'>{{ form.polling_interval.errors }}</p>
+  </div>
   <button type='submit' class='btn btn-info'>
     Save
   </button>

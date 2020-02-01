@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}Report {{ reportee }}{% endblock pagename %}
+{% block heading %}Report {{ reportee }}{% endblock heading %}
+
+
+{% block content %}
+<div class='container my-4'>
+  <div class="card muted-card my-2">
+    <div class="card-body">
+      <p class="card-text">
+        Please report behaviour that doesn't meet our
+        <a href="https://goodchat.io/terms" target='blank' class='text-info'>
+        Terms of Service</a>{% if coc_link %}, or the conference's
+        <a href="{{ coc_link }}" target='blank' class='text-info'>
+        Code of Conduct</a>{% endif %}.
+      </p>
+      <p class="card-text">
+        When you make a report, we will read any messages between you and
+        {{ reportee }} to see what action is appropriate.
+      </p>
+    </div>
+  </div>
+  <form method="post" class='mt-4'>
+    {% csrf_token %}
+    <label>Report about {{ reportee }}</label>
+    <p class='text-muted'>
+      Include what happened, whether the behaviour was in their profile or a
+      message, and whether you want us to send it to the conference organisers.
+    </p>
+    {{ form.report|setclass:'form-control' }}
+    {% for error in form.errors %}
+      {{ error }}
+    {% endfor %}
+    <div class='container'>
+      <div class="row justify-content-end">
+        <button type='submit' class='btn btn-info my-2 align-right'>Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock content %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}My reported users{% endblock pagename %}
+{% block heading %}My reported users{% endblock heading %}
+
+
+{% block content %}
+<div class='container my-5'>
+  {% for report in reports %}
+  <div class='card bg-dark-grey my-2'>
+    <div class='card-body'>
+      <p>
+        <span class='text-rockmelon'>User</span>&nbsp;
+        <a href="{% url 'profile-detail' report.reportee %}"
+          class='text-info'>
+          {{ report.reportee }}
+        </a>
+      </p>
+      <p>
+        <span class='text-rockmelon'>Report</span>&nbsp;
+        {{ report.report }}
+      </p>
+      <p>
+        <span class='text-rockmelon'>Created</span>&nbsp;
+        {{ report.created }}
+      </p>
+      {% if report.public_outcome %}
+        <p>
+          <span class='text-rockmelon'>Outcome</span>&nbsp;
+          {{ report.public_outcome }}
+        </p>
+      {% endif %}
+      <p>
+        <span class='text-rockmelon'>Status</span>&nbsp;
+        {{ report.get_status_display }}
+      </p>
+      {% if report.reportee in blocked_users  %}
+        <a href="{% url 'blocked-list' %}" class='text-less-light block'>
+          <i class='material-icons align-middle'>block</i>&nbsp;Already blocked
+        </a>
+      {% else %}
+        <a href="{% url 'profile-block' report.reportee.pk %}" class='text-less-light block'>
+          <i class='material-icons align-middle'>block</i>&nbsp;Block
+        </a>
+      {% endif %}
+    </div>
+  </div>
+  {% empty %}
+    <p>You haven't reported anyone</p>
+  {% endfor %}
+</div>
+{% endblock content %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}

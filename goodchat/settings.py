@@ -43,10 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'behaviour',
     'conferences',
     'conversations',
     'dash',
     'goodchat',  # TODO: Remove this. It's a hack so that base.html is found.
+    'meetups',
     'pages',
     'profiles',
 ]
@@ -97,7 +99,9 @@ DATABASES = {
         'USER': os.environ['GOODCHAT_DATABASE_USER'],
     }
 }
-if not IS_PRODUCTION_INSTANCE:
+if IS_PRODUCTION_INSTANCE:
+    DATABASES['default']['HOST'] = os.environ['GOODCHAT_DATABASE_HOST']
+else:
     DATABASES['default']['HOST'] = 'localhost'
 
 
@@ -140,7 +144,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'goodchat', 'static'),)
+
 if IS_PRODUCTION_INSTANCE:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
     STATIC_ROOT = '/home/goodchat/static/'
 
 
@@ -224,3 +230,11 @@ LOGGING = {
         },
     },
 }
+
+# Security
+if IS_PRODUCTION_INSTANCE:
+    CSRF_COOKIE_SECURE = True
+    LANGUAGE_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True

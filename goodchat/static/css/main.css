@@ -13067,6 +13067,20 @@ span.hover-gold:hover {
   color: #d7dbe0;
 }
 
+/* dropdown overrides */
+.dropdown-menu {
+  background-color: #6c757d;
+}
+
+.dropdown-item {
+  color: white;
+}
+
+.dropdown-item:hover {
+  color: white;
+  background-color: #138597;
+}
+
 /* Select2 customisation */
 .select2-container--default.select2-container--focus .select2-selection--multiple {
   border-color: #d7dbe0;
