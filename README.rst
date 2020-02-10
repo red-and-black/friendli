@@ -144,3 +144,10 @@ The ``css`` is managed by ``sass``.
 When any ``.scss`` files are changed, rebuild ``main.css`` with::
 
     $ sass /path/to/static/scss/main.scss /path/to/static/css/main.css
+
+Generating a usage report
+-------------------------
+
+After an event has run, a usage report can be generated with::
+
+    $ ./manage.py usage
