@@ -153,9 +153,8 @@ if IS_PRODUCTION_INSTANCE:
 # Dates and times
 # https://docs.djangoproject.com/en/3.0/ref/settings/#date-format
 
-DATE_FORMAT = 'd M Y'
-DATETIME_FORMAT = 'd M Y, g:i a'
-
+DATE_INPUT_FORMATS = ['%d/%m/%y', '%d/%m/%Y']
+TIME_INPUT_FORMATS = ['%I:%M%p', '%H:%M', '%I %p', '%I:%M %p', '%I%p']
 
 # Authentication
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth

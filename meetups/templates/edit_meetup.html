@@ -19,25 +19,49 @@
       {% endif %}
     </div>
     <div class='form-group'>
-      <label>Date</label>
-      {{ form.date|setclass:'form-control' }}
+      <label>Start date</label>
+      {{ form.start_date|setclass:'form-control' }}
       <p class='text-muted py-0 my-1'>
         Date must be in one of these formats: dd/mm/yy, dd/mm/yyyy
       </p>
-      {% if form.date.errors %}
-        {% for error in form.date.errors %}
+      {% if form.start_date.errors %}
+        {% for error in form.start_date.errors %}
         <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
         {% endfor %}
       {% endif %}
     </div>
     <div class='form-group'>
-      <label>Time</label>
-      {{ form.time|setclass:'form-control' }}
+      <label>Start time</label>
+      {{ form.start_time|setclass:'form-control' }}
       <p class='text-muted py-0 my-1'>
-        Time must be one of in these formats: '23:00', '11 pm', or '10:30 am'.
+        Time must be one of in these formats: '23:00', '11 pm', or '11:00 pm'.
       </p>
-      {% if form.time.errors %}
-        {% for error in form.time.errors %}
+      {% if form.start_time.errors %}
+        {% for error in form.start_time.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class='form-group'>
+      <label>End date</label>
+      {{ form.end_date|setclass:'form-control' }}
+      <p class='text-muted py-0 my-1'>
+        Date must be in one of these formats: dd/mm/yy, dd/mm/yyyy
+      </p>
+      {% if form.end_date.errors %}
+        {% for error in form.end_date.errors %}
+        <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class='form-group'>
+      <label>End time</label>
+      {{ form.end_time|setclass:'form-control' }}
+      <p class='text-muted py-0 my-1'>
+        Time must be one of in these formats: '23:00', '11 pm', or '11:00 pm'.
+      </p>
+      {% if form.end_time.errors %}
+        {% for error in form.end_time.errors %}
         <p class='text-watermelon py-0 mt-1 mb-0'>{{ error }}</p>
         {% endfor %}
       {% endif %}

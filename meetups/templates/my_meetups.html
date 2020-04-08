@@ -9,16 +9,16 @@
 <div class='container'>
   <div class="card muted-card my-3">
     <div class="card-body">
-      {% if current_meetups %}
+      {% if my_meetups %}
       <p class="card-text text-center">
         Anyone can create a meetup!
       </p>
       {% else %}
       <p class="card-text text-center">
-        There are no meetups coming up.
+        You haven't made a meetup yet.
       </p>
       <p class="card-text text-center">
-        But you can make one!
+        But you can make one now!
       </p>
       {% endif %}
       <div class='d-flex justify-content-center'>
@@ -28,10 +28,10 @@
   </div>
   <div class="d-flex justify-content-center mt-4">
     <div class='btn-group mt-2 mb-4 w-100'>
-      <button class='btn btn-info search-form-toggle'>
+      <a href="{% url 'meetups' %}" class='btn btn-secondary'>
         <i class='material-icons align-middle'>schedule</i>
         Current
-      </button>
+      </a>
       <a href="{% url 'past-meetups' %}" class='btn btn-secondary'>
         <i class='material-icons align-middle'>history</i>
         Past
@@ -40,13 +40,13 @@
         <i class='material-icons align-middle'>star_outline</i>
         Starred
       </a>
-      <a href="{% url 'my-meetups' %}" class='btn btn-secondary'>
+      <button class='btn btn-info search-form-toggle'>
         <i class='material-icons align-middle'>edit</i>
         Mine
-      </a>
+    </button>
     </div>
   </div>
-  {% for meetup in current_meetups %}
+  {% for meetup in my_meetups %}
   <div class='card bg-dark-grey my-2'>
     <div class='card-header'>
         {{ meetup.name }}
