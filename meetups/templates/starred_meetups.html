@@ -9,18 +9,9 @@
 <div class='container'>
   <div class="card muted-card my-3">
     <div class="card-body">
-      {% if current_meetups %}
       <p class="card-text text-center">
         Anyone can create a meetup!
       </p>
-      {% else %}
-      <p class="card-text text-center">
-        There are no meetups coming up.
-      </p>
-      <p class="card-text text-center">
-        But you can make one!
-      </p>
-      {% endif %}
       <div class='d-flex justify-content-center'>
         <a href="{% url 'new-meetup' %}" class='btn btn-info'>Set one up</a>
       </div>
@@ -28,26 +19,26 @@
   </div>
   <div class="d-flex justify-content-center mt-4">
     <div class='btn-group mt-2 mb-4 w-100'>
-      <button class='btn btn-info search-form-toggle'>
+      <a href="{% url 'meetups' %}" class='btn btn-secondary'>
         <i class='material-icons align-middle'>schedule</i>
         Current
-      </button>
+      </a>
       <a href="{% url 'past-meetups' %}" class='btn btn-secondary'>
         <i class='material-icons align-middle'>history</i>
         Past
       </a>
-      <a href="{% url 'starred-meetups' %}" class='btn btn-secondary'>
+      <button class='btn btn-info search-form-toggle'>
         <i class='material-icons align-middle'>star_outline</i>
         Starred
-      </a>
+      </button>
       <a href="{% url 'my-meetups' %}" class='btn btn-secondary'>
         <i class='material-icons align-middle'>edit</i>
         Mine
       </a>
     </div>
   </div>
-  {% for meetup in current_meetups %}
-  <div class='card bg-dark-grey my-2'>
+  {% for meetup in starred_meetups %}
+  <div id='meetup_{{ meetup.id }}' class='card bg-dark-grey my-2'>
     <div class='card-header'>
         {{ meetup.name }}
       <div class='float-right'>
@@ -122,11 +113,11 @@
         url: url
       }).done(function(json) {
         var action = json.action;
-        var id = "meetup-" + meetupId + "-star-icon";
-        if (action == "starred") {
-          $("#" + id).html("star");
-        } else if (action == "unstarred") {
-          $("#" + id).html("star_outline");
+        if (action == "unstarred") {
+          var id = "meetup_" + meetupId;
+          var message = meetupName + " has been unstarred.";
+          var marker = "<div class='card-body py-2'>" + message + "</div>";
+          $("#" + id).html(marker);
         } else {
           alert(errorMsg);
         };
