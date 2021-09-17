@@ -1,3 +1,6 @@
+from hashlib import sha256
+
+from django.conf import settings
 from django.db import models
 from django.db.models import Q
 
@@ -146,6 +149,28 @@ class Conversation(models.Model):
         message in the conversation.
         """
         return conversation_time(self.latest_message_time)
+
+    @property
+    def video_chat_url(self):
+        """
+        Returns the url of a video chat room just for the parties to the
+        conversation if the approachee has responded, else returns None.
+        """
+        approachee_has_responded = self.messages.\
+            filter(sender=self.approachee).\
+            exists()
+
+        if not approachee_has_responded:
+            return None
+
+        combined_usernames = "%s-and-%s" % (
+            self.initiator.username.lower()[:15],
+            self.approachee.username.lower()[:15],
+        )
+        token_input = "%s%s" % (combined_usernames, settings.SECRET_KEY)
+        token = sha256(token_input.encode("utf-8")).hexdigest()[:10]
+
+        return "https://meet.jit.si/%s-%s" % (combined_usernames, token)
 
     def update_latest_message(self, message):
         """
