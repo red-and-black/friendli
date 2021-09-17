@@ -99,6 +99,7 @@ def conversation(request, pk):
         'other_party': other_party,
         'read_messages': read_messages,
         'unread_messages': unread_messages,
+        'video_chat_url': conversation.video_chat_url,
     })
 
 

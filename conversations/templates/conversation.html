@@ -43,8 +43,8 @@
         <form method="post">
           {% csrf_token %}
           {{ form.content|setclass:"form-control bg-dark text-white" }}
-          <div class="container">
-            <div class="row justify-content-between">
+          <div class="row">
+            <div class="col">
               <button class="text-less-light btn my-2" href="#"
                 role="button" id="dropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
@@ -58,7 +58,21 @@
                   <i class='material-icons align-middle'>report</i>&nbsp;Report
                 </a>
               </div>
-              <button class="btn btn-info my-2" type="submit">Send</button>
+            </div>
+            {% if video_chat_url %}
+              <div class="col-auto">
+                <a class="btn btn-info my-2" href="{{ video_chat_url }}"
+                  target="_blank" role="button">
+                  <i class='material-icons align-middle'>videocam</i>
+                  Video chat
+                </a>
+              </div>
+            {% endif %}
+            <div class="col">
+              <button class="btn btn-info my-2 float-right" type="submit">
+                <i class='material-icons align-middle'>send</i>
+                Send
+              </button>
             </div>
           </div>
         </form>
