@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block pagename %}Landing{% endblock pagename %}
-{% block heading %}GoodChat{% endblock heading %}
+{% block heading %}Friendli{% endblock heading %}
 
 {% block content %}
 <div class='my-5 text-center text-less-light mx-2'>
-  <h3 class='text-info'>GoodChat @ {{ conference.name }}</h3>
+  <h3 class='text-info'>Friendli @ {{ conference.name }}</h3>
   {% if conference.start_date and conference.end_date %}
     <p>
     {% if conference.start_date|date:'M' == conference.end_date|date:'M' %}
@@ -38,7 +38,7 @@
       <h5 class="card-title mb-3 text-center">Welcome back {{ user.username }}!</h5>
       {% endif %}
       <p class="card-text text-left">
-        Goodchat makes it easy to find, contact and meet like-minded people
+        Friendli makes it easy to find, contact and meet like-minded people
         at conferences.
       </p>
       <p class="card-text text-left">

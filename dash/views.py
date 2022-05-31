@@ -14,7 +14,7 @@ from conferences.models import Conference
 
 from conversations.models import Conversation
 
-from goodchat.decorators import superuser_required
+from friendli.decorators import superuser_required
 
 from profiles.forms import (
     LanguageForm,

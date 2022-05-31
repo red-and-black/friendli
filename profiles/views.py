@@ -20,7 +20,7 @@ from django.shortcuts import (
     render,
 )
 
-from goodchat.decorators import public
+from friendli.decorators import public
 
 from profiles.forms import (
     AddUserForm,

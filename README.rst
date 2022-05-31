@@ -1,8 +1,8 @@
 ========
-GoodChat
+Friendli
 ========
 
-GoodChat is an app which makes it easier to meet new people with similar
+Friendli is an app which makes it easier to meet new people with similar
 interests at conferences.
 
 The story
@@ -57,23 +57,23 @@ It's assumed that you have Node installed. Use it to install `sass`::
 Step 2 - Set up a virtualenv
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Set up a virtualenv called ``goodchat``::
+Set up a virtualenv called ``friendli``::
 
-    $ mkvirtualenv --python=`which python3` goodchat
+    $ mkvirtualenv --python=`which python3` friendli
 
-Then add these lines to ``~/.virtualenvs/goodchat/bin/postactivate``::
+Then add these lines to ``~/.virtualenvs/friendli/bin/postactivate``::
 
-    export GOODCHAT_DATABASE_NAME=goodchat
-    export GOODCHAT_DATABASE_PASSWORD=password
-    export GOODCHAT_DATABASE_USER=goodchat
-    export GOODCHAT_ENVIRONMENT=development
-    export GOODCHAT_TIMEZONE=Europe/Prague
-    export GOODCHAT_SECRET_KEY=123456789
+    export FRIENDLI_DATABASE_NAME=friendli
+    export FRIENDLI_DATABASE_PASSWORD=password
+    export FRIENDLI_DATABASE_USER=friendli
+    export FRIENDLI_ENVIRONMENT=development
+    export FRIENDLI_TIMEZONE=Europe/Prague
+    export FRIENDLI_SECRET_KEY=123456789
 
 Then restart the virtualenv to pick up those environment variables::
 
     $ deactivate
-    $ workon goodchat
+    $ workon friendli
 
 Step 3 - Clone the repo
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,14 +81,14 @@ Step 3 - Clone the repo
 Clone the repo::
 
     $ cd /path/to/your/projects/directory
-    $ git clone git@github.com:red-and-black/goodchat.git
+    $ git clone git@github.com:red-and-black/friendli.git
 
 Step 4 - Install dependencies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Install the required Python packages in your virtualenv::
 
-    $ cd goodchat
+    $ cd friendli
     $ pip install -r requirements.txt
 
 Step 5 - Create the database
@@ -98,8 +98,8 @@ Create a Postgres database and database user, setting the password for the new
 user to ``password`` when prompted::
 
     $ sudo su postgres
-    $ createuser -P goodchat
-    $ createdb -O goodchat goodchat
+    $ createuser -P friendli
+    $ createdb -O friendli friendli
     $ exit
 
 Then initialise the database with::
