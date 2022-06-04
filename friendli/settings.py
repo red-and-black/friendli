@@ -129,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-gb'
 
-TIME_ZONE = os.environ['FRIENDLI_TIMEZONE']
+TIME_ZONE = 'Pacific/Auckland'
 
 USE_I18N = True
 

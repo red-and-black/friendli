@@ -71,7 +71,6 @@ Then add these lines to ``~/.virtualenvs/friendli/bin/postactivate``::
     export FRIENDLI_DATABASE_PASSWORD=password
     export FRIENDLI_DATABASE_USER=friendli
     export FRIENDLI_ENVIRONMENT=development
-    export FRIENDLI_TIMEZONE=Europe/Prague
     export FRIENDLI_SECRET_KEY=123456789
 
 Then restart the virtualenv to pick up those environment variables::

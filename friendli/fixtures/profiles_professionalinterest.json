@@ -1,0 +1,100 @@
+[
+{
+    "model": "profiles.professionalinterest",
+    "pk": 1,
+    "fields": {
+        "prof_interest": "Infosec worker"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 2,
+    "fields": {
+        "prof_interest": "Other IT worker"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 3,
+    "fields": {
+        "prof_interest": "Infosec manager"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 4,
+    "fields": {
+        "prof_interest": "Privacy nerd"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 5,
+    "fields": {
+        "prof_interest": "Public servant"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 6,
+    "fields": {
+        "prof_interest": "Student"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 7,
+    "fields": {
+        "prof_interest": "Military, Fed, Spook, Police Informant, Undercover Cop, NSA Apologist"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 8,
+    "fields": {
+        "prof_interest": "Hobbyist, enthusiast, or amateur hacker"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 9,
+    "fields": {
+        "prof_interest": "Gamer, geek or other general nerd"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 10,
+    "fields": {
+        "prof_interest": "Curious general non-nerdy onlooker"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 11,
+    "fields": {
+        "prof_interest": "Spammer, Botnet Herder, 419er, or other Criminal"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 12,
+    "fields": {
+        "prof_interest": "Media, reporter, spin doctor, or hype merchant"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 13,
+    "fields": {
+        "prof_interest": "Cryptocurrency aficionado, blockchain evangelist"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 14,
+    "fields": {
+        "prof_interest": "Some other interested party"
+    }
+}
+]

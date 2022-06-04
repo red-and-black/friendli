@@ -1,0 +1,23 @@
+[
+{
+    "model": "profiles.language",
+    "pk": 1,
+    "fields": {
+        "language": "English"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 2,
+    "fields": {
+        "language": "Te Reo Māori"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 3,
+    "fields": {
+        "language": "Other (check bio)"
+    }
+}
+]
