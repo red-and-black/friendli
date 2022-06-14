@@ -37,6 +37,10 @@ Install pip::
     $ sudo apt update
     $ sudo apt install python-pip
 
+Install redis::
+
+    $ sudo apt install redis-server
+
 Install virtualenv and virtualenvwrapper::
 
     $ pip install --user virtualenv virtualenvwrapper

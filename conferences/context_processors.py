@@ -14,17 +14,3 @@ def conference_name(request):
         cache.set('conference_name', name, 600)
 
     return {'conference_name': name}
-
-
-def polling_interval(request):
-    """
-    Adds the time for the client to wait until polling for unread messages to
-    the context.
-    """
-    polling_interval = cache.get('polling_interval')
-    if not polling_interval:
-        conference = Conference.objects.first()
-        polling_interval = conference.polling_interval if conference else 60
-        cache.set('polling_interval', polling_interval, 60)
-
-    return {'polling_interval': polling_interval}

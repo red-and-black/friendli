@@ -38,18 +38,6 @@ class ConversationManager(models.Manager):
             Q(approachee=user) | Q(initiator=user)
         )
 
-    def with_unread_messages(self, user):
-        """
-        Accepts a user.
-
-        Returns a queryset of conversations with messages that user hasn't
-        read.
-        """
-        return self.get_queryset().filter(
-            Q(approachee=user) & Q(approachee_unread_count__gt=0)
-            | Q(initiator=user) & Q(initiator_unread_count__gt=0)
-        )
-
 
 class Conversation(models.Model):
     # Automatic timestamping fields.
@@ -193,6 +181,11 @@ class Message(models.Model):
         'conversations.Conversation',
         on_delete=models.PROTECT,
         related_name='messages',
+    )
+    receiver = models.ForeignKey(
+        'auth.User',
+        on_delete=models.PROTECT,
+        related_name='received_messages',
     )
     sender = models.ForeignKey(
         'auth.User',

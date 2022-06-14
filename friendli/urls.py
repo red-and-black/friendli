@@ -39,8 +39,6 @@ urlpatterns = [
     path('start-conversation/<int:pk>/',
          conversations_views.start_conversation,
          name='start-conversation'),
-    path('unread-messages/', conversations_views.unread_messages,
-         name='unread-messages'),
 
     # Dash
     path('dash/', include('dash.urls')),

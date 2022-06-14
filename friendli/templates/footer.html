@@ -14,10 +14,10 @@
     <div class='text-center'>
       <a class='text-muted nav-link' href="{% url 'conversations' %}">
         <i class='material-icons align-middle'>chat_bubble_outline</i>
-        <span id="conversation_count">
-          {% if conversations_unread_count > 0 %}
+        <span id="unread_messages_count">
+          {% if unread_messages_count > 0 %}
             <span class="align-top badge badge-pill badge-info" style="position: absolute;">
-              {{ conversations_unread_count }}
+              {{ unread_messages_count }}
             </span>
           {% endif %}
         </span>

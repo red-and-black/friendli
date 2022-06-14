@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'behaviour',
     'conferences',
     'conversations',
@@ -78,8 +79,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'conferences.context_processors.conference_name',
-                'conferences.context_processors.polling_interval',
-                'conversations.context_processors.conversations_unread_count',
+                'conversations.context_processors.unread_messages_count',
             ],
         },
     },
@@ -237,3 +237,14 @@ if IS_PRODUCTION_INSTANCE:
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
+
+# Channels.
+ASGI_APPLICATION = "friendli.asgi.application"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}

@@ -106,3 +106,25 @@
 {% block footer %}
   {% include 'footer.html' %}
 {% endblock footer %}
+
+{% block js %}
+  <script>
+
+    // Handle an incoming WebSocket message by adding to a conversation's
+    // message count.
+    socket.addEventListener("message", function(e) {
+      const data = JSON.parse(e.data);
+      const conversation = data.conversation;
+      const target_conversation_id = "#" + conversation + "_unread_count";
+      const currentCount = $(target_conversation_id).text();
+      const newCount = Number(currentCount) + 1;
+      const newHtml = (
+        '<span class="badge badge-pill badge-info align-top">' +
+        newCount +
+        '</span>'
+      );
+      $(target_conversation_id).html(newHtml);
+    });
+
+  </script>
+{% endblock js %}

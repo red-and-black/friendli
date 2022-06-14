@@ -29,5 +29,4 @@ class ConferenceForm(forms.ModelForm):
             'link',
             'coc_link',
             'message',
-            'polling_interval'
         )

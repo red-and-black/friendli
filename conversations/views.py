@@ -1,26 +1,24 @@
 from copy import copy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.core.cache import cache
 from django.db import transaction
 from django.db.models import Q
-from django.http import (
-    Http404,
-    JsonResponse,
-)
+from django.http import Http404
 from django.shortcuts import (
     get_object_or_404,
     redirect,
     render,
 )
 
-from conferences.models import Conference
+from conversations.forms import (
+    MessageForm,
+    NewConversationForm,
+)
+from conversations.models import Conversation
 from profiles.models import (
     Blocked,
     Profile,
 )
-from conversations.forms import MessageForm
-from conversations.models import Conversation
 
 
 @login_required
@@ -64,33 +62,26 @@ def conversation(request, pk):
             timestamp
         unread_messages = unread_messages.exclude(created__gte=block_time)
 
-    if request.method == 'POST':
-        form = MessageForm(request.POST)
-        if form.is_valid():
-            message = form.save(user, conversation, blocked_by_other)
+    if unread_messages:
+        with transaction.atomic():
+            conversation.reset_unread_count(user)
 
-            return redirect('conversation', pk)
-    else:
-        if unread_messages:
-            with transaction.atomic():
-                conversation.reset_unread_count(user)
+            # The message.save() operation below modifies the read_messages
+            # queryset, adding the saved messages to it. Therefore to be
+            # able to use the current state of read_messages where it's
+            # needed in the template, make a copy of it now.
+            read_messages_copy = copy(read_messages)
 
-                # The message.save() operation below modifies the read_messages
-                # queryset, adding the saved messages to it. Therefore to be
-                # able to use the current state of read_messages where it's
-                # needed in the template, make a copy of it now.
-                read_messages_copy = copy(read_messages)
+            # Make every one of this user's unread messages in this
+            # conversation as read.
+            for message in unread_messages:
+                message.is_read = True
+                message.save()
 
-                # Make every one of this user's unread messages in this
-                # conversation as read.
-                for message in unread_messages:
-                    message.is_read = True
-                    message.save()
+            # Now restore the correct data to read_messages.
+            read_messages = read_messages_copy
 
-                # Now restore the correct data to read_messages.
-                read_messages = read_messages_copy
-
-        form = MessageForm()
+    form = MessageForm(user=user)
 
     return render(request, 'conversation.html', {
         'blocked_by_user': blocked_by_user,
@@ -149,7 +140,7 @@ def start_conversation(request, pk):
         return redirect('conversation', existing_conversation.pk)
 
     if request.method == 'POST':
-        form = MessageForm(request.POST)
+        form = NewConversationForm(request.POST)
         if form.is_valid():
             with transaction.atomic():
                 conversation = Conversation.objects.create(
@@ -160,38 +151,9 @@ def start_conversation(request, pk):
 
             return redirect('conversation', conversation.pk)
     else:
-        form = MessageForm()
+        form = NewConversationForm()
 
     return render(request, 'start_conversation.html', {
         'form': form,
         'other_party': other_party,
     })
-
-
-@login_required
-def unread_messages(request):
-    """
-    Return a user's unread message counts as JSON.
-    """
-    user = request.user
-    conversations = Conversation.c_objects.with_unread_messages(user)
-
-    count_list = []
-    for conversation in conversations:
-        if conversation.initiator == user:
-            count = conversation.initiator_unread_count
-        else:
-            count = conversation.approachee_unread_count
-        count_list.append({'id': conversation.id, 'count': count})
-
-    polling_interval = cache.get('polling_interval')
-    if not polling_interval:
-        polling_interval = Conference.objects.get().polling_interval
-        cache.set('polling_interval', polling_interval, 60)
-
-    response = {
-        'messages': count_list,
-        'wait': polling_interval,
-    }
-
-    return JsonResponse(response, safe=False)
