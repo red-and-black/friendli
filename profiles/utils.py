@@ -20,7 +20,8 @@ def get_search_results(user, search_data):
     prof_interests = search_data['prof_interests']
     personal_interests = search_data['personal_interests']
     detail = search_data['detail']
-    stack = search_data['stack']
+    ask_me = search_data['ask_me']
+    teach_me = search_data['teach_me']
 
     search_expression = {}
     if languages not in [[], ['']]:  # TODO: Fix this.
@@ -58,13 +59,20 @@ def get_search_results(user, search_data):
         for word in detail_words:
             detail_q_object |= Q(detail__icontains=word)
         q_list.append(detail_q_object)
-    if stack:
+    if ask_me:
         # TODO: Treat quoted strings as phrases.
-        stack_words = words_regex.findall(stack)
-        stack_q_object = Q()
-        for word in stack_words:
-            stack_q_object |= Q(stack__icontains=word)
-        q_list.append(stack_q_object)
+        ask_me_words = words_regex.findall(ask_me)
+        ask_me_q_object = Q()
+        for word in ask_me_words:
+            ask_me_q_object |= Q(ask_me__icontains=word)
+        q_list.append(ask_me_q_object)
+    if teach_me:
+        # TODO: Treat quoted strings as phrases.
+        teach_me_words = words_regex.findall(teach_me)
+        teach_me_q_object = Q()
+        for word in teach_me_words:
+            teach_me_q_object |= Q(teach_me__icontains=word)
+        q_list.append(teach_me_q_object)
 
     search_results = Profile.objects.\
         filter(*q_list, **search_expression).\

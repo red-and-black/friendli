@@ -44,18 +44,23 @@
       </p>
       {% endif %}
       {% if profile.prof_interests.all %}
-      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Professional interests</span>&nbsp;
+      <p class='my-2'><span class='text-rockmelon font-weight-bold'>I'm here because I'm a</span>&nbsp;
         {{ profile.prof_interests.all|join:", " }}
       </p>
       {% endif %}
       {% if profile.personal_interests.all %}
-      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Personal interests</span>&nbsp;
+      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Non-tech interests</span>&nbsp;
         {{ profile.personal_interests.all|join:", " }}
       </p>
       {% endif %}
-      {% if profile.stack %}
-      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Tech stack</span>&nbsp;
-        {{ profile.stack }}
+      {% if profile.ask_me %}
+      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Ask me about</span>&nbsp;
+        {{ profile.ask_me }}
+      </p>
+      {% endif %}
+      {% if profile.teach_me %}
+      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Teach me about</span>&nbsp;
+        {{ profile.teach_me }}
       </p>
       {% endif %}
       {% if profile.detail %}

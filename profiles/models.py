@@ -52,12 +52,13 @@ class Profile(models.Model):
     modified = models.DateTimeField(auto_now=True)
     personal_interests = models.ManyToManyField(PersonalInterest, blank=True)
     prof_interests = models.ManyToManyField(ProfessionalInterest, blank=True)
-    stack = models.TextField(max_length=300, blank=True)
-    detail = models.TextField(max_length=500, blank=True)
+    detail = models.TextField(max_length=2000, blank=True)
     languages = models.ManyToManyField(Language, blank=True)
     looking_for = models.ManyToManyField(LookingFor, blank=True)
     twitter = models.CharField(max_length=255, blank=True)
     github = models.CharField(max_length=255, blank=True)
+    ask_me = models.TextField(max_length=500, blank=True)
+    teach_me = models.TextField(max_length=500, blank=True)
 
     starred = models.ManyToManyField(
         'auth.User',

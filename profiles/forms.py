@@ -69,7 +69,10 @@ class ProfileSearchForm(forms.Form):
     detail = forms.CharField(
         required=False
     )
-    stack = forms.CharField(
+    ask_me = forms.CharField(
+        required=False
+    )
+    teach_me = forms.CharField(
         required=False
     )
 
@@ -223,7 +226,8 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = (
             'detail',
-            'stack',
+            'ask_me',
+            'teach_me',
             'github',
             'twitter',
             'prof_interests',
@@ -232,7 +236,8 @@ class ProfileForm(forms.ModelForm):
             'looking_for',
         )
         widgets = {
-            'stack': forms.Textarea(attrs={'rows': 3}),
+            'ask_me': forms.Textarea(attrs={'rows': 3}),
+            'teach_me': forms.Textarea(attrs={'rows': 3}),
         }
 
     def clean_github(self):
