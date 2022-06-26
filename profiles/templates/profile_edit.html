@@ -17,6 +17,13 @@
         {% endfor %}
     </div>
     <div class='form-group'>
+      <label>Pronouns</label>
+        {{ profile_form.pronouns|setclass:'form-control' }}
+        {% for error in profile_form.pronouns.errors %}
+          <span class='text-watermelon'>{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div class='form-group'>
       <label>Language/s</label>
       {{ profile_form.languages|setclass:'form-control multiselect' }}
     </div>

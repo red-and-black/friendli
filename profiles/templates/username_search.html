@@ -81,6 +81,11 @@
         </div>
       </div>
       <div class='card-body py-2'>
+        {% if profile.pronouns %}
+        <p class='my-2'><span class='text-rockmelon font-weight-bold'>Pronouns</span>&nbsp;
+          {{ profile.pronouns }}
+        </p>
+        {% endif %}
         {% if profile.languages.all %}
         <p class='my-2'><span class='text-rockmelon font-weight-bold'>Languages</span>&nbsp;
           {{ profile.languages.all|join:" &nbsp;&bull;&nbsp; " }}

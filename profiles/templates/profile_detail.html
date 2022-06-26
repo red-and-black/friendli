@@ -109,6 +109,12 @@
       </div>
   {% endif %}
       <dl class='mt-4'>
+        {% if profile_to_view.pronouns %}
+          <dt class='text-rockmelon'>Pronouns</dt>
+          <dd class='mb-1'>
+            {{ profile_to_view.pronouns }}
+          </dd>
+        {% endif %}
         {% if profile_to_view.languages.all %}
           <dt class='text-rockmelon'>Languages</dt>
           <dd class='mb-1'>

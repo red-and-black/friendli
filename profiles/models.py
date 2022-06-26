@@ -59,6 +59,7 @@ class Profile(models.Model):
     github = models.CharField(max_length=255, blank=True)
     ask_me = models.TextField(max_length=500, blank=True)
     teach_me = models.TextField(max_length=500, blank=True)
+    pronouns = models.CharField(max_length=50, blank=True)
 
     starred = models.ManyToManyField(
         'auth.User',

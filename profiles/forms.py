@@ -75,6 +75,9 @@ class ProfileSearchForm(forms.Form):
     teach_me = forms.CharField(
         required=False
     )
+    pronouns = forms.CharField(
+        required=False
+    )
 
 
 class UserSearchForm(forms.Form):
@@ -234,6 +237,7 @@ class ProfileForm(forms.ModelForm):
             'personal_interests',
             'languages',
             'looking_for',
+            'pronouns',
         )
         widgets = {
             'ask_me': forms.Textarea(attrs={'rows': 3}),

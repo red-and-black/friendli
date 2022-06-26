@@ -364,6 +364,7 @@ def profile_detail(request, username):
         profile_to_view.teach_me,
         profile_to_view.twitter,
         profile_to_view.github,
+        profile_to_view.pronouns,
     ])
 
     return render(request, 'profile_detail.html', {
