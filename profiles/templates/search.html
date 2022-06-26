@@ -38,16 +38,20 @@
       {{ profile_form.looking_for|setclass:'form-control bg-dark-grey text-less-light multiselect' }}
     </div>
     <div class='form-group'>
-      <label>Professional interests</label>
+      <label>They're here because they're a</label>
       {{ profile_form.prof_interests|setclass:'form-control bg-dark-grey text-less-light multiselect' }}
     </div>
     <div class='form-group'>
-      <label>Personal interests</label>
+      <label>Non-tech interests</label>
       {{ profile_form.personal_interests|setclass:'form-control bg-dark-grey text-less-light multiselect' }}
     </div>
     <div class='form-group'>
-      <label>Keywords in Tech stack</label>
-      {{ profile_form.stack|setclass:'form-control bg-dark-grey text-less-light' }}
+      <label>Keywords in Ask me about</label>
+      {{ profile_form.ask_me|setclass:'form-control bg-dark-grey text-less-light' }}
+    </div>
+    <div class='form-group'>
+      <label>Keywords in Teach me about</label>
+      {{ profile_form.teach_me|setclass:'form-control bg-dark-grey text-less-light' }}
     </div>
     <div class='form-group'>
       <label>Keywords in Everything else</label>
@@ -101,6 +105,11 @@
         </div>
       </div>
       <div class='card-body py-2'>
+        {% if profile.pronouns %}
+        <p class='my-2'><span class='text-rockmelon font-weight-bold'>Pronouns</span>&nbsp;
+          <span class="pronouns">{{ profile.pronouns }}</span>
+        </p>
+        {% endif %}
         {% if profile.languages.all %}
         <p class='my-2'>
           <span class='text-rockmelon font-weight-bold'>Languages</span>&nbsp;
@@ -114,18 +123,23 @@
         </p>
         {% endif %}
         {% if profile.prof_interests.all %}
-        <p class='my-2'><span class='text-rockmelon font-weight-bold'>Professional interests</span>&nbsp;
+        <p class='my-2'><span class='text-rockmelon font-weight-bold'>I'm here because I'm a</span>&nbsp;
           <span class="prof_interests">{{ profile.prof_interests.all|join:" &nbsp;&bull;&nbsp; " }}</span>
         </p>
         {% endif %}
         {% if profile.personal_interests.all %}
-        <p class='my-2'><span class='text-rockmelon font-weight-bold'>Personal interests</span>&nbsp;
+        <p class='my-2'><span class='text-rockmelon font-weight-bold'>Non-tech interests</span>&nbsp;
           <span class="personal_interests">{{ profile.personal_interests.all|join:" &nbsp;&bull;&nbsp; " }}</span>
         </p>
         {% endif %}
-        {% if profile.stack %}
-        <p class='my-2'><span class='text-rockmelon font-weight-bold'>Tech stack</span>&nbsp;
-          <span class="stack">{{ profile.stack }}</span>
+        {% if profile.ask_me %}
+        <p class='my-2'><span class='text-rockmelon font-weight-bold'>Ask me about</span>&nbsp;
+          <span class="ask_me">{{ profile.ask_me }}</span>
+        </p>
+        {% endif %}
+        {% if profile.teach_me %}
+        <p class='my-2'><span class='text-rockmelon font-weight-bold'>Teach me about</span>&nbsp;
+          <span class="teach_me">{{ profile.teach_me }}</span>
         </p>
         {% endif %}
         {% if profile.detail %}
@@ -239,8 +253,11 @@
       {% for prof_interest in search_data.prof_interests %}
       $(".prof_interests").highlight("{{ prof_interest }}");
       {% endfor %}
-      {% for stack_item in search_data.stack %}
-      $(".stack").highlight("{{ stack_item }}");
+      {% for ask_me_item in search_data.ask_me %}
+      $(".ask_me").highlight("{{ ask_me_item }}");
+      {% endfor %}
+      {% for teach_me_item in search_data.teach_me %}
+      $(".teach_me").highlight("{{ teach_me_item }}");
       {% endfor %}
       {% for detail_item in search_data.detail %}
       $(".detail").highlight("{{ detail_item }}");

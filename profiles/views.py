@@ -20,7 +20,7 @@ from django.shortcuts import (
     render,
 )
 
-from goodchat.decorators import public
+from friendli.decorators import public
 
 from profiles.forms import (
     AddUserForm,
@@ -213,8 +213,10 @@ def search(request):
             values_list('personal_interest', flat=True)
         )
         words_regex = re.compile(r'\w+')
-        natural_keyed_search_data['stack'] = \
-            words_regex.findall(search_data['stack'])
+        natural_keyed_search_data['ask_me'] = \
+            words_regex.findall(search_data['ask_me'])
+        natural_keyed_search_data['teach_me'] = \
+            words_regex.findall(search_data['teach_me'])
         natural_keyed_search_data['detail'] = \
             words_regex.findall(search_data['detail'])
 
@@ -358,9 +360,11 @@ def profile_detail(request, username):
         profile_to_view.personal_interests.all().exists(),
         profile_to_view.prof_interests.all().exists(),
         profile_to_view.detail,
-        profile_to_view.stack,
+        profile_to_view.ask_me,
+        profile_to_view.teach_me,
         profile_to_view.twitter,
         profile_to_view.github,
+        profile_to_view.pronouns,
     ])
 
     return render(request, 'profile_detail.html', {

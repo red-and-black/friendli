@@ -109,6 +109,12 @@
       </div>
   {% endif %}
       <dl class='mt-4'>
+        {% if profile_to_view.pronouns %}
+          <dt class='text-rockmelon'>Pronouns</dt>
+          <dd class='mb-1'>
+            {{ profile_to_view.pronouns }}
+          </dd>
+        {% endif %}
         {% if profile_to_view.languages.all %}
           <dt class='text-rockmelon'>Languages</dt>
           <dd class='mb-1'>
@@ -122,21 +128,27 @@
           </dd>
         {% endif %}
         {% if profile_to_view.personal_interests.all %}
-          <dt class='text-rockmelon mt-2'>Personal interests</dt>
+          <dt class='text-rockmelon mt-2'>Non-tech interests</dt>
           <dd class='mb-1'>
             {{ profile_to_view.personal_interests.all|join:" &nbsp;&bull;&nbsp; " }}
           </dd>
         {% endif %}
         {% if profile_to_view.prof_interests.all %}
-          <dt class='text-rockmelon mt-2'>Professional interests</dt>
+          <dt class='text-rockmelon mt-2'>I'm here because I'm a</dt>
           <dd class='mb-1'>
             {{ profile_to_view.prof_interests.all|join:" &nbsp;&bull;&nbsp; " }}
           </dd>
         {% endif %}
-        {% if profile_to_view.stack %}
-          <dt class='text-rockmelon mt-2'>Tech stack</dt>
+        {% if profile_to_view.ask_me %}
+          <dt class='text-rockmelon mt-2'>Ask me about</dt>
           <dd class='urlize text-break'>
-            {{ profile_to_view.stack|urlize }}
+            {{ profile_to_view.ask_me|urlize }}
+          </dd>
+        {% endif %}
+        {% if profile_to_view.teach_me %}
+          <dt class='text-rockmelon mt-2'>Teach me about</dt>
+          <dd class='urlize text-break'>
+            {{ profile_to_view.teach_me|urlize }}
           </dd>
         {% endif %}
         {% if profile_to_view.detail %}

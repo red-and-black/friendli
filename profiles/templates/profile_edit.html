@@ -17,6 +17,13 @@
         {% endfor %}
     </div>
     <div class='form-group'>
+      <label>Pronouns</label>
+        {{ profile_form.pronouns|setclass:'form-control' }}
+        {% for error in profile_form.pronouns.errors %}
+          <span class='text-watermelon'>{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div class='form-group'>
       <label>Language/s</label>
       {{ profile_form.languages|setclass:'form-control multiselect' }}
     </div>
@@ -25,22 +32,33 @@
       {{ profile_form.looking_for|setclass:'form-control multiselect' }}
     </div>
     <div class='form-group'>
-      <label>Professional interests</label>
+      <label>I'm here because I'm a</label>
       {{ profile_form.prof_interests|setclass:'form-control multiselect' }}
     </div>
     <div class='form-group'>
-      <label>Personal interests</label>
+      <label>Non-tech interests</label>
       {{ profile_form.personal_interests|setclass:'form-control multiselect' }}
     </div>
     <div class='form-group'>
-      <label>Tech stack</label>
-      {{ profile_form.stack|setclass:'form-control' }}
-      {% if profile_form.stack.errors %}
-        {% for error in profile_form.stack.errors %}
+      <label>Ask me about</label>
+      {{ profile_form.ask_me|setclass:'form-control' }}
+      {% if profile_form.ask_me.errors %}
+        {% for error in profile_form.ask_me.errors %}
           <span class='text-watermelon'>{{ error }}</span>
         {% endfor %}
       {% else %}
-        <span class="text-muted">Languages, frameworks, hardware, etc.</span>
+        <span class="text-muted">What can people learn from you?</span>
+      {% endif %}
+    </div>
+    <div class='form-group'>
+      <label>Teach me about</label>
+      {{ profile_form.teach_me|setclass:'form-control' }}
+      {% if profile_form.teach_me.errors %}
+        {% for error in profile_form.teach_me.errors %}
+          <span class='text-watermelon'>{{ error }}</span>
+        {% endfor %}
+      {% else %}
+        <span class="text-muted">What would you love to hear about?</span>
       {% endif %}
     </div>
     <div class='form-group'>

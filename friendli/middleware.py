@@ -49,36 +49,34 @@ class RequestLoggingMiddleware(object):
 
     def __call__(self, request):
         # Process the request.
-        # Ignore polling for new messages.
-        if request.path not in ['/unread-messages/']:
-            log_entry = 'User: %s -- %s -- %s' % (
-                request.user.pk if request.user.pk else 'Anon',
-                request.method,
-                request.build_absolute_uri(),
-            )
+        log_entry = 'User: %s -- %s -- %s' % (
+            request.user.pk if request.user.pk else 'Anon',
+            request.method,
+            request.build_absolute_uri(),
+        )
 
-            # Append POST data if there is any.
-            if request.method == 'POST':
-                log_entry += ' -- '
+        # Append POST data if there is any.
+        if request.method == 'POST':
+            log_entry += ' -- '
 
-                request_string = '{'
+            request_string = '{'
 
-                # Add form data.
-                for key, value in request.POST.items():
+            # Add form data.
+            for key, value in request.POST.items():
+                request_string += (
+                    '%s: \'%s\', ' % (key, self.process_string(key, value))
+                )
+
+            # Add files data, if there is any.
+            if request.FILES:
+                for key, value in request.FILES.iteritems():
                     request_string += (
-                        '%s: \'%s\', ' % (key, self.process_string(key, value))
+                        '%s: \'%s\', ' % (key, value.name)
                     )
 
-                # Add files data, if there is any.
-                if request.FILES:
-                    for key, value in request.FILES.iteritems():
-                        request_string += (
-                            '%s: \'%s\', ' % (key, value.name)
-                        )
+            request_string = '%s%s' % (request_string[0: -2], '}')
 
-                request_string = '%s%s' % (request_string[0: -2], '}')
-
-                log_entry += request_string
+            log_entry += request_string
 
             self.logger.info(log_entry)
 

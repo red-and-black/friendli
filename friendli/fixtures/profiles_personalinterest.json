@@ -1,0 +1,170 @@
+[
+{
+    "model": "profiles.personalinterest",
+    "pk": 1,
+    "fields": {
+        "personal_interest": "Activism"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 2,
+    "fields": {
+        "personal_interest": "Arts"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 3,
+    "fields": {
+        "personal_interest": "Climate action"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 4,
+    "fields": {
+        "personal_interest": "Cooking"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 5,
+    "fields": {
+        "personal_interest": "Craft"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 6,
+    "fields": {
+        "personal_interest": "Gaming - tabletop"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 7,
+    "fields": {
+        "personal_interest": "Gaming - with a computer of some kind"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 8,
+    "fields": {
+        "personal_interest": "Gear"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 9,
+    "fields": {
+        "personal_interest": "Ham radio"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 10,
+    "fields": {
+        "personal_interest": "Health and fitness"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 11,
+    "fields": {
+        "personal_interest": "History"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 12,
+    "fields": {
+        "personal_interest": "Life optimisation"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 13,
+    "fields": {
+        "personal_interest": "Literature"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 14,
+    "fields": {
+        "personal_interest": "Lock picking/locksport"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 15,
+    "fields": {
+        "personal_interest": "Movies"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 16,
+    "fields": {
+        "personal_interest": "Performing"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 17,
+    "fields": {
+        "personal_interest": "Personal development"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 18,
+    "fields": {
+        "personal_interest": "Photography"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 19,
+    "fields": {
+        "personal_interest": "Privacy"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 20,
+    "fields": {
+        "personal_interest": "Robotics"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 21,
+    "fields": {
+        "personal_interest": "Sports"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 22,
+    "fields": {
+        "personal_interest": "Tramping/Hiking"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 23,
+    "fields": {
+        "personal_interest": "Travel"
+    }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 24,
+    "fields": {
+        "personal_interest": "Vegan/vegetarian"
+    }
+}
+]

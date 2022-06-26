@@ -1,7 +1,7 @@
-from conversations.models import Conversation
+from conversations.models import Message
 
 
-def conversations_unread_count(request):
+def unread_messages_count(request):
     """
     Adds the number of conversations with unread messages to the context.
 
@@ -11,10 +11,9 @@ def conversations_unread_count(request):
     For anonymous users, this will be None.
     """
     user = request.user
-
     if user.is_authenticated:
-        count = Conversation.c_objects.with_unread_messages(user).count()
+        count = Message.objects.filter(is_read=False, receiver=user).count()
     else:
         count = None
 
-    return {'conversations_unread_count': count}
+    return {'unread_messages_count': count}

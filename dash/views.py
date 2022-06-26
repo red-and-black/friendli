@@ -1,4 +1,3 @@
-from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.shortcuts import (
     redirect,
@@ -14,7 +13,7 @@ from conferences.models import Conference
 
 from conversations.models import Conversation
 
-from goodchat.decorators import superuser_required
+from friendli.decorators import superuser_required
 
 from profiles.forms import (
     LanguageForm,
@@ -68,7 +67,6 @@ def add_conference(request):
         form = ConferenceForm(request.POST)
         if form.is_valid():
             conference = form.save()
-            cache.set('polling_interval', conference.polling_interval, 60)
             return redirect('conference')
     else:
         form = ConferenceForm()
@@ -93,7 +91,6 @@ def edit_conference(request):
         form = ConferenceForm(request.POST, instance=conference)
         if form.is_valid():
             conference = form.save()
-            cache.set('polling_interval', conference.polling_interval, 60)
             return redirect('conference')
     else:
         form = ConferenceForm(instance=conference)

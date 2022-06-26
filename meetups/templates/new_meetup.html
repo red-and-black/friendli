@@ -110,7 +110,7 @@
       </p>
     </div>
     <div class='form-group'>
-      <label>Relevant professional interests (optional)</label>
+      <label>Relevant tech interests (optional)</label>
       {{ form.prof_interests|setclass:'form-control multiselect' }}
       {% if form.prof_interests.errors %}
         {% for error in form.prof_interests.errors %}
@@ -119,7 +119,7 @@
       {% endif %}
     </div>
     <div class='form-group'>
-      <label>Relevant personal interests (optional)</label>
+      <label>Relevant non-tech interests (optional)</label>
       {{ form.personal_interests|setclass:'form-control multiselect' }}
       {% if form.personal_interests.errors %}
         {% for error in form.personal_interests.errors %}

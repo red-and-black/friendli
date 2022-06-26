@@ -37,45 +37,49 @@
     {% if not unread_messages %}
       <div id="scroll-marker"></div>
     {% endif %}
+
+    <div id='new_messages'>
+    </div>
+
     <div class='py-2'></div>
     <div class="fixed-bottom">
       <div class="container medium-width bg-dark pt-2">
-        <form method="post">
-          {% csrf_token %}
-          {{ form.content|setclass:"form-control bg-dark text-white" }}
-          <div class="row">
-            <div class="col">
-              <button class="text-less-light btn my-2" href="#"
-                role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class='material-icons align-middle'>more_horiz</i>
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a href="{% url 'profile-block' other_party.pk  %}" class='dropdown-item py-2'>
-                  <i class='material-icons align-middle'>block</i>&nbsp;Block
-                </a>
-                <a href="{% url 'new-report' other_party.pk  %}" class='dropdown-item py-2'>
-                  <i class='material-icons align-middle'>report</i>&nbsp;Report
-                </a>
-              </div>
-            </div>
-            {% if video_chat_url %}
-              <div class="col-auto">
-                <a class="btn btn-info my-2" href="{{ video_chat_url }}"
-                  target="_blank" role="button">
-                  <i class='material-icons align-middle'>videocam</i>
-                  Video chat
-                </a>
-              </div>
-            {% endif %}
-            <div class="col">
-              <button class="btn btn-info my-2 float-right" type="submit">
-                <i class='material-icons align-middle'>send</i>
-                Send
-              </button>
+        <textarea name="content" cols="40" rows="2" autofocus maxlength="2000"
+          class="form-control bg-dark text-white" required id="id_content">
+        </textarea>
+        <div class="row">
+          <div class="col">
+            <button class="text-less-light btn my-2" href="#"
+              role="button" id="dropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class='material-icons align-middle'>more_horiz</i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a href="{% url 'profile-block' other_party.pk  %}" class='dropdown-item py-2'>
+                <i class='material-icons align-middle'>block</i>&nbsp;Block
+              </a>
+              <a href="{% url 'new-report' other_party.pk  %}" class='dropdown-item py-2'>
+                <i class='material-icons align-middle'>report</i>&nbsp;Report
+              </a>
             </div>
           </div>
-        </form>
+          {% if video_chat_url %}
+            <div class="col-auto">
+              <a class="btn btn-info my-2" href="{{ video_chat_url }}"
+                target="_blank" role="button">
+                <i class='material-icons align-middle'>videocam</i>
+                Video chat
+              </a>
+            </div>
+          {% endif %}
+          <div class="col">
+            <button class="btn btn-info my-2 float-right" type="button"
+              id='send-button'>
+              <i class='material-icons align-middle'>send</i>
+              Send
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   {% endif %}
@@ -86,10 +90,76 @@
 
 {% block js %}
   <script>
+    // Scroll the page on load.
     $(function() {
       var scrollMarker = document.getElementById("scroll-marker");
       var scrollOffset = scrollMarker.offsetTop - 15;
       window.scrollTo(0, scrollOffset);
     });
+
+    // Handle an incoming WebSocket message.
+    socket.addEventListener("message", function(e) {
+      const data = JSON.parse(e.data);
+      var newHtml;
+      if (data.sender == {{ user.pk }}) {
+        newHtml = (
+          '<div class="row justify-content-end">' +
+            '<div class="col-11">' +
+              '<div class="card bg-darkest-grey mt-2">' +
+                '<div class="card-body mb-n1 pb-0 pt-1 px-2">' +
+                  '<p class="card-text urlize">' +
+                    data.content +
+                  '</p>' +
+                '</div>' +
+                '<div class="card-footer bg-transparent border-0px-2 py-0 text-right">' +
+                  '<small>' +
+                    'Now' +
+                  '</small>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>'
+        );
+      } else {
+        newHtml = (
+          '<div class="row justify-content-start">' +
+            '<div class="col-11">' +
+              '<div class="card bg-even-darker-grey mt-2">' +
+                '<div class="card-body mb-n1 pb-0 pt-1 px-2">' +
+                  '<p class="card-text urlize">' +
+                    data.content +
+                  '</p>' +
+                '</div>' +
+                '<div class="card-footer bg-transparent border-0px-2 py-0 text-right">' +
+                  '<small>' +
+                    data.sender_username +
+                    ' &middot; Now' +
+                  '</small>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>'
+        );
+      }
+      $("#new_messages").append(newHtml);
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+
+    // Send a WebSocket message.
+    document.querySelector('#send-button').onclick = function(e) {
+      const messageInput = document.querySelector('#id_content');
+      const message = messageInput.value;
+      const conversation = {{ conversation.pk }};
+      const payload = {'content': message, 'conversation': conversation};
+      socket.send(JSON.stringify(payload));
+      messageInput.value = '';
+      messageInput.focus();
+    };
+
+    // Remove scroll marker after a few seconds.
+    setTimeout(function () {
+      $('#scroll-marker').fadeOut(duration=1000);
+    }, 3000);
+
   </script>
 {% endblock js %}

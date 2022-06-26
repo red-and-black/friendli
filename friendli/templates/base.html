@@ -10,7 +10,7 @@
     <link href="{% static 'css/select2.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
     <title>
-      GoodChat &bull; {{ conference_name }} |
+      Friendli &bull; {{ conference_name }} |
       {% block pagename %}{% endblock pagename %}
     </title>
   </head>
@@ -47,13 +47,13 @@
           </a>
         </li>
         <li class='nav-item'>
-          <a class='nav-link' href="https://goodchat.io/terms" target='blank'>
+          <a class='nav-link' href="https://friendli.io/terms" target='blank'>
             <i class='material-icons align-middle ml-3 mr-2'>description</i>
             Terms
           </a>
         </li>
         <li class='nav-item'>
-          <a class='nav-link' href="https://goodchat.io/privacy" target='blank'>
+          <a class='nav-link' href="https://friendli.io/privacy" target='blank'>
             <i class='material-icons align-middle ml-3 mr-2'>lock</i>
             Privacy
           </a>
@@ -133,57 +133,7 @@
       $(function (){
         resizeTextarea();
         restyleMultiselects();
-        poll({{ polling_interval }});
       });
-      /*
-       * Polls for new messages.
-       */
-      var lastMessageCounts = null;
-      function poll(waitTime) {
-        setTimeout(function () {
-          $.ajax({
-            url: "{% url 'unread-messages' %}",
-          }).done(function(json) {
-            var messageCounts = json['messages'];
-            if (lastMessageCounts == null) {
-              lastMessageCounts = messageCounts;
-            };
-            if(
-              !(JSON.stringify(lastMessageCounts)
-              == JSON.stringify(messageCounts))
-            ){
-              createNotificationIfAllowed();
-              lastMessageCounts = messageCounts;
-            };
-            var wait = json['wait'];
-            for (var i = 0; i < messageCounts.length; ++i) {
-              var id = messageCounts[i].id.toString();
-              var count = messageCounts[i].count.toString();
-              var counterId = "#" + id + "_unread_count";
-              var html = (
-                "<span class=\"align-top badge badge-pill badge-info\">"
-                + count
-                + "</span>"
-              );
-              $(counterId).html(html);
-            };
-            var conversationCount = messageCounts.length;
-            if (conversationCount > 0) {
-              var html = (
-                "<span class=\"align-top badge badge-pill badge-info\" "
-                + "style=\"position: absolute;\">"
-                + conversationCount.toString()
-                + "</span>"
-              );
-              $("#conversation_count").html(html);
-            };
-            poll(wait);
-          }).fail(function() {
-            // If the connection is lost, fall back to polling once per minute.
-            poll(60);
-          });
-        }, waitTime * 1000);
-      };
       /*
        * Automatically resizes textareas to fit content.
        * TODO: Cap the number of lines it can expand to, and make this settable
@@ -198,6 +148,7 @@
           this.style.height = (this.scrollHeight) + 'px';
         });
       };
+
       function restyleMultiselects () {
         $('.multiselect').select2({
           allowClear: true,
@@ -205,6 +156,7 @@
           placeholder: "",
         });
       };
+
       jQuery.fn.highlight = function(pat) {
        function innerHighlight(node, pat) {
         var skip = 0;
@@ -235,14 +187,49 @@
       };
 
       /*
-       * Creates a notification if notifications are allowed.
+       * Create a notification if notifications are allowed.
        */
-      function createNotificationIfAllowed() {
+      function createNotificationIfAllowed(sender) {
         if(Notification.permission === 'granted') {
-          var message = 'New message received.';
-          var notification = new Notification('GoodChat', {body: message});
+          var message = 'New message from ' + sender + '.';
+          var notification = new Notification('Friendli', {body: message});
         };
       };
+
+      /*
+       * Create a WebSocket connection.
+       */
+      const socketUrl = 'wss://' + window.location.host + '/ws/messages/';
+      const socket = new WebSocket(socketUrl);
+
+      /*
+       * Handle an incoming WebSocket message.
+       */
+      socket.addEventListener("message", function(e) {
+        // Add one to the unread messages count displayed in the footer.
+        const currentCount = $("#unread_messages_count").text();
+        const newCount = Number(currentCount) + 1;
+        const newHtml = (
+          '<span class="align-top badge badge-pill badge-info" style="position: absolute;">' +
+          newCount +
+          '</span>'
+        );
+        $("#unread_messages_count").html(newHtml);
+        // Show a notification that a new message has been received, but not to
+        // the sender of the message.
+        const data = JSON.parse(e.data);
+        if (data.sender != {{ user.pk }}) {
+          createNotificationIfAllowed(data.sender_username);
+        }
+      });
+
+      /*
+       * Handle a WebSocket disconnection.
+       */
+      socket.onclose = function(e) {
+          console.error('The socket has closed.');
+      };
+
     </script>
   {% endif %}
 

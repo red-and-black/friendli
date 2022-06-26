@@ -42,7 +42,7 @@ class Command(BaseCommand):
         conference = Conference.objects.get()
 
         # Headers
-        header_text = ('GoodChat usage for %s' % conference.name)
+        header_text = ('Friendli usage for %s' % conference.name)
         header_border = "*" * len(header_text)
         print()
         print(header_border)
@@ -240,7 +240,7 @@ class Command(BaseCommand):
         print('Total number of profile searches: ')
         print('Run this command and paste the result in:')
         print(
-            'grep "goodchat.io/search/ --" ~/logs/requests.log | grep -v '
+            'grep "friendli.io/search/ --" ~/logs/requests.log | grep -v '
             '"User: 1 --" | grep -v "User: 2 --" | grep -v "User: 3 --" | '
             'grep -v "User: Anon --" | grep -F "csrfmiddlewaretoken" | wc -l'
         )
@@ -248,7 +248,7 @@ class Command(BaseCommand):
         print('Total number of username searches: ')
         print('Run this command and paste the result in:')
         print(
-            'grep "goodchat.io/username-search/ --" ~/logs/requests.log | '
+            'grep "friendli.io/username-search/ --" ~/logs/requests.log | '
             'grep -v "User: 1 --" | grep -v "User: 2 --" | grep -v "User: 3 '
             '--" | grep -v "User: Anon --" | grep -F "csrfmiddlewaretoken" | '
             'wc -l'

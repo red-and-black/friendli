@@ -47,9 +47,14 @@
         {% endfor %}
       </p>
       {% endif %}
-      {% if profile.stack %}
-      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Stack</span>&nbsp;
-        {{ profile.stack }}
+      {% if profile.ask_me %}
+      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Ask me</span>&nbsp;
+        {{ profile.ask_me }}
+      </p>
+      {% endif %}
+      {% if profile.teach_me %}
+      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Teach me</span>&nbsp;
+        {{ profile.teach_me }}
       </p>
       {% endif %}
       {% if profile.detail %}

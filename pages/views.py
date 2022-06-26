@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from goodchat.decorators import public
+from friendli.decorators import public
 
 from conferences.models import Conference
 
