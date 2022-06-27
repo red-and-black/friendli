@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load url_target_blank %}
 
 {% block pagename %}People{% endblock pagename %}
 {% block heading %}All Users{% endblock heading %}
@@ -48,18 +49,21 @@
       </p>
       {% endif %}
       {% if profile.ask_me %}
-      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Ask me</span>&nbsp;
-        {{ profile.ask_me }}
+      <p class='my-2 urlize text-break'><span class='text-rockmelon font-weight-bold'>Ask me</span>&nbsp;
+        <br>
+        {{ profile.ask_me|linebreaksbr|urlize|url_target_blank }}
       </p>
       {% endif %}
       {% if profile.teach_me %}
-      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Teach me</span>&nbsp;
-        {{ profile.teach_me }}
+      <p class='my-2 urlize text-break'><span class='text-rockmelon font-weight-bold'>Teach me</span>&nbsp;
+        <br>
+        {{ profile.teach_me|linebreaksbr|urlize|url_target_blank }}
       </p>
       {% endif %}
       {% if profile.detail %}
-      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Detail</span>&nbsp;
-        {{ profile.detail }}
+      <p class='my-2 urlize text-break'><span class='text-rockmelon font-weight-bold'>Detail</span>&nbsp;
+        <br>
+        {{ profile.detail|linebreaksbr|urlize|url_target_blank }}
       </p>
       {% endif %}
     </div>

@@ -78,7 +78,7 @@ class RequestLoggingMiddleware(object):
 
             log_entry += request_string
 
-            self.logger.info(log_entry)
+        self.logger.info(log_entry)
 
         response = self.get_response(request)
 
