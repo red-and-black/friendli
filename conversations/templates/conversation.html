@@ -100,6 +100,7 @@
     // Handle an incoming WebSocket message.
     socket.addEventListener("message", function(e) {
       const data = JSON.parse(e.data);
+      const contentWithBreaks = data.content.replace(/\n/g, '<br>');
       var newHtml;
       if (data.sender == {{ user.pk }}) {
         newHtml = (
@@ -108,7 +109,7 @@
               '<div class="card bg-darkest-grey mt-2">' +
                 '<div class="card-body mb-n1 pb-0 pt-1 px-2">' +
                   '<p class="card-text urlize">' +
-                    data.content +
+                    contentWithBreaks +
                   '</p>' +
                 '</div>' +
                 '<div class="card-footer bg-transparent border-0px-2 py-0 text-right">' +
@@ -127,7 +128,7 @@
               '<div class="card bg-even-darker-grey mt-2">' +
                 '<div class="card-body mb-n1 pb-0 pt-1 px-2">' +
                   '<p class="card-text urlize">' +
-                    data.content +
+                    contentWithBreaks +
                   '</p>' +
                 '</div>' +
                 '<div class="card-footer bg-transparent border-0px-2 py-0 text-right">' +
