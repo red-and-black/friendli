@@ -55,17 +55,20 @@
       {% endif %}
       {% if profile.ask_me %}
       <p class='my-2'><span class='text-rockmelon font-weight-bold'>Ask me about</span>&nbsp;
-        {{ profile.ask_me }}
+        <br>
+        {{ profile.ask_me|linebreaksbr }}
       </p>
       {% endif %}
       {% if profile.teach_me %}
       <p class='my-2'><span class='text-rockmelon font-weight-bold'>Teach me about</span>&nbsp;
-        {{ profile.teach_me }}
+        <br>
+        {{ profile.teach_me|linebreaksbr }}
       </p>
       {% endif %}
       {% if profile.detail %}
       <p class='my-2'><span class='text-rockmelon font-weight-bold'>Everything else</span>&nbsp;
-        {{ profile.detail }}
+        <br>
+        {{ profile.detail|linebreaksbr }}
       </p>
       {% endif %}
       {% if profile.github or profile.twitter %}

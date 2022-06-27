@@ -82,7 +82,8 @@
       </p>
       <p class='urlize'>
         <span class='text-rockmelon'>Details</span>&nbsp;
-        {{ meetup.details|urlize }}
+        <br>
+        {{ meetup.details|linebreaksbr|urlize }}
       </p>
       {% if meetup.prof_interests.all or meetup.personal_interests.all %}
       <p>

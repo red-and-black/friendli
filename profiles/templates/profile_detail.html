@@ -142,19 +142,19 @@
         {% if profile_to_view.ask_me %}
           <dt class='text-rockmelon mt-2'>Ask me about</dt>
           <dd class='urlize text-break'>
-            {{ profile_to_view.ask_me|urlize }}
+            {{ profile_to_view.ask_me|linebreaksbr|urlize }}
           </dd>
         {% endif %}
         {% if profile_to_view.teach_me %}
           <dt class='text-rockmelon mt-2'>Teach me about</dt>
           <dd class='urlize text-break'>
-            {{ profile_to_view.teach_me|urlize }}
+            {{ profile_to_view.teach_me|linebreaksbr|urlize }}
           </dd>
         {% endif %}
         {% if profile_to_view.detail %}
           <dt class='text-rockmelon mt-2'>Everything else</dt>
           <dd class='close-paragraphs urlize text-break'>
-            {{ profile_to_view.detail|urlize|linebreaks }}
+            {{ profile_to_view.detail|linebreaksbr|urlize }}
           </dd>
         {% endif %}
         {% if profile_to_view.github or profile_to_view.twitter %}
