@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load url_target_blank %}
 
 {% block pagename %}Your crew{% endblock pagename %}
 {% block heading %}Your saved list{% endblock heading %}
@@ -64,21 +65,21 @@
     </p>
     {% endif %}
     {% if profile.ask_me %}
-    <p class='my-2'><span class='text-rockmelon font-weight-bold'>Ask me about</span>&nbsp;
+    <p class='my-2 urlize text-break'><span class='text-rockmelon font-weight-bold'>Ask me about</span>&nbsp;
       <br>
-      {{ profile.ask_me|linebreaksbr }}
+      {{ profile.ask_me|linebreaksbr|urlize|url_target_blank }}
     </p>
     {% endif %}
     {% if profile.teach_me %}
-    <p class='my-2'><span class='text-rockmelon font-weight-bold'>Teach me about</span>&nbsp;
+    <p class='my-2 urlize text-break'><span class='text-rockmelon font-weight-bold'>Teach me about</span>&nbsp;
       <br>
-      {{ profile.teach_me|linebreaksbr }}
+      {{ profile.teach_me|linebreaksbr|urlize|url_target_blank }}
     </p>
     {% endif %}
     {% if profile.detail %}
-    <p class='my-2'><span class='text-rockmelon font-weight-bold'>Everything else</span>&nbsp;
+    <p class='my-2 urlize text-break'><span class='text-rockmelon font-weight-bold'>Everything else</span>&nbsp;
       <br>
-      {{ profile.detail|linebreaksbr }}
+      {{ profile.detail|linebreaksbr|urlize|url_target_blank }}
     </p>
     {% endif %}
       {% if profile.github or profile.twitter %}

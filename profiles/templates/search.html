@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load setclass %}
+{% load url_target_blank %}
 
 {% block pagename %}Search{% endblock pagename %}
 {% block heading %}Search{% endblock heading %}
@@ -135,19 +136,19 @@
         {% if profile.ask_me %}
         <p class='my-2'><span class='text-rockmelon font-weight-bold'>Ask me about</span>&nbsp;
           <br>
-          <span class="ask_me">{{ profile.ask_me|linebreaksbr }}</span>
+          <span class="ask_me urlize text-break">{{ profile.ask_me|linebreaksbr|urlize|url_target_blank }}</span>
         </p>
         {% endif %}
         {% if profile.teach_me %}
         <p class='my-2'><span class='text-rockmelon font-weight-bold'>Teach me about</span>&nbsp;
           <br>
-          <span class="teach_me">{{ profile.teach_me|linebreaksbr }}</span>
+          <span class="teach_me urlize text-break">{{ profile.teach_me|linebreaksbr|urlize|url_target_blank }}</span>
         </p>
         {% endif %}
         {% if profile.detail %}
         <p class='my-2'><span class='text-rockmelon font-weight-bold'>Everything else</span>&nbsp;
           <br>
-          <span class="detail">{{ profile.detail|linebreaksbr }}</span>
+          <span class="detail urlize text-break">{{ profile.detail|linebreaksbr|urlize|url_target_blank }}</span>
         </p>
         {% endif %}
         {% if profile.github or profile.twitter %}

@@ -1,3 +1,4 @@
+{% load url_target_blank %}
 {% if message.sender == user %}
 <div class="row justify-content-end">
 {% else %}
@@ -11,7 +12,7 @@
     {% endif %}
       <div class="card-body mb-n1 pb-0 pt-1 px-2">
         <p class="card-text urlize">
-          {{ message.content|linebreaksbr|urlize }}
+          {{ message.content|linebreaksbr|urlize|url_target_blank }}
         </p>
       </div>
       <div class="card-footer bg-transparent border-0px-2 py-0 text-right">

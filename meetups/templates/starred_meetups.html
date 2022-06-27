@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load setclass %}
+{% load url_target_blank %}
 
 {% block pagename %}Meetups{% endblock pagename %}
 {% block heading %}Meetups{% endblock heading %}
@@ -74,7 +75,7 @@
       <p class='urlize'>
         <span class='text-rockmelon'>Details</span>&nbsp;
         <br>
-        {{ meetup.details|linebreaksbr|urlize }}
+        {{ meetup.details|linebreaksbr|urlize|url_target_blank }}
       </p>
       {% if meetup.prof_interests.all or meetup.personal_interests.all %}
       <p>
