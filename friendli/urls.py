@@ -20,6 +20,7 @@ from django.urls import (
     path
 )
 
+from common import views as common_views
 from conversations import views as conversations_views
 from pages import views as pages_views
 from profiles import views as profiles_views
@@ -97,4 +98,7 @@ urlpatterns = [
          name='username-search'),
     path('user/<username>/', profiles_views.profile_detail,
          name='profile-detail'),
+
+    # Service worker.
+    path('sw.js', common_views.serve_serviceworker_file),
 ]

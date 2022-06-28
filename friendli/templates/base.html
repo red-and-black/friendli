@@ -186,13 +186,18 @@
        }) : this;
       };
 
+      // Register a service worker for notifications.
+      navigator.serviceWorker.register('/sw.js');
+
       /*
        * Create a notification if notifications are allowed.
        */
       function createNotificationIfAllowed(sender) {
         if(Notification.permission === 'granted') {
           var message = 'New message from ' + sender + '.';
-          var notification = new Notification('Friendli', {body: message});
+          navigator.serviceWorker.ready.then(function(registration) {
+            registration.showNotification('Friendli', {body: message});
+          });
         };
       };
 
