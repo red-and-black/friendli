@@ -38,7 +38,7 @@
             <small>{{ conversation.time }}</small>
           </p>
         </div>
-        <p class="card-text">
+        <p class="card-text" id="{{ conversation.pk }}_latest_message">
           {{ conversation.latest_message.content|truncatechars:60 }}
         </p>
       </div>
@@ -111,19 +111,26 @@
   <script>
 
     // Handle an incoming WebSocket message by adding to a conversation's
-    // message count.
+    // message count and updating the preview of the latest message.
     socket.addEventListener("message", function(e) {
       const data = JSON.parse(e.data);
       const conversation = data.conversation;
-      const target_conversation_id = "#" + conversation + "_unread_count";
-      const currentCount = $(target_conversation_id).text();
+      const unreadCountId = "#" + conversation + "_unread_count";
+      const currentCount = $(unreadCountId).text();
       const newCount = Number(currentCount) + 1;
-      const newHtml = (
+      const newCountHtml = (
         '<span class="badge badge-pill badge-info align-top">' +
         newCount +
         '</span>'
       );
-      $(target_conversation_id).html(newHtml);
+      $(unreadCountId).html(newCountHtml);
+      var newMessageContent = data.content;
+      const maxLength = 60;
+      if (newMessageContent.length > maxLength) {
+        newMessageContent = newMessageContent.slice(0, maxLength -  3) + "...";
+      }
+      const latestMessageId = "#" + conversation + "_latest_message";
+      $(latestMessageId).html(newMessageContent);
     });
 
   </script>
