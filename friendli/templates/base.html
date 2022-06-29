@@ -212,7 +212,11 @@
       /*
        * Create a WebSocket connection.
        */
-      const socketUrl = 'wss://' + window.location.host + '/ws/messages/';
+      const host = window.location.host;
+      const httpProtocol = window.location.protocol;
+      const socketProtocol = (httpProtocol == 'https:') ? 'wss://' : 'ws://';
+      const socketUrl = socketProtocol + host + '/ws/messages/';
+
       const socket = new WebSocket(socketUrl);
       var lastWebSocketHeartbeat = new Date().getTime() / 1000;
 
