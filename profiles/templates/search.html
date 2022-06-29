@@ -13,11 +13,7 @@
         <i class='material-icons align-middle'>search</i>
         Profile
       </button>
-      <a href="{% url 'username-search' %}" class='btn btn-secondary'>
-        <i class='material-icons align-middle'>search</i>
-        Username
-      </a>
-      <button class='btn btn-dark-grey px-0 search-form-toggle'>
+      <button class='btn btn-info px-0 search-form-toggle'>
         <i class='material-icons align-middle' id='caret'>
           {% if page_obj %}
             keyboard_arrow_down
@@ -26,6 +22,10 @@
           {% endif %}
         </i>
       </button>
+      <a href="{% url 'username-search' %}" class='btn btn-secondary'>
+        <i class='material-icons align-middle'>search</i>
+        Username
+      </a>
     </div>
   </div>
   <form id='search_form' method='POST'>
