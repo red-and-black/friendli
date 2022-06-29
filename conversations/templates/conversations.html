@@ -116,6 +116,11 @@
     // Handle an incoming WebSocket message by adding to a conversation's
     // message count and updating the preview of the latest message.
     socket.addEventListener("message", function(e) {
+      // If this is a heartbeat message, ignore it.
+      if (e.data == "heartbeat") {
+        return;
+      }
+
       const data = JSON.parse(e.data);
       const conversation = data.conversation;
       const unreadCountId = "#" + conversation + "_unread_count";

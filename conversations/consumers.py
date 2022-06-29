@@ -24,6 +24,13 @@ class MessageConsumer(WebsocketConsumer):
         async_group_discard(self.user_group_name, self.channel_name)
 
     def receive(self, text_data):
+        # If this is a heartbeat message, which is simply the string
+        # "heartbeat", respond to the sending client and do nothing more.
+        heartbeat_text = "heartbeat"
+        if text_data == heartbeat_text:
+            self.send(text_data=heartbeat_text)
+            return
+
         user = self.user
         # Convert the string to a dictionary. It should have only these keys:
         # "content", "conversation".
