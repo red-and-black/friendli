@@ -99,6 +99,11 @@
 
     // Handle an incoming WebSocket message.
     socket.addEventListener("message", function(e) {
+      // If this is a heartbeat message, ignore it.
+      if (e.data == "heartbeat") {
+        return;
+      }
+
       const data = JSON.parse(e.data);
       const contentWithBreaks = data.content.replace(/\n/g, '<br>');
       var newHtml;

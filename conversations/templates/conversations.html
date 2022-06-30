@@ -77,6 +77,9 @@
           <i class='material-icons align-middle'>person_outline</i>
           so others can find you.
         </p>
+        <a href="{% url 'profile-edit' %}" class='btn btn-info mb-3'>
+          Set up your profile
+        </a>
         <p class="card-text text-center">
           <i class='material-icons align-middle'>arrow_downward</i>
         </p>
@@ -85,6 +88,9 @@
           <i class='material-icons align-middle'>search</i>
           to contact.
         </p>
+        <a href="{% url 'search' %}" class='btn btn-info mb-3'>
+          Search now
+        </a>
         <p class="card-text text-center">
           <i class='material-icons align-middle'>arrow_downward</i>
         </p>
@@ -92,12 +98,9 @@
           Star
           <i class='material-icons align-middle'>star_outline</i>
           people for later, or message them
-          <i class='material-icons align-middle'>chat_bubble_outline</i>
+          <i class='material-icons align-middle'>send</i>
           right away.
         </p>
-        <a href="{% url 'profile-edit' %}" class='btn btn-info mt-3'>
-          Set up your profile
-        </a>
       </div>
     </div>
   {% endif %}
@@ -113,6 +116,11 @@
     // Handle an incoming WebSocket message by adding to a conversation's
     // message count and updating the preview of the latest message.
     socket.addEventListener("message", function(e) {
+      // If this is a heartbeat message, ignore it.
+      if (e.data == "heartbeat") {
+        return;
+      }
+
       const data = JSON.parse(e.data);
       const conversation = data.conversation;
       const unreadCountId = "#" + conversation + "_unread_count";
