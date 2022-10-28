@@ -3,98 +3,189 @@
     "model": "profiles.professionalinterest",
     "pk": 1,
     "fields": {
-        "prof_interest": "Infosec worker"
+        "prof_interest": "Backend development"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 2,
     "fields": {
-        "prof_interest": "Other IT worker"
+        "prof_interest": "Frontend development"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 3,
     "fields": {
-        "prof_interest": "Infosec manager"
+        "prof_interest": "Management"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 4,
     "fields": {
-        "prof_interest": "Privacy nerd"
+        "prof_interest": "Policy"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 5,
     "fields": {
-        "prof_interest": "Public servant"
+        "prof_interest": "DevOps"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 6,
     "fields": {
-        "prof_interest": "Student"
+        "prof_interest": "Pen testing"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 7,
     "fields": {
-        "prof_interest": "Military, Fed, Spook, Police Informant, Undercover Cop, NSA Apologist"
+        "prof_interest": "Red team"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 8,
     "fields": {
-        "prof_interest": "Hobbyist, enthusiast, or amateur hacker"
+        "prof_interest": "Blue team"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 9,
     "fields": {
-        "prof_interest": "Gamer, geek or other general nerd"
+        "prof_interest": "Forensics"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 10,
     "fields": {
-        "prof_interest": "Curious general non-nerdy onlooker"
+        "prof_interest": "Privacy"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 11,
     "fields": {
-        "prof_interest": "Spammer, Botnet Herder, 419er, or other Criminal"
+        "prof_interest": "Other IT"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 12,
     "fields": {
-        "prof_interest": "Media, reporter, spin doctor, or hype merchant"
+        "prof_interest": "Networks"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 13,
     "fields": {
-        "prof_interest": "Cryptocurrency aficionado, blockchain evangelist"
+        "prof_interest": "SysAdmin"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 14,
     "fields": {
-        "prof_interest": "Some other interested party"
+        "prof_interest": "Media"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 15,
+    "fields": {
+        "prof_interest": "Cryptography"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 16,
+    "fields": {
+        "prof_interest": "Hacking"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 17,
+    "fields": {
+        "prof_interest": "Cyrptocurrency"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 18,
+    "fields": {
+        "prof_interest": "Design"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 19,
+    "fields": {
+        "prof_interest": "DevSecOps"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 20,
+    "fields": {
+        "prof_interest": "Ops"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 21,
+    "fields": {
+        "prof_interest": "Social engineering"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 22,
+    "fields": {
+        "prof_interest": "Other security"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 23,
+    "fields": {
+        "prof_interest": "Mobile dev"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 24,
+    "fields": {
+        "prof_interest": "OS"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 25,
+    "fields": {
+        "prof_interest": "FOSS maintaining"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 26,
+    "fields": {
+        "prof_interest": "Infrastructure"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 27,
+    "fields": {
+        "prof_interest": "Hobby / enthusiast / curious"
     }
 }
 ]

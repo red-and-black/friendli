@@ -3,15 +3,13 @@
   "model": "conferences.Conference",
   "pk": 1,
   "fields": {
-    "name": "KawaiiCon 2022",
-    "hashtag": "#KawaiiCon",
+    "name": "The Friendli Testing Instance",
     "collective_noun": "hackers",
-    "location": "Michael Fowler Centre, Wellington, New Zealand",
-    "start_date":"2022-06-01",
-    "end_date": "2022-06-02",
-    "link": "https://kawaiicon.org/",
-    "coc_link": "https://kawaiicon.org/code-of-conduct/",
-    "message": "Welcome to KawaiiCon's 2022 Friendli instance!"
+    "location": "The Internet",
+    "start_date":"2022-01-01",
+    "end_date": "2023-12-31",
+    "link": "https://friendli.io/",
+    "message": "Welcome to the Friendli testing instance :)"
   }
 }
 ]
