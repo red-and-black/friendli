@@ -129,13 +129,13 @@
           </dd>
         {% endif %}
         {% if profile_to_view.personal_interests.all %}
-          <dt class='text-rockmelon mt-2'>Non-tech interests</dt>
+          <dt class='text-rockmelon mt-2'>Personal interests</dt>
           <dd class='mb-1'>
             {{ profile_to_view.personal_interests.all|join:" &nbsp;&bull;&nbsp; " }}
           </dd>
         {% endif %}
         {% if profile_to_view.prof_interests.all %}
-          <dt class='text-rockmelon mt-2'>I'm here because I'm a</dt>
+          <dt class='text-rockmelon mt-2'>Professional interests</dt>
           <dd class='mb-1'>
             {{ profile_to_view.prof_interests.all|join:" &nbsp;&bull;&nbsp; " }}
           </dd>

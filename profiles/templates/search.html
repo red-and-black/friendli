@@ -39,11 +39,11 @@
       {{ profile_form.looking_for|setclass:'form-control bg-dark-grey text-less-light multiselect' }}
     </div>
     <div class='form-group'>
-      <label>They're here because they're a</label>
+      <label>Professional interests</label>
       {{ profile_form.prof_interests|setclass:'form-control bg-dark-grey text-less-light multiselect' }}
     </div>
     <div class='form-group'>
-      <label>Non-tech interests</label>
+      <label>Personal interests</label>
       {{ profile_form.personal_interests|setclass:'form-control bg-dark-grey text-less-light multiselect' }}
     </div>
     <div class='form-group'>
@@ -124,12 +124,12 @@
         </p>
         {% endif %}
         {% if profile.prof_interests.all %}
-        <p class='my-2'><span class='text-rockmelon font-weight-bold'>I'm here because I'm a</span>&nbsp;
+        <p class='my-2'><span class='text-rockmelon font-weight-bold'>Professional interests</span>&nbsp;
           <span class="prof_interests">{{ profile.prof_interests.all|join:" &nbsp;&bull;&nbsp; " }}</span>
         </p>
         {% endif %}
         {% if profile.personal_interests.all %}
-        <p class='my-2'><span class='text-rockmelon font-weight-bold'>Non-tech interests</span>&nbsp;
+        <p class='my-2'><span class='text-rockmelon font-weight-bold'>Personal interests</span>&nbsp;
           <span class="personal_interests">{{ profile.personal_interests.all|join:" &nbsp;&bull;&nbsp; " }}</span>
         </p>
         {% endif %}
