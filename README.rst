@@ -127,14 +127,30 @@ Give the superuser a profile with these lines::
     >>> user = User.objects.get()
     >>> Profile.objects.create(user=user)
 
-Step 7 - Start the server
+Step 7 - Load data from fixtures
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Load basic fixture data with::
+
+    $ ./manage.py loaddata \
+        conferences_conference \
+        profiles_language \
+        profiles_lookingfor \
+        profiles_personalinterest \
+        profiles_professionalinterest
+
+Load data for two test users with::
+
+    $ ./manage.py loaddata auth_user profiles_profile
+
+Step 8 - Start the server
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Start the server with::
 
     $ ./manage.py runserver
 
-Step 8 - Access the app
+Step 9 - Access the app
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Browse to http://localhost:8000.
