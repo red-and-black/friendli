@@ -92,7 +92,8 @@ Step 4 - Install dependencies
 Install the required Python packages in your virtualenv::
 
     $ cd friendli
-    $ pip install -r requirements.txt
+    $ pip install --upgrade pip pip-tools setuptools
+    $ pip-sync requirements.txt
 
 Step 5 - Create the database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -163,6 +164,14 @@ The ``css`` is managed by ``sass``.
 When any ``.scss`` files are changed, rebuild ``main.css`` with::
 
     $ sass /path/to/static/scss/main.scss /path/to/static/css/main.css
+
+Upgrading Python packages
+-------------------------
+
+Use ``pip-tools`` to upgrade Python packages::
+
+    pip install --upgrade pip pip-tools setuptools
+    pip-compile --generate-hashes --upgrade requirements.in
 
 Generating a usage report
 -------------------------
