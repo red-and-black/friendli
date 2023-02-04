@@ -115,7 +115,7 @@
     "model": "profiles.professionalinterest",
     "pk": 17,
     "fields": {
-        "prof_interest": "Cyrptocurrency"
+        "prof_interest": "Cryptocurrency"
     }
 },
 {
