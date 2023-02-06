@@ -255,6 +255,7 @@ class ProfileForm(forms.ModelForm):
             'ask_me',
             'teach_me',
             'github',
+            'mastodon',
             'twitter',
             'prof_interests',
             'personal_interests',
