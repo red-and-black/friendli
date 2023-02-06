@@ -165,6 +165,18 @@ class EditUserForm(forms.ModelForm):
             raise forms.ValidationError(error_msg)
 
         return username
+    
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email:
+            another_user_has_that_email = User.objects.\
+                filter(email__iexact=email).\
+                exclude(email__iexact=self.instance.email).\
+                exists()
+            if another_user_has_that_email:
+                error_msg = "That email is unavailable."
+                raise forms.ValidationError(error_msg)
+        return email
 
 
 class AddUserForm(forms.ModelForm):
@@ -183,6 +195,17 @@ class AddUserForm(forms.ModelForm):
             'email',
         )
         widgets = {'password': forms.PasswordInput()}
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email:
+            another_user_has_that_email = User.objects.\
+                filter(email__iexact=email).\
+                exists()
+            if another_user_has_that_email:
+                error_msg = "That email is unavailable."
+                raise forms.ValidationError(error_msg)
+        return email
 
     def clean_username(self):
         # Usernames can be no longer than 16 characters
