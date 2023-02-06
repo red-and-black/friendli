@@ -10,14 +10,532 @@
     "model": "profiles.language",
     "pk": 2,
     "fields": {
-        "language": "Te Reo Māori"
+        "language": "Chinese (Mandarin)"
     }
 },
 {
     "model": "profiles.language",
     "pk": 3,
     "fields": {
-        "language": "Other (check bio)"
+        "language": "Hindi"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 4,
+    "fields": {
+        "language": "Spanish"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 5,
+    "fields": {
+        "language": "French"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 6,
+    "fields": {
+        "language": "Arabic"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 7,
+    "fields": {
+        "language": "Bengali"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 8,
+    "fields": {
+        "language": "Russian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 9,
+    "fields": {
+        "language": "Portuguese"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 10,
+    "fields": {
+        "language": "Urdu"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 11,
+    "fields": {
+        "language": "Indonesian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 12,
+    "fields": {
+        "language": "German"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 13,
+    "fields": {
+        "language": "Japanese"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 14,
+    "fields": {
+        "language": "Marathi"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 15,
+    "fields": {
+        "language": "Telugu"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 16,
+    "fields": {
+        "language": "Turkish"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 17,
+    "fields": {
+        "language": "Tamil"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 18,
+    "fields": {
+        "language": "Chinese (Gan)"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 19,
+    "fields": {
+        "language": "Vietnamese"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 20,
+    "fields": {
+        "language": "Tagalog"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 21,
+    "fields": {
+        "language": "Korean"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 22,
+    "fields": {
+        "language": "Hausa"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 23,
+    "fields": {
+        "language": "Swahili"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 24,
+    "fields": {
+        "language": "Javanese"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 25,
+    "fields": {
+        "language": "Naija"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 26,
+    "fields": {
+        "language": "Farsi"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 27,
+    "fields": {
+        "language": "Punjabi"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 28,
+    "fields": {
+        "language": "Kannada"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 29,
+    "fields": {
+        "language": "Gujarati"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 30,
+    "fields": {
+        "language": "Thai"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 31,
+    "fields": {
+        "language": "Amharic"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 32,
+    "fields": {
+        "language": "Bhojpuri"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 33,
+    "fields": {
+        "language": "Yoruba"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 34,
+    "fields": {
+        "language": "Burmese"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 35,
+    "fields": {
+        "language": "Polish"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 36,
+    "fields": {
+        "language": "Lingala"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 37,
+    "fields": {
+        "language": "Malay"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 38,
+    "fields": {
+        "language": "Dutch"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 39,
+    "fields": {
+        "language": "Afrikaans"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 40,
+    "fields": {
+        "language": "Albanian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 41,
+    "fields": {
+        "language": "Armenian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 42,
+    "fields": {
+        "language": "Azerbaijani"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 43,
+    "fields": {
+        "language": "Basque"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 44,
+    "fields": {
+        "language": "Belarusian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 45,
+    "fields": {
+        "language": "Catalan"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 46,
+    "fields": {
+        "language": "Croatian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 47,
+    "fields": {
+        "language": "Czech"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 48,
+    "fields": {
+        "language": "Danish"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 49,
+    "fields": {
+        "language": "Esperanto"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 50,
+    "fields": {
+        "language": "Estonian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 51,
+    "fields": {
+        "language": "Finnish"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 52,
+    "fields": {
+        "language": "Greek"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 53,
+    "fields": {
+        "language": "Hebrew"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 54,
+    "fields": {
+        "language": "Hmong"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 55,
+    "fields": {
+        "language": "Hungarian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 56,
+    "fields": {
+        "language": "Icelandic"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 57,
+    "fields": {
+        "language": "Italian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 58,
+    "fields": {
+        "language": "Latvian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 59,
+    "fields": {
+        "language": "Lithuanian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 60,
+    "fields": {
+        "language": "Macedonian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 61,
+    "fields": {
+        "language": "Maori"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 62,
+    "fields": {
+        "language": "Nepali"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 63,
+    "fields": {
+        "language": "Norwegian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 64,
+    "fields": {
+        "language": "Pashto"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 65,
+    "fields": {
+        "language": "Romanian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 66,
+    "fields": {
+        "language": "Serbian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 67,
+    "fields": {
+        "language": "Sinhala"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 68,
+    "fields": {
+        "language": "Swedish"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 69,
+    "fields": {
+        "language": "Ukrainian"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 70,
+    "fields": {
+        "language": "Welsh"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 71,
+    "fields": {
+        "language": "Scots Gaelic"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 72,
+    "fields": {
+        "language": "Irish"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 73,
+    "fields": {
+        "language": "Chinese (Wu)"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 74,
+    "fields": {
+        "language": "Chinese (Min)"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 75,
+    "fields": {
+        "language": "Chinese (Hakka)"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 76,
+    "fields": {
+        "language": "Chinese (Yue inc. Cantonese)"
+    }
+},
+{
+    "model": "profiles.language",
+    "pk": 77,
+    "fields": {
+        "language": "Chinese (Xiang)"
     }
 }
 ]

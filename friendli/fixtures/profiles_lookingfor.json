@@ -3,49 +3,49 @@
     "model": "profiles.lookingfor",
     "pk": 1,
     "fields": {
-        "looking_for": "Good conversation"
+        "looking_for": "Collaborators"
     }
 },
 {
     "model": "profiles.lookingfor",
     "pk": 2,
     "fields": {
-        "looking_for": "Meal companions"
+        "looking_for": "Workshop and study buddies"
     }
 },
 {
     "model": "profiles.lookingfor",
     "pk": 3,
     "fields": {
-        "looking_for": "Workshop buddies"
+        "looking_for": "Sober friends"
     }
 },
 {
     "model": "profiles.lookingfor",
     "pk": 4,
     "fields": {
-        "looking_for": "Fellow n00bs"
+        "looking_for": "Party people"
     }
 },
 {
     "model": "profiles.lookingfor",
     "pk": 5,
     "fields": {
-        "looking_for": "Explorers"
+        "looking_for": "Good conversation"
     }
 },
 {
     "model": "profiles.lookingfor",
     "pk": 6,
     "fields": {
-        "looking_for": "Mentors"
+        "looking_for": "Locals"
     }
 },
 {
     "model": "profiles.lookingfor",
     "pk": 7,
     "fields": {
-        "looking_for": "Mentees"
+        "looking_for": "Fellow explorers"
     }
 },
 {
@@ -59,35 +59,49 @@
     "model": "profiles.lookingfor",
     "pk": 9,
     "fields": {
-        "looking_for": "Collaborators"
+        "looking_for": "Mentors"
     }
 },
 {
     "model": "profiles.lookingfor",
     "pk": 10,
     "fields": {
-        "looking_for": "Party people"
+        "looking_for": "Mentees"
     }
 },
 {
     "model": "profiles.lookingfor",
     "pk": 11,
     "fields": {
-        "looking_for": "Sober friends"
+        "looking_for": "Job opportunities"
     }
 },
 {
     "model": "profiles.lookingfor",
     "pk": 12,
     "fields": {
-        "looking_for": "Job opportunities"
+        "looking_for": "Employees (I'm hiring)"
     }
 },
 {
     "model": "profiles.lookingfor",
     "pk": 13,
     "fields": {
-        "looking_for": "New staff (I'm hiring!)"
+        "looking_for": "Co-founders"
+    }
+},
+{
+    "model": "profiles.lookingfor",
+    "pk": 14,
+    "fields": {
+        "looking_for": "Meal companions"
+    }
+},
+{
+    "model": "profiles.lookingfor",
+    "pk": 15,
+    "fields": {
+        "looking_for": "Fellow n00bs"
     }
 }
 ]

@@ -38,7 +38,7 @@
     "model": "profiles.personalinterest",
     "pk": 6,
     "fields": {
-        "personal_interest": "Gaming - tabletop"
+        "personal_interest": "Gaming - tabletop and RPG"
     }
 },
 {
@@ -94,7 +94,7 @@
     "model": "profiles.personalinterest",
     "pk": 14,
     "fields": {
-        "personal_interest": "Lock picking/locksport"
+        "personal_interest": "Lock picking / locksport"
     }
 },
 {
@@ -115,56 +115,49 @@
     "model": "profiles.personalinterest",
     "pk": 17,
     "fields": {
-        "personal_interest": "Personal development"
+        "personal_interest": "Photography"
     }
 },
 {
     "model": "profiles.personalinterest",
     "pk": 18,
     "fields": {
-        "personal_interest": "Photography"
+        "personal_interest": "Privacy"
     }
 },
 {
     "model": "profiles.personalinterest",
     "pk": 19,
     "fields": {
-        "personal_interest": "Privacy"
+        "personal_interest": "Robotics"
     }
 },
 {
     "model": "profiles.personalinterest",
     "pk": 20,
     "fields": {
-        "personal_interest": "Robotics"
+        "personal_interest": "Sports"
     }
 },
 {
     "model": "profiles.personalinterest",
     "pk": 21,
     "fields": {
-        "personal_interest": "Sports"
+        "personal_interest": "Tramping / hiking / bush walking"
     }
 },
 {
     "model": "profiles.personalinterest",
     "pk": 22,
     "fields": {
-        "personal_interest": "Tramping/Hiking"
+        "personal_interest": "Travel"
     }
 },
 {
     "model": "profiles.personalinterest",
     "pk": 23,
     "fields": {
-        "personal_interest": "Travel"
-    }
-},
-{
-    "model": "profiles.personalinterest",
-    "pk": 24,
-    "fields": {
-        "personal_interest": "Vegan/vegetarian"
+        "personal_interest": "Vegan / vegetarian"
     }
 }
 ]

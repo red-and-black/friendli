@@ -92,7 +92,8 @@ Step 4 - Install dependencies
 Install the required Python packages in your virtualenv::
 
     $ cd friendli
-    $ pip install -r requirements.txt
+    $ pip install --upgrade pip pip-tools setuptools
+    $ pip-sync requirements.txt
 
 Step 5 - Create the database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -127,14 +128,30 @@ Give the superuser a profile with these lines::
     >>> user = User.objects.get()
     >>> Profile.objects.create(user=user)
 
-Step 7 - Start the server
+Step 7 - Load data from fixtures
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Load basic fixture data with::
+
+    $ ./manage.py loaddata \
+        conferences_conference \
+        profiles_language \
+        profiles_lookingfor \
+        profiles_personalinterest \
+        profiles_professionalinterest
+
+Load data for two test users with::
+
+    $ ./manage.py loaddata auth_user profiles_profile
+
+Step 8 - Start the server
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Start the server with::
 
     $ ./manage.py runserver
 
-Step 8 - Access the app
+Step 9 - Access the app
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Browse to http://localhost:8000.
@@ -147,6 +164,14 @@ The ``css`` is managed by ``sass``.
 When any ``.scss`` files are changed, rebuild ``main.css`` with::
 
     $ sass /path/to/static/scss/main.scss /path/to/static/css/main.css
+
+Upgrading Python packages
+-------------------------
+
+Use ``pip-tools`` to upgrade Python packages::
+
+    pip install --upgrade pip pip-tools setuptools
+    pip-compile --generate-hashes --upgrade requirements.in
 
 Generating a usage report
 -------------------------

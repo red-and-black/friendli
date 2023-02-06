@@ -1,0 +1,5 @@
+channels[daphne]
+channels-redis
+django~=3.2
+gunicorn
+psycopg2

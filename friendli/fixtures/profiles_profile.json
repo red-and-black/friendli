@@ -1,0 +1,85 @@
+[
+{
+    "model": "profiles.profile",
+    "pk": 2,
+    "fields": {
+        "created": "2022-11-07T03:09:06.499Z",
+        "modified": "2022-11-07T03:16:57.485Z",
+        "detail": "I'm one half of the Friendli (this app you're using now!) team.\r\nInterested in all the kinds of security -- cyber and physical.\r\nI live in Melbourne.\r\nI'm vegan.\r\nI'm a relentless optimiser -- of everything :)",
+        "twitter": "countrmeasure",
+        "github": "countermeasure",
+        "ask_me": "* GrapheneOS, and generally getting Google off your phone.\r\n* The threats humans pose to future non-human intelligences.\r\n* The time I had breakfast with Bruce Schneier at DEFCON.\r\n* What you can do to stop losing things.",
+        "teach_me": "* OSINT tools.\r\n* Access control systems.",
+        "pronouns": "he/him",
+        "unread_message_counter": 0,
+        "personal_interests": [
+            1,
+            8,
+            10,
+            12,
+            23
+        ],
+        "prof_interests": [
+            1,
+            19,
+            16,
+            22
+        ],
+        "languages": [
+            1
+        ],
+        "looking_for": [
+            1,
+            7,
+            5,
+            14
+        ]
+    }
+},
+{
+    "model": "profiles.profile",
+    "pk": 3,
+    "fields": {
+        "created": "2022-11-07T04:29:53.135Z",
+        "modified": "2022-11-07T04:52:32.211Z",
+        "detail": "One half of the team that made Friendli (this thing you're using).\r\n\r\nDjango dev, security hobbyist, privacy enthusiast, with a very varied work background. I'm one of those self-taught devs with an arts degree. Looking to find ways to bring more people into my working life, through either community/user-facing work or people management.\r\n\r\nI'd like to see more justice, equity, and kindness in the world. Feminist, not terfy. \r\n\r\nFor fun, I paint acrylics and watercolours, read sci-fi and mysteries, bake, dance and learn unnecessary things.\r\n\r\nMastodon @keira_reckons@aus.social",
+        "twitter": "keira_reckons",
+        "github": "GeneralStrike",
+        "ask_me": "Relevant: \r\n - hacker cons around the world (Disobey, CCC, DefCon, Diana, HOPE, BSides, KawaiiCon, BuildStuff, FOSDEM and more)\r\n - django\r\n - people management\r\n - that time we met Bruce Schneier for breakfast, and,\r\n - Friendli.\r\n\r\nLess relevant / past work lives: \r\n - long term travel logistics\r\n - volunteer wrangling\r\n - vegan cooking and nutrition\r\n - gym programs\r\n - vegetable gardening\r\n - charity regulation in Australia",
+        "teach_me": "- How you figured out what you wanted to do.\r\n - Your neck of the security or tech world\r\n - Food where you're from.",
+        "pronouns": "she/her",
+        "unread_message_counter": 0,
+        "personal_interests": [
+            1,
+            2,
+            3,
+            4,
+            10,
+            18,
+            22,
+            23
+        ],
+        "prof_interests": [
+            1,
+            5,
+            19,
+            25,
+            2,
+            27,
+            3,
+            6,
+            10
+        ],
+        "languages": [
+            1
+        ],
+        "looking_for": [
+            7,
+            5,
+            11,
+            3,
+            2
+        ]
+    }
+}
+]

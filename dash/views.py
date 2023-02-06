@@ -34,6 +34,11 @@ from profiles.models import (
 
 @superuser_required
 def dash(request):
+    conference = Conference.objects.last()
+    if conference:
+        conference_name = conference.name
+    else:
+        conference_name = 'Unnamed'
     profile_count = Profile.objects.all().count()
     convo_count = Conversation.objects.all().count()
     reports_count = BehaviourReport.objects.all().count()
@@ -41,6 +46,7 @@ def dash(request):
 
     return render(request, 'dash.html', {
         'blocks_count': blocks_count,
+        'conference_name': conference_name,
         'convo_count': convo_count,
         'profile_count': profile_count,
         'reports_count': reports_count,
