@@ -96,6 +96,15 @@
       {% endif %}
     </div>
     <div class='form-group'>
+      <label>Mastodon</label>
+      {{ profile_form.mastodon|setclass:'form-control' }}
+      {% if profile_form.mastodon.errors %}
+        {% for error in profile_form.mastodon.errors %}
+        <span class='text-watermelon'>{{ error }}</span>
+        {% endfor %}
+      {% endif %}
+    </div>    
+    <div class='form-group'>
       <label>Twitter</label>
       {{ profile_form.twitter|setclass:'form-control' }}
       {% if profile_form.twitter.errors %}

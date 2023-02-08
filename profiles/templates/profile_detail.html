@@ -158,17 +158,19 @@
             {{ profile_to_view.detail|linebreaksbr|urlize|url_target_blank }}
           </dd>
         {% endif %}
-        {% if profile_to_view.github or profile_to_view.twitter %}
+        {% if profile_to_view.github or profile_to_view.twitter or profile.mastodon %}
           <dt class='text-rockmelon mt-2'>Social media</dt>
-            {% if profile_to_view.github %}
+          {% if profile_to_view.github %}
             <dd>
-            <a href="https://github.com/{{ profile_to_view.github }}"
-              class='text-info' target='blank'>
-              <i class='fa fa-github text-less-light'></i>&nbsp;
-              {{ profile_to_view.github|truncatechars:16 }}
-            </a>&nbsp;
+              <a href="https://github.com/{{ profile_to_view.github }}"
+                class='text-info' target='blank'>
+                <i class='fa fa-github text-less-light'></i>&nbsp;
+                {{ profile_to_view.github|truncatechars:16 }}
+              </a>&nbsp;
+            </dd>
           {% endif %}
           {% if profile_to_view.twitter %}
+            <dd>
               <a href="https://twitter.com/{{ profile_to_view.twitter }}"
                 class='text-info' target='blank'>
                 <i class='fa fa-twitter text-less-light'></i>&nbsp;
@@ -176,6 +178,11 @@
               </a>
             </dd>
           {% endif %}
+          {% if profile_to_view.mastodon %}
+          <dd>
+            <span class='text-less-light font-weight-bold'>m</span>&nbsp;&nbsp;{{ profile_to_view.mastodon }}
+          </dd>
+      {% endif %}
         </dl>
       </div>
     </div>

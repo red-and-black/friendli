@@ -33,7 +33,12 @@
       </div>
     </div>
     <div class='card-body py-2'>
-    {% if profile.languages.all or profile.looking_for.all or profile.interests.all or profile.detail %}
+      {% if profile.pronouns or profile.languages.all or profile.looking_for.all or profile.interests.all or profile.detail or profile.github or profile.twitter or profile.mastodon %}
+      {% if profile.pronouns %}
+      <p class='my-2'><span class='text-rockmelon font-weight-bold'>Pronouns</span>&nbsp;
+        {{ profile.pronouns }}
+      </p>
+      {% endif %}
       {% if profile.languages.all %}
       <p class='my-2'><span class='text-rockmelon font-weight-bold'>Languages</span>&nbsp;
         {{ profile.languages.all|join:", " }}
@@ -72,22 +77,29 @@
         {{ profile.detail|linebreaksbr|urlize|url_target_blank }}
       </p>
       {% endif %}
-      {% if profile.github or profile.twitter %}
-      <dt class='text-rockmelon mt-2'>Social media</dt>
-        {% if profile.github %}
-        <dd>
-        <a href="https://github.com/{{ profile.github }}" class='text-info' target='blank'>
-          <i class='fa fa-github text-less-light'></i>&nbsp;
-          {{ profile.github|truncatechars:16 }}
-        </a>&nbsp;
-        {% endif %}
-        {% if profile.twitter %}
-          <a href="https://twitter.com/{{ profile.twitter }}" class='text-info' target='blank'>
-            <i class='fa fa-twitter text-less-light'></i>&nbsp;
-            {{ profile.twitter|truncatechars:16  }}
-          </a>
-        </dd>
-        {% endif %}
+      {% if profile.github or profile.twitter or profile.mastodon %}
+        <dt class='text-rockmelon mt-2'>Social media</dt>
+          {% if profile.github %}
+            <dd>
+              <a href="https://github.com/{{ profile.github }}" class='text-info' target='blank'>
+                <i class='fa fa-github text-less-light'></i>&nbsp;
+                {{ profile.github|truncatechars:16 }}
+              </a>&nbsp;
+            </dd>
+          {% endif %}
+          {% if profile.twitter %}
+            <dd>
+              <a href="https://twitter.com/{{ profile.twitter }}" class='text-info' target='blank'>
+                <i class='fa fa-twitter text-less-light'></i>&nbsp;
+                {{ profile.twitter|truncatechars:16  }}
+              </a>
+            </dd>
+          {% endif %}
+          {% if profile.mastodon %}
+            <dd>
+              <span class='text-less-light font-weight-bold'>m</span>&nbsp;&nbsp;{{ profile.mastodon }}
+            </dd>
+          {% endif %} 
       {% endif %}
     {% else %}
       <class='my-2'>{{ profile.user.username }}'s profile is empty.</p>

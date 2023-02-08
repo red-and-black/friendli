@@ -55,6 +55,7 @@ class Profile(models.Model):
     detail = models.TextField(max_length=2000, blank=True)
     languages = models.ManyToManyField(Language, blank=True)
     looking_for = models.ManyToManyField(LookingFor, blank=True)
+    mastodon = models.CharField(max_length=255, blank=True)
     twitter = models.CharField(max_length=255, blank=True)
     github = models.CharField(max_length=255, blank=True)
     ask_me = models.TextField(max_length=500, blank=True)
