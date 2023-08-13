@@ -159,5 +159,12 @@
     "fields": {
         "personal_interest": "Vegan / vegetarian"
     }
+},
+{
+    "model": "profiles.personalinterest",
+    "pk": 24,
+    "fields": {
+        "personal_interest": "Pokémon"
+    }
 }
 ]

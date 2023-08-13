@@ -3,13 +3,13 @@
   "model": "conferences.Conference",
   "pk": 1,
   "fields": {
-    "name": "The Friendli Testing Instance",
-    "collective_noun": "hackers",
-    "location": "The Internet",
-    "start_date":"2022-01-01",
-    "end_date": "2023-12-31",
-    "link": "https://friendli.io/",
-    "message": "Welcome to the Friendli testing instance :)"
+    "name": "PyConAU 2023",
+    "collective_noun": "pythonistas",
+    "location": "Tarndanya/Adelaide, Australia",
+    "start_date":"2023-08-18",
+    "end_date": "2023-08-22",
+    "link": "https://2023.pycon.org.au/",
+    "message": "Welcome to Friendli for PyConAU 2023!"
   }
 }
 ]
