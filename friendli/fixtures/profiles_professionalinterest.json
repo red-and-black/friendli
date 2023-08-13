@@ -113,13 +113,6 @@
 },
 {
     "model": "profiles.professionalinterest",
-    "pk": 17,
-    "fields": {
-        "prof_interest": "Cryptocurrency"
-    }
-},
-{
-    "model": "profiles.professionalinterest",
     "pk": 18,
     "fields": {
         "prof_interest": "Design"
@@ -186,6 +179,41 @@
     "pk": 27,
     "fields": {
         "prof_interest": "Hobby / enthusiast / curious"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 28,
+    "fields": {
+        "prof_interest": "Django"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 29,
+    "fields": {
+        "prof_interest": "Internet of Things"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 30,
+    "fields": {
+        "prof_interest": "Education"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 31,
+    "fields": {
+        "prof_interest": "Data"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 32,
+    "fields": {
+        "prof_interest": "Geospatial / GIS"
     }
 }
 ]
