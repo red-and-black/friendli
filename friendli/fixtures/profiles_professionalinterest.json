@@ -10,210 +10,147 @@
     "model": "profiles.professionalinterest",
     "pk": 2,
     "fields": {
-        "prof_interest": "Frontend development"
+        "prof_interest": "DevOps"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 3,
     "fields": {
-        "prof_interest": "Management"
+        "prof_interest": "Frontend development"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 4,
     "fields": {
-        "prof_interest": "Policy"
+        "prof_interest": "Management"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 5,
     "fields": {
-        "prof_interest": "DevOps"
+        "prof_interest": "Policy"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 6,
     "fields": {
-        "prof_interest": "Pen testing"
+        "prof_interest": "Security"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 7,
     "fields": {
-        "prof_interest": "Red team"
+        "prof_interest": "Privacy"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 8,
     "fields": {
-        "prof_interest": "Blue team"
+        "prof_interest": "Networks"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 9,
     "fields": {
-        "prof_interest": "Forensics"
+        "prof_interest": "SysAdmin"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 10,
     "fields": {
-        "prof_interest": "Privacy"
+        "prof_interest": "Media"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 11,
     "fields": {
-        "prof_interest": "Other IT"
+        "prof_interest": "Hacking"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 12,
     "fields": {
-        "prof_interest": "Networks"
+        "prof_interest": "Design"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 13,
     "fields": {
-        "prof_interest": "SysAdmin"
+        "prof_interest": "Mobile dev"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 14,
     "fields": {
-        "prof_interest": "Media"
+        "prof_interest": "FOSS maintaining"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 15,
     "fields": {
-        "prof_interest": "Cryptography"
+        "prof_interest": "Infrastructure"
     }
 },
 {
     "model": "profiles.professionalinterest",
     "pk": 16,
     "fields": {
-        "prof_interest": "Hacking"
-    }
-},
-{
-    "model": "profiles.professionalinterest",
-    "pk": 18,
-    "fields": {
-        "prof_interest": "Design"
-    }
-},
-{
-    "model": "profiles.professionalinterest",
-    "pk": 19,
-    "fields": {
-        "prof_interest": "DevSecOps"
-    }
-},
-{
-    "model": "profiles.professionalinterest",
-    "pk": 20,
-    "fields": {
-        "prof_interest": "Ops"
-    }
-},
-{
-    "model": "profiles.professionalinterest",
-    "pk": 21,
-    "fields": {
-        "prof_interest": "Social engineering"
-    }
-},
-{
-    "model": "profiles.professionalinterest",
-    "pk": 22,
-    "fields": {
-        "prof_interest": "Other security"
-    }
-},
-{
-    "model": "profiles.professionalinterest",
-    "pk": 23,
-    "fields": {
-        "prof_interest": "Mobile dev"
-    }
-},
-{
-    "model": "profiles.professionalinterest",
-    "pk": 24,
-    "fields": {
-        "prof_interest": "OS"
-    }
-},
-{
-    "model": "profiles.professionalinterest",
-    "pk": 25,
-    "fields": {
-        "prof_interest": "FOSS maintaining"
-    }
-},
-{
-    "model": "profiles.professionalinterest",
-    "pk": 26,
-    "fields": {
-        "prof_interest": "Infrastructure"
-    }
-},
-{
-    "model": "profiles.professionalinterest",
-    "pk": 27,
-    "fields": {
         "prof_interest": "Hobby / enthusiast / curious"
     }
 },
 {
     "model": "profiles.professionalinterest",
-    "pk": 28,
+    "pk": 17,
     "fields": {
         "prof_interest": "Django"
     }
 },
 {
     "model": "profiles.professionalinterest",
-    "pk": 29,
+    "pk": 18,
     "fields": {
         "prof_interest": "Internet of Things"
     }
 },
 {
     "model": "profiles.professionalinterest",
-    "pk": 30,
+    "pk": 19,
     "fields": {
         "prof_interest": "Education"
     }
 },
 {
     "model": "profiles.professionalinterest",
-    "pk": 31,
+    "pk": 20,
     "fields": {
         "prof_interest": "Data"
     }
 },
 {
     "model": "profiles.professionalinterest",
-    "pk": 32,
+    "pk": 21,
     "fields": {
         "prof_interest": "Geospatial / GIS"
+    }
+},
+{
+    "model": "profiles.professionalinterest",
+    "pk": 22,
+    "fields": {
+        "prof_interest": "Testing"
     }
 }
 ]
